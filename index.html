@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html><head>
+        <meta charset="UTF-8">
+        <title>Shot?</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="main.js"></script><style type="text/css"></style>
+    </head>
+    <body>
+    	<div class="bgimage"></div>
+    	<div id="ok">
+    	<div id="vertical">
+	        <div id="thing" title="Click me to hide/show the countdown!">
+	            <output id="display-area">10:00.000</output>
+	        </div>
+	        <div id="players">Waiting for players</div>
+	        <div id="previous">&nbsp;</div>
+	        <div>
+	            <form method="get" onsubmit="return false;">
+	            	<input id="inp" name="name" autocomplete="off" placeholder="Type Player Name Here...">
+	            	<input type="submit" onclick="addDeltaker(this.form);" style="display:none;">
+	            </form>
+	        </div>
+        </div>
+        </div>
+	</body>
+</html>
