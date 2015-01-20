@@ -8,6 +8,7 @@ var b = a;
 bytter = 0;
 var snd = new Audio("sound/bell.mp3"); // buffers automatically when created
 var togg;
+var times = 0;
 
 window.addEventListener("load", function(){
 	document.getElementById("thing").addEventListener("click", function(){
@@ -39,13 +40,23 @@ function update_time(){
 	seconds = (Math.floor((fDate-curr)/1000) - Math.floor(((fDate-curr)/1000)/60) * 60);
 	minutes = Math.floor(((fDate-curr)/1000)/60), 2;
 	milli = fDate-curr-(seconds*1000)-(minutes*60*1000);
+    if(minutes == 0 && seconds < 10){
+        document.getElementById("display-area").style.cssText = "visibility:visible;";
+    }else if(minutes > 0){
+        document.getElementById("display-area").style.cssText = "visibility:hidden;";
+    }
 	if(minutes < 0){
 		newTimer();
 		rng = Math.floor(Math.random() * players.length);
 		document.getElementById("previous").innerHTML = "Your turn to drink "+players[rng]+"!";
 		snd.play();
+        flash=0;
+        setTimeout("lightning()",1);
 		setTimeout(function(){
 			document.getElementById("previous").innerHTML = "Previous drinker: "+players[rng];
+            flash=7;
+            snd.pause();
+            document.getElementById("bgimage").style.backgroundColor='black';
 		}, 10000)
 	}
 	document.getElementById("display-area").innerHTML = pad(minutes, 2)+":"+pad(seconds, 2)+"."+pad(milli, 3);
@@ -53,7 +64,7 @@ function update_time(){
 
 function newTimer(){
 	dateNow = new Date();
-	fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+10, dateNow.getSeconds(), dateNow.getMilliseconds());
+	fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+Math.floor(Math.random()*6)+1, dateNow.getSeconds(), dateNow.getMilliseconds());
 }
 
 function pad(t, num){
@@ -65,4 +76,17 @@ function pad(t, num){
 function capitaliseFirstLetter(string)
 {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+var flash=0
+function lightning()
+{
+    flash=flash+1;
+    if(flash==1){document.getElementById("bgimage").style.backgroundColor='red'; setTimeout("lightning()",85);}
+    if(flash==2){document.getElementById("bgimage").style.backgroundColor='blue'; setTimeout("lightning()",80);}
+    if(flash==3){document.getElementById("bgimage").style.backgroundColor='purple'; setTimeout("lightning()",75);}
+    if(flash==4){document.getElementById("bgimage").style.backgroundColor='yellow'; setTimeout("lightning()",75);}
+    if(flash==5){document.getElementById("bgimage").style.backgroundColor='green'; setTimeout("lightning()",75);}
+    if(flash==6){flash=0; setTimeout("lightning()",1);}
 }
