@@ -1,7 +1,7 @@
 #ShotTimer
 
 
-Its a shottimer. 
+Its a shottimer! 
 
 You type your name in the box (needs to be atleast two entered), and when two or more is added, the timer starts.
 
