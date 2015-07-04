@@ -9,13 +9,20 @@ bytter = 0;
 var snd = new Audio("sound/bell.mp3"); // buffers automatically when created
 var togg;
 var times = 0;
+var show = true;
 
 window.addEventListener("load", function(){
 	document.getElementById("thing").addEventListener("click", function(){
-		togg = !togg;
+		/*togg = !togg;
 		if(togg){
 			document.getElementById("display-area").style.cssText = "visibility:hidden;";
-		}else document.getElementById("display-area").style.cssText = "visibility:visible;";
+		}else document.getElementById("display-area").style.cssText = "visibility:visible;";*/
+	});
+
+	document.getElementById("check-count").addEventListener("change", function(){
+		show = this.checked;
+		val = show ? "visible" : "hidden";
+		document.getElementById("display-area").style.cssText = "visibility:"+val+";"; 
 	});
 });
 
@@ -40,7 +47,7 @@ function update_time(){
 	seconds = (Math.floor((fDate-curr)/1000) - Math.floor(((fDate-curr)/1000)/60) * 60);
 	minutes = Math.floor(((fDate-curr)/1000)/60), 2;
 	milli = fDate-curr-(seconds*1000)-(minutes*60*1000);
-    if(minutes == 0 && seconds < 10){
+    if((minutes == 0 && seconds < 10) || show){
         document.getElementById("display-area").style.cssText = "visibility:visible;";
     }else if(minutes > 0){
         document.getElementById("display-area").style.cssText = "visibility:hidden;";
@@ -56,7 +63,7 @@ function update_time(){
 			document.getElementById("previous").innerHTML = "Previous drinker: "+players[rng];
             flash=7;
             snd.pause();
-            document.getElementById("bgimage").style.backgroundColor='black';
+            document.getElementById("bgimage").style.backgroundColor='white';
 		}, 10000)
 	}
 	document.getElementById("display-area").innerHTML = pad(minutes, 2)+":"+pad(seconds, 2)+"."+pad(milli, 3);
