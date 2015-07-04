@@ -39,6 +39,11 @@ text-align: center;
 transition: background 1s;
 background-color: rgba(255, 255, 255, 0.22);}
 
+#github{
+	position:absolute;
+	bottom:0px;
+}
+
 #show-counter{
 	position:absolute;
 	left:0px;
