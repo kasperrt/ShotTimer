@@ -21,7 +21,7 @@ background-color: #FFF;
 #ok{display:table;margin:auto;height:80%;}
 #vertical{ display: table-cell;vertical-align: middle;}
 #display-area{font-size:170px;}
-#previous{font-size:40px;}
+#previous{font-size:80px;}
 #display-area, #previous, #players{padding-top:20px;padding-bottom:20px;color:#2D2D2D;}
 #inp{
 width: 90%;
