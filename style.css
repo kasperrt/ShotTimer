@@ -21,9 +21,9 @@ background-color: #FFF;
 #ok{display:table;margin:auto;height:80%;}
 #vertical{ display: table-cell;vertical-align: middle;}
 #display-area{font-size:170px;}
-#previous{font-size:40px;}
+#previous{font-size:80px;}
 #display-area, #previous, #players{padding-top:20px;padding-bottom:20px;color:#2D2D2D;}
-#inp{
+#inp, #zoffchannel{
 width: 90%;
 height: 50px;
 color:#2D2D2D;
@@ -39,15 +39,22 @@ text-align: center;
 transition: background 1s;
 background-color: rgba(255, 255, 255, 0.22);}
 
+#zoffchannel{
+	width: 20%;
+    font-size: 15px;
+}
+
 #github{
 	position:absolute;
 	bottom:0px;
+	left: calc(50vw - 18.5px);
 }
 
 #show-counter{
 	position:absolute;
 	left:0px;
 	top:0px;
+	text-align: left;
 }
 
 textarea:focus, input:focus{

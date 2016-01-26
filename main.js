@@ -24,6 +24,11 @@ window.addEventListener("load", function(){
 		val = show ? "visible" : "hidden";
 		document.getElementById("display-area").style.cssText = "visibility:"+val+";"; 
 	});
+
+	document.getElementById("zofform").addEventListener("submit", function(){
+		var channel  = document.getElementById("zoffchannel").value;
+		var myWindow = window.open("https://zoff.no/embed.html#" + channel, "", "width=600, height=300");
+	});
 });
 
 function addDeltaker(form){
