@@ -12,6 +12,7 @@ var togg;
 var times = 0;
 var show = true;
 var fair_game = true;
+var previous_drinker = "";
 
 
 //responsiveVoice.setDefaultVoice("US English Male");
@@ -91,7 +92,9 @@ function update_time(){
 		newTimer();
 		rng = Math.floor(Math.random() * players.length);
 		document.getElementById("previous").innerHTML = "Your turn to drink "+players[rng]+"!";
-		responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk(players[rng])});
+		console.log("speak");
+		previous_drinker = players[rng];
+		responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
 		if(fair_game){
 			players.splice(rng, 1);
 			if(players.length == 0) {
@@ -106,12 +109,13 @@ function update_time(){
 	document.getElementById("display-area").innerHTML = pad(minutes, 2)+":"+pad(seconds, 2)+"."+pad(milli, 3);
 }
 
-function endtalk(drinker){
+function endtalk(){
+	responsiveVoice.cancel();
 	snd.play();
     flash=0;
     setTimeout("lightning()",1);
 	setTimeout(function(){
-		document.getElementById("previous").innerHTML = "Previous drinker: "+drinker;
+		document.getElementById("previous").innerHTML = "Previous drinker: "+previous_drinker;
         flash=7;
         snd.pause();
         document.getElementById("bgimage").style.backgroundColor='white';
