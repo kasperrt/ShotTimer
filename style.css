@@ -45,7 +45,7 @@ text-align: center;
 -moz-transition: background 1s;
 -o-transition: background 1s;
 transition: background 1s;
-background-color: rgba(255, 255, 255, 0.22);}
+background-color: rgba(255, 255, 255, 0);}
 
 #zoffchannel{
 	width: 20%;
