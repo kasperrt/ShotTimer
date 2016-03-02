@@ -91,7 +91,7 @@ function update_time(){
 		newTimer();
 		rng = Math.floor(Math.random() * players.length);
 		document.getElementById("previous").innerHTML = "Your turn to drink "+players[rng]+"!";
-		//responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
+		responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
 		if(fair_game){
 			players.splice(rng, 1);
 			if(players.length == 0) {
