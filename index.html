@@ -3,6 +3,7 @@
         <meta charset="UTF-8">
         <title>Shot?</title>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
         <script src="main.js"></script><style type="text/css"></style>
     </head>
     <body>
@@ -20,14 +21,14 @@
 	        <div id="players">Waiting for players</div>
 	        <div id="previous">&nbsp;</div>
 	        <div>
-	            <form method="get" onsubmit="return false;">
+	            <form id="playerform" method="get">
 	            	<input id="inp" name="name" autocomplete="off" placeholder="Type Player Name Here...">
-	            	<input type="submit" onclick="addDeltaker(this.form);" style="display:none;">
+	            	<input type="submit" style="display:none;">
 	            </form>
 	        </div>
         </div>
         </div>
-        <form id="zofform" onsubmit="return false;">
+        <form id="zofform">
         <input id="zoffchannel" placeholder="Zöff channel" autocomplete="off" />
         </form>
         <a href="https://github.com/kasperrt/ShotTimer" id="github"><img src="github.png" alt="GitHub" title="GitHub"></a>

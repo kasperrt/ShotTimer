@@ -11,7 +11,11 @@ var togg;
 var times = 0;
 var show = true;
 
+
+//responsiveVoice.setDefaultVoice("US English Male");
+
 window.addEventListener("load", function(){
+
 	document.getElementById("thing").addEventListener("click", function(){
 		/*togg = !togg;
 		if(togg){
@@ -25,9 +29,17 @@ window.addEventListener("load", function(){
 		document.getElementById("display-area").style.cssText = "visibility:"+val+";"; 
 	});
 
-	document.getElementById("zofform").addEventListener("submit", function(){
+	document.getElementById("zofform").addEventListener("submit", function(e){
+		e.preventDefault();
+
 		var channel  = document.getElementById("zoffchannel").value;
-		var myWindow = window.open("https://zoff.no/embed.html#" + channel, "", "width=600, height=300");
+		var myWindow = window.open("https://zoff.no/embed.html#" + channel + "&autoplay", "", "width=600, height=300");
+	});
+
+	document.getElementById("playerform").addEventListener("submit", function(e){
+		e.preventDefault();
+
+		addDeltaker(this);
 	});
 });
 
@@ -61,17 +73,22 @@ function update_time(){
 		newTimer();
 		rng = Math.floor(Math.random() * players.length);
 		document.getElementById("previous").innerHTML = "Your turn to drink "+players[rng]+"!";
-		snd.play();
-        flash=0;
-        setTimeout("lightning()",1);
-		setTimeout(function(){
-			document.getElementById("previous").innerHTML = "Previous drinker: "+players[rng];
-            flash=7;
-            snd.pause();
-            document.getElementById("bgimage").style.backgroundColor='white';
-		}, 10000)
+		console.log(responsiveVoice);
+		responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
 	}
 	document.getElementById("display-area").innerHTML = pad(minutes, 2)+":"+pad(seconds, 2)+"."+pad(milli, 3);
+}
+
+function endtalk(){
+	snd.play();
+    flash=0;
+    setTimeout("lightning()",1);
+	setTimeout(function(){
+		document.getElementById("previous").innerHTML = "Previous drinker: "+players[rng];
+        flash=7;
+        snd.pause();
+        document.getElementById("bgimage").style.backgroundColor='white';
+	}, 10000);
 }
 
 function newTimer(){
