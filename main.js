@@ -107,7 +107,7 @@ function update_time(){
 }
 
 function endtalk(){
-	//snd.play();
+	snd.play();
     flash=0;
     setTimeout("lightning()",1);
 	setTimeout(function(){
