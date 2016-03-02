@@ -1,5 +1,6 @@
 var toggled, interval, date, reset;
 var players = Array();
+var players_all = Array();
 var interval;
 var col = ["0","2","4","5","7","9","A","C","D","F"];
 col.reverse();
@@ -10,6 +11,7 @@ var snd = new Audio("sound/bell.mp3"); // buffers automatically when created
 var togg;
 var times = 0;
 var show = true;
+var fair_game = true;
 
 
 //responsiveVoice.setDefaultVoice("US English Male");
@@ -26,7 +28,11 @@ window.addEventListener("load", function(){
 	document.getElementById("check-count").addEventListener("change", function(){
 		show = this.checked;
 		val = show ? "visible" : "hidden";
-		document.getElementById("display-area").style.cssText = "visibility:"+val+";"; 
+		/*document.getElementById("display-area").style.cssText = "visibility:"+val+";"; */
+	});
+
+	document.getElementById("fair-game").addEventListener("change", function(){
+		fair_game = !fair_game;
 	});
 
 	document.getElementById("zofform").addEventListener("submit", function(e){
@@ -46,13 +52,25 @@ window.addEventListener("load", function(){
 function addDeltaker(form){
 	name = form.name.value;
 	if(name != "" && name != " " && name != "  " && name != "   "){
-		players.push(capitaliseFirstLetter(name));
-		if(!interval && players.length >= 2){
+		if(fair_game) {
+			players_all.push(capitaliseFirstLetter(name));
+			players.push(capitaliseFirstLetter(name));
+			players.push(capitaliseFirstLetter(name));
+			players.push(capitaliseFirstLetter(name));
+		} else {
+			players.push(capitaliseFirstLetter(name));
+		}
+		if(!interval && ((players.length >= 2 && !fair_game) || (players_all.length >= 2 && fair_game))){
 			dateNow = new Date();
 			newTimer();
 			interval = window.setInterval(update_time, 1);
+			document.getElementById("fairgame-div").style.display = "none";
 		}
-		document.getElementById("players").innerHTML = "Players:<br>"+players.join(", ");
+		if(fair_game){
+			document.getElementById("players").innerHTML = "Players:<br>"+players_all.join(", ");
+		} else {
+			document.getElementById("players").innerHTML = "Players:<br>"+players.join(", ");
+		}
 		document.getElementById("players").style.paddingBottom = "9.5px";
 		document.getElementById("players").style.paddingTop = "9.5px";
 		form.name.value = "";
@@ -73,14 +91,23 @@ function update_time(){
 		newTimer();
 		rng = Math.floor(Math.random() * players.length);
 		document.getElementById("previous").innerHTML = "Your turn to drink "+players[rng]+"!";
-		console.log(responsiveVoice);
-		responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
+		//responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
+		if(fair_game){
+			players.splice(rng, 1);
+			if(players.length == 0) {
+				for(x in players_all) {
+					players.push(players_all[x]);
+					players.push(players_all[x]);
+					players.push(players_all[x]);
+				}
+			}
+		}
 	}
 	document.getElementById("display-area").innerHTML = pad(minutes, 2)+":"+pad(seconds, 2)+"."+pad(milli, 3);
 }
 
 function endtalk(){
-	snd.play();
+	//snd.play();
     flash=0;
     setTimeout("lightning()",1);
 	setTimeout(function(){

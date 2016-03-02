@@ -18,6 +18,14 @@ width: 100%;
 height: 100%;
 background-color: #FFF;
 }
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #F1F1F1 !important;
+}
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #74DE74 !important;
+}
+#topLabel{margin-left:21px;}
+.bottomswitch{margin-top:10px;}
 #ok{display:table;margin:auto;height:80%;}
 #vertical{ display: table-cell;vertical-align: middle;}
 #display-area{font-size:170px;}

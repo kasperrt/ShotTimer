@@ -2,13 +2,36 @@
 <html><head>
         <meta charset="UTF-8">
         <title>Shot?</title>
+         <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
         <script src="main.js"></script><style type="text/css"></style>
     </head>
     <body>
     	<div id="show-counter">
-    		<label title="Counter will be shown when there is 10 seconds left."><input checked id="check-count" type="checkbox">Show Counter</label>
+            <div class="switch">
+                Timer
+                <label id="topLabel">
+                  Off
+                  <input type="checkbox" id="check-count" checked>
+                  <span class="lever"></span>
+                  On
+                </label>
+            </div>
+            <div class="switch bottomswitch" id="fairgame-div">
+                Type
+                <label>
+                  Anarchy
+                  <input type="checkbox" id="fair-game" checked>
+                  <span class="lever"></span>
+                  Fair
+                </label>
+            </div>
+    		
             <br>
             <span>In collab with <a href="https://zoff.no">Zöff</a></span>
     	</div>
