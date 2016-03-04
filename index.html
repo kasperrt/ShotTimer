@@ -35,6 +35,7 @@
             <br>
             <span>In collab with <a href="https://zoff.no">Zöff</a></span>
     	</div>
+      <a id="rulesbutton" class="waves-effect waves-green btn-flat" onclick="$('#rules').openModal()">Rules</a>
     	<div id="bgimage"></div>
     	<div id="ok">
     	<div id="vertical">
@@ -55,5 +56,16 @@
         <input id="zoffchannel" placeholder="Zöff channel" autocomplete="off" />
         </form>
         <a href="https://github.com/kasperrt/ShotTimer" id="github"><img src="github.png" alt="GitHub" title="GitHub"></a>
+        <div id="rules" class="modal">
+            <div class="modal-content">
+                <h4>So you need help?</h4>
+                <p>To start a game, there must be atleast two players. When two playernames has been entered, the timer will start a countdown from a random time between 1 and 6 minutes. When the timer hits 00:00.000, a name will popup on the middle of the screen, a voice will yell out his/hers name, and the screen will go crazy with blinking and sounds.</p>
+                <p>If you're the one that is picked out to drink, depending on the local rules on the game, you have to drink! (You should figure out how much before starting the game) A suggestion on how to make the game more fun, is to get a cardboard box and have the drinkee stand in it while drinking.</p>
+                <p>There are two modes to the game. Anarchy, where a name is picked random, always, and fair. Fair works like this: A player can never be more than 3 drinks ahead than the other players. This means the namepicking is pseudorandom up untill someone has drunk 3 times, then that person isn't accounted for anymore, untill everyone else has drunk 3 times.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
 	</body>
 </html>
