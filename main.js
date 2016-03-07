@@ -14,6 +14,8 @@ var show = true;
 var fair_game = true;
 var previous_drinker = "";
 
+var zoffWindow;
+
 
 //responsiveVoice.setDefaultVoice("US English Male");
 
@@ -39,8 +41,8 @@ window.addEventListener("load", function(){
 	document.getElementById("zofform").addEventListener("submit", function(e){
 		e.preventDefault();
 
-		var channel  = document.getElementById("zoffchannel").value;
-		var myWindow = window.open("https://zoff.no/embed.html#" + channel + "&autoplay", "", "width=600, height=300");
+		var channel    = document.getElementById("zoffchannel").value;
+		zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&autoplay", "", "width=600, height=300");
 	});
 
 	document.getElementById("playerform").addEventListener("submit", function(e){
@@ -48,6 +50,7 @@ window.addEventListener("load", function(){
 
 		addDeltaker(this);
 	});
+
 });
 
 function addDeltaker(form){
@@ -94,6 +97,7 @@ function update_time(){
 		document.getElementById("previous").innerHTML = "Your turn to drink "+players[rng]+"!";
 		console.log("speak");
 		previous_drinker = players[rng];
+		lowerVolume();
 		responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
 		if(fair_game){
 			players.splice(rng, 1);
@@ -111,6 +115,7 @@ function update_time(){
 
 function endtalk(){
 	responsiveVoice.cancel();
+	resetVolume();
 	snd.play();
     flash=0;
     setTimeout("lightning()",1);
@@ -120,6 +125,14 @@ function endtalk(){
         snd.pause();
         document.getElementById("bgimage").style.backgroundColor='white';
 	}, 10000);
+}
+
+function lowerVolume(){
+	if(zoffWindow !== undefined) zoffWindow.postMessage("lower", "https://zoff.no");
+}
+
+function resetVolume() {
+	if(zoffWindow !== undefined) zoffWindow.postMessage("reset", "https://zoff.no");
 }
 
 function newTimer(){
@@ -150,3 +163,62 @@ function lightning()
     if(flash==5){document.getElementById("bgimage").style.backgroundColor='green'; setTimeout("lightning()",75);}
     if(flash==6){flash=0; setTimeout("lightning()",1);}
 }
+
+
+window.onload = function () {
+    "use strict";
+    var paths = document.getElementsByTagName('path');
+    var visualizer = document.getElementById('visualizer');
+    console.log(visualizer);
+    var mask = visualizer.getElementsByTagName('mask')[0];
+    var h = document.getElementsByTagName('h1')[0];
+    var path;
+    var report = 0;
+    
+    var soundAllowed = function (stream) {
+        //Audio stops listening in FF without // window.persistAudioStream = stream;
+        //https://bugzilla.mozilla.org/show_bug.cgi?id=965483
+        //https://support.mozilla.org/en-US/questions/984179
+        window.persistAudioStream = stream;
+        var audioContent = new AudioContext();
+        var audioStream = audioContent.createMediaStreamSource( stream );
+        var analyser = audioContent.createAnalyser();
+        audioStream.connect(analyser);
+        analyser.fftSize = 1024;
+
+        var frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+        visualizer.setAttribute('viewBox', '0 0 255 100');
+      
+				//Through the frequencyArray has a length longer than 255, there seems to be no
+        //significant data after this point. Not worth visualizing.
+        for (var i = 0 ; i < 255; i++) {
+            path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('stroke-dasharray', '4,1');
+            mask.appendChild(path);
+        }
+        var doDraw = function () {
+            requestAnimationFrame(doDraw);
+            analyser.getByteFrequencyData(frequencyArray);
+          	var adjustedLength;
+            for (var i = 0 ; i < 255; i++) {
+              	adjustedLength = Math.floor(frequencyArray[i]) - (Math.floor(frequencyArray[i]) % 5);
+                paths[i].setAttribute('d', 'M '+ (i) +',255 l 100,-' + adjustedLength);
+            }
+
+        }
+        doDraw();
+    }
+
+    var soundNotAllowed = function (error) {
+        console.log(error);
+        document.getElementsByTagName("svg")[0].style.display = "none";
+    }
+
+    /*window.navigator = window.navigator || {};
+    navigator.mediaDevices.getUserMedia =  navigator.mediaDevices.getUserMedia       ||
+                              navigator.mediaDevices.webkitGetUserMedia ||
+                              navigator.mediaDevices.mozGetUserMedia    ||
+                              null;*/
+   	navigator.webkitGetUserMedia({audio:true}, soundAllowed, soundNotAllowed);
+
+};
