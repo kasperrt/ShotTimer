@@ -72,6 +72,11 @@ textarea:focus, input:focus{
     outline: 0;
 }
 
+#toast-container{right: auto !important;
+    left: 16px;
+    top: 5px;
+    cursor: pointer;}
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
