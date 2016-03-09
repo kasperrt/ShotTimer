@@ -166,6 +166,9 @@ function lightning()
 
 
 window.onload = function () {
+
+	//Shamelessly stolen from http://codepen.io/zapplebee/pen/gbNbZE
+
     "use strict";
     var paths = document.getElementsByTagName('path');
     var visualizer = document.getElementById('visualizer');
