@@ -13,7 +13,7 @@ var times = 0;
 var show = true;
 var fair_game = true;
 var previous_drinker = "";
-
+var sound_on = true;
 var zoffWindow;
 
 
@@ -36,6 +36,10 @@ window.addEventListener("load", function(){
 
 	document.getElementById("fair-game").addEventListener("change", function(){
 		fair_game = !fair_game;
+	});
+
+	document.getElementById("sound").addEventListener("change", function(){
+		sound_on = !sound_on;
 	});
 
 	document.getElementById("zofform").addEventListener("submit", function(e){
@@ -112,7 +116,6 @@ function update_time(){
 		newTimer();
 		rng = Math.floor(Math.random() * players.length);
 		document.getElementById("previous").innerHTML = "Your turn to drink "+players[rng]+"!";
-		console.log("speak");
 		previous_drinker = players[rng];
 		lowerVolume();
 		responsiveVoice.speak("Your turn to drink " + players[rng], "US English Male", {onend: endtalk});
@@ -133,13 +136,13 @@ function update_time(){
 function endtalk(){
 	responsiveVoice.cancel();
 	resetVolume();
-	snd.play();
+	if(sound_on) snd.play();
     flash=0;
     setTimeout("lightning()",1);
 	setTimeout(function(){
 		document.getElementById("previous").innerHTML = "Previous drinker: "+previous_drinker;
         flash=7;
-        snd.pause();
+        if(sound_on) snd.pause();
         document.getElementById("bgimage").style.backgroundColor='white';
 	}, 10000);
 }
@@ -189,7 +192,6 @@ window.onload = function () {
     "use strict";
     var paths = document.getElementsByTagName('path');
     var visualizer = document.getElementById('visualizer');
-    console.log(visualizer);
     var mask = visualizer.getElementsByTagName('mask')[0];
     var h = document.getElementsByTagName('h1')[0];
     var path;
