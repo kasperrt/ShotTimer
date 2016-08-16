@@ -85,7 +85,7 @@ function addDeltaker(form){
 		} else {
 			players.push(capitaliseFirstLetter(name));
 		}
-		if(!interval && ((players.length >= 2 && !fair_game) || (players_all.length >= 2 && fair_game))){
+		if(!interval && ((players.length >= 1 && !fair_game) || (players_all.length >= 1 && fair_game))){
 			dateNow = new Date();
 			newTimer();
 			interval = window.setInterval(update_time, 1);
@@ -196,7 +196,7 @@ window.onload = function () {
     var h = document.getElementsByTagName('h1')[0];
     var path;
     var report = 0;
-    
+
     var soundAllowed = function (stream) {
         //Audio stops listening in FF without // window.persistAudioStream = stream;
         //https://bugzilla.mozilla.org/show_bug.cgi?id=965483
@@ -210,7 +210,7 @@ window.onload = function () {
 
         var frequencyArray = new Uint8Array(analyser.frequencyBinCount);
         visualizer.setAttribute('viewBox', '0 0 255 100');
-      
+
 				//Through the frequencyArray has a length longer than 255, there seems to be no
         //significant data after this point. Not worth visualizing.
         for (var i = 0 ; i < 255; i++) {
