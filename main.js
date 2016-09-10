@@ -50,11 +50,6 @@ window.addEventListener("load", function(){
 
 		addDeltaker(this);
 	});
-
-	if(!isSecure()) {
-		Materialize.toast("Click this if you want microphone and visualizer!", 5000);
-	}
-
 });
 
 //Dynamic listener
@@ -65,10 +60,6 @@ $(document).on('click', '#toast-container', function(){
 	    $(this).remove();
 	});
 });
-
-function isSecure(){
-   return window.location.protocol == 'https:';
-}
 
 function addDeltaker(form){
 	name = form.name.value;
