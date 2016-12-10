@@ -54,7 +54,16 @@ window.addEventListener("load", function(){
 		e.preventDefault();
 
 		var channel    = document.getElementById("zoffchannel").value;
-		zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
+		//zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
+		document.getElementById("iframe_container").innerHTML = "<iframe id='iframe' src='http://zoff.no/embed.html#" + channel + "&71C387&autoplay'></iframe>";
+		zoffWindow = document.getElementById('iframe').contentWindow;
+		document.getElementById("qr_container").style.display = "block";
+		document.getElementById("zofform").style.display = "none";
+	});
+
+	document.getElementById("qr_container").addeEventListener("click", function(){
+		document.getElementById("qr_container").style.display = "none";
+		document.getElementById("zofform").style.display = "block";
 	});
 
 	document.getElementById("playerform").addEventListener("submit", function(e){
