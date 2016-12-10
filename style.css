@@ -29,9 +29,12 @@ background-color: #FFF;
     background-color: #74DE74 !important;
 }
 #zofform_container{
-  width:200px;
-  margin:auto;
-  height:150px;
+  width: 200px;
+  margin: auto;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #hidden-height{
       height: 140px;
