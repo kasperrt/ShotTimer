@@ -28,8 +28,16 @@ background-color: #FFF;
 .switch label input[type=checkbox]:checked+.lever {
     background-color: #74DE74 !important;
 }
+#zofform_container{
+  width:200px;
+  margin:auto;
+}
+#hidden-height{
+      height: 140px;
+}
 #qr_container{height:200px;opacity:0;-webkit-transition:opacity 1s; /* Safari */
-    transition: opacity 1s;}
+    transition: opacity 1s;width: 200px;
+    margin: auto;}
 #topLabel{margin-left:21px;}
 .bottomswitch{margin-top:10px;}
 #ok{display:table;margin:auto;height:80%;}
@@ -54,12 +62,11 @@ transition: background 1s;
 background-color: rgba(255, 255, 255, 0);}
 
 #zoffchannel{
-	width: 20%;
     font-size: 15px;
 }
 
 #github{
-	position:absolute;
+	position:fixed;
 	bottom:0px;
 	left: calc(50vw - 18.5px);
 }

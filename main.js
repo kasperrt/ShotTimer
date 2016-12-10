@@ -64,11 +64,13 @@ window.addEventListener("load", function(){
 		}
 		document.getElementById("qr_container").style.display = "block";
 		document.getElementById("zofform").style.display = "none";
+		document.getElementById("hidden-height").style.display = "none";
 	});
 
 	document.getElementById("qr_container").addEventListener("click", function(){
 		document.getElementById("qr_container").style.display = "none";
 		document.getElementById("zofform").style.display = "block";
+		document.getElementById("hidden-height").style.display = "block";
 	});
 
 	document.getElementById("playerform").addEventListener("submit", function(e){
