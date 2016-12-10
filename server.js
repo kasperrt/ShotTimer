@@ -8,7 +8,8 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  var guid = hash_pass(socket.handshake.headers["user-agent"] + socket.handshake.address + socket.handshake.headers["accept-language"]);
+  var socketid = socket.id.substring(2);
+  var guid = uniqueID(socketid, 4);
 
   socket.on("join", function(obj){
     io.to(obj.id).emit("joined", {_name: obj.name});
@@ -24,6 +25,17 @@ io.on('connection', function(socket){
 function hash_pass(thing)
 {
     return crypto.createHash('sha256').update(thing).digest('base64');
+}
+
+function uniqueID(seed, minlen){
+    var len = minlen;
+    var id = rndName(seed, minlen);
+
+    while( contains(unique_ids, id) && len<=8){
+        id = rndName(String(len)+id, len);
+        len += 0.1;                        // try 10 times at each length
+    }
+    return id;
 }
 
 http.listen(3000, function(){
