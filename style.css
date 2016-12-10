@@ -19,7 +19,7 @@ height: 100%;
 
 background-color: #FFF;
 }
-#qr_container{height:200px;}
+
 .modal-content p{text-align: left;}
 #rulesbutton{position: absolute;top: 5px;right: 5px;}
 .switch label input[type=checkbox]:checked+.lever:after {
@@ -28,6 +28,7 @@ background-color: #FFF;
 .switch label input[type=checkbox]:checked+.lever {
     background-color: #74DE74 !important;
 }
+#qr_container{height:200px;}
 #topLabel{margin-left:21px;}
 .bottomswitch{margin-top:10px;}
 #ok{display:table;margin:auto;height:80%;}
