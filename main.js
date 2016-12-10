@@ -22,7 +22,7 @@ socket.on("joined", function(obj){
 
 socket.on("id", function(_id){
 	id = encodeURI("?" + _id);
-	document.getElementById("qr_container").innerHTML = "<img src='//chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://etys.no/mobile.html" + id + "&choe=UTF-8&chld=L%7C1' alt='qr' />";
+	document.getElementById("qr_container").innerHTML = "<img src='//chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://etys.no/mobile.html" + id + "&choe=UTF-8&chld=L%7C1' alt='qr' />";
 });
 socket.emit("host");
 
