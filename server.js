@@ -21,7 +21,35 @@ io.on('connection', function(socket){
     socket.emit("id", guid);
   });
 
+  socket.on('disconnect', function()
+    {
+        left(guid);
+    });
+
+    socket.on('reconnect_failed', function()
+    {
+        left(guid);
+    });
+
+    socket.on('connect_timeout', function()
+    {
+        left(guid);
+    });
+
+    socket.on('error', function()
+    {
+        left(guid);
+    });
+
 });
+
+function left(element){
+  if(contains(unique_ids, element)){
+        var index = unique_ids.indexOf(element);
+        if(index != -1)
+            unique_ids.splice(index, 1);
+    }
+}
 
 function hash_pass(thing)
 {
