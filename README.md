@@ -9,9 +9,9 @@ When the timer hits zero, a random name is picked out, and a sound is played + t
 
 ###Screenshots
 
-![alt tag](http://imgur.com/GiyZCiO)
+![alt tag](http://imgur.com/GiyZCiO.png)
 
-![alt tag](http://imgur.com/2kr7Gye)
+![alt tag](http://imgur.com/2kr7Gye.png)
 
 Settings
 =================================
