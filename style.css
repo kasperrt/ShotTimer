@@ -19,7 +19,7 @@ height: 100%;
 
 background-color: #FFF;
 }
-
+#qr_container{height:200px;}
 .modal-content p{text-align: left;}
 #rulesbutton{position: absolute;top: 5px;right: 5px;}
 .switch label input[type=checkbox]:checked+.lever:after {
