@@ -42,7 +42,6 @@ window.addEventListener("load", function(){
 		e.preventDefault();
 
 		var channel    = document.getElementById("zoffchannel").value;
-		<embed src="https://zoff.no/embed.html#party&808080&autoplay" width="600px" height="300px">
 		zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
 	});
 
