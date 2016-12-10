@@ -13,7 +13,18 @@ var fair_game = true;
 var previous_drinker = "";
 var sound_on = true;
 var zoffWindow;
+var id = "";
+var socket = io("http://etys.no:3000");
 
+socket.on("joined", function(obj){
+	addDeltaker({name: {value: obj._name}});
+});
+
+socket.on("id", function(_id){
+	id = encodeURI("?" + _id);
+	document.getElementById("qr_container").innerHTML = "<a href='http://etys.no/mobile.html" + id + "'>'<img src='//chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://etys.no/" + id + "&choe=UTF-8&chld=L%7C1' alt='qr' /></a>";
+});
+socket.emit("host");
 
 window.addEventListener("load", function(){
 

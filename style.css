@@ -19,6 +19,7 @@ height: 100%;
 
 background-color: #FFF;
 }
+
 .modal-content p{text-align: left;}
 #rulesbutton{position: absolute;top: 5px;right: 5px;}
 .switch label input[type=checkbox]:checked+.lever:after {
@@ -82,7 +83,7 @@ textarea:focus, input:focus{
   font-style: normal;
   font-weight: 300;
   src: local('Open Sans Light'), local('OpenSans-Light'), url(sound/open_sans.woff) format('woff');
-  
+
 }
 
 
