@@ -54,6 +54,7 @@ window.addEventListener("load", function(){
 		e.preventDefault();
 
 		var channel    = document.getElementById("zoffchannel").value;
+		document.getElementById("zoffchannel").value = "";
 		if(channel == ""){
 			document.getElementById("iframe_container").innerHTML = "";
 		} else {
