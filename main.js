@@ -61,7 +61,7 @@ window.addEventListener("load", function(){
 		document.getElementById("zofform").style.display = "none";
 	});
 
-	document.getElementById("qr_container").addeEventListener("click", function(){
+	document.getElementById("qr_container").addEventListener("click", function(){
 		document.getElementById("qr_container").style.display = "none";
 		document.getElementById("zofform").style.display = "block";
 	});
