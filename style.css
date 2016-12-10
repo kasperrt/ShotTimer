@@ -32,7 +32,6 @@ background-color: #FFF;
   width: 200px;
   margin: auto;
   height: 150px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
