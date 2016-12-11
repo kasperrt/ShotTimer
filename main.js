@@ -65,12 +65,14 @@ window.addEventListener("load", function(){
 		document.getElementById("qr_container").style.display = "block";
 		document.getElementById("zofform_container").style.display = "none";
 		document.getElementById("zofform").style.display = "none";
+		document.getElementById("inp").focus();
 	});
 
 	document.getElementById("qr_container").addEventListener("click", function(){
 		document.getElementById("qr_container").style.display = "none";
 		document.getElementById("zofform_container").style.display = "flex";
 		document.getElementById("zofform").style.display = "block";
+		document.getElementById("zoffchannel").focus();
 	});
 
 	document.getElementById("playerform").addEventListener("submit", function(e){
