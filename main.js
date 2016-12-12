@@ -59,7 +59,7 @@ window.addEventListener("load", function(){
 			document.getElementById("iframe_container").innerHTML = "";
 		} else {
 			//zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
-			document.getElementById("iframe_container").innerHTML = "<iframe id='iframe' src='http://zoff.no/embed.html#" + channel + "&71C387&autoplay'></iframe>";
+			document.getElementById("iframe_container").innerHTML = "<iframe id='iframe' src='http://zoff.no/_embed#" + channel + "&71C387&autoplay'></iframe>";
 			zoffWindow = document.getElementById('iframe').contentWindow;
 		}
 		document.getElementById("qr_container").style.display = "block";
