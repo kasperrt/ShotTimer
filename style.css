@@ -38,6 +38,9 @@ background-color: #FFF;
 #hidden-height{
       height: 140px;
 }
+#github{
+	z-index: -1;
+}
 #qr_container{height:200px;opacity:0;-webkit-transition:opacity 1s; /* Safari */
     transition: opacity 1s;width: 200px;
     margin: auto;}
