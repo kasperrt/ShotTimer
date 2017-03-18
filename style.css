@@ -148,12 +148,18 @@ path{
     font-size: 3rem;
   }
 
+  #inp, #zoffchannel{
+    font-size: 1.5rem;
+  }
+
   #github{
   	position:fixed;
   	bottom:0px;
   	left: calc(50vw - 18.5px);
+    right:auto;
   }
 }
+
 
 @media screen and (orientation:landscape) {
   #display-area{
