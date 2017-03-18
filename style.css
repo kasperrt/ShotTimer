@@ -40,6 +40,7 @@ background-color: #FFF;
 }
 #github{
 	z-index: -1;
+
 }
 #qr_container{height:200px;opacity:0;-webkit-transition:opacity 1s; /* Safari */
     transition: opacity 1s;width: 200px;
@@ -74,7 +75,8 @@ background-color: rgba(255, 255, 255, 0);}
 #github{
 	position:fixed;
 	bottom:0px;
-	left: calc(50vw - 18.5px);
+	/*left: calc(50vw - 18.5px);*/
+  right: 10px;
 }
 
 #show-counter{
@@ -145,10 +147,23 @@ path{
   #previous{
     font-size: 3rem;
   }
+
+  #github{
+  	position:fixed;
+  	bottom:0px;
+  	left: calc(50vw - 18.5px);
+  }
 }
 
 @media screen and (orientation:landscape) {
   #display-area{
     margin-top: 0rem;
+  }
+
+  #github{
+  	position:fixed;
+  	bottom:0px;
+  	/*left: calc(50vw - 18.5px);*/
+    right: 10px;
   }
 }
