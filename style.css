@@ -48,7 +48,11 @@ background-color: #FFF;
 .bottomswitch{margin-top:10px;}
 #ok{display:block;margin:auto;height:80%;}
 #vertical{ display: block;vertical-align: middle;margin:auto;}
-#display-area{font-size:170px;}
+#display-area{font-size:170px;
+    display: block;
+    margin-top: 10rem;
+    font-size: 3rem;
+}}
 #previous{font-size:80px;}
 #display-area, #previous, #players{padding-top:20px;padding-bottom:20px;color:#2D2D2D;}
 #inp, #zoffchannel{
