@@ -131,7 +131,7 @@ path{
     user-select: none;
 }
 
-@media only screen and (max-width: 736px) and (max-width:600px), only screen and (max-device-width: 736px)  and (orientation: landscape){
+@media only screen and (max-width: 736px) and (max-width:600px), only screen and (max-device-width: 736px){
   #display-area{
     display: block;
     margin-top: 10rem;
@@ -140,5 +140,15 @@ path{
 
   #qr_container{
     display: none;
+  }
+
+  #previous{
+    font-size: 3rem;
+  }
+}
+
+@media screen and (orientation:landscape) {
+  #display-area{
+    margin-top: 0rem;
   }
 }
