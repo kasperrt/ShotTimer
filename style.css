@@ -129,4 +129,8 @@ path{
     margin-top: 10rem;
     font-size: 3rem;
   }
+
+  #qr_container{
+    display: none;
+  }
 }
