@@ -1,6 +1,34 @@
+var server;
 var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var add = "";
+
+try{
+    var fs = require('fs');
+    //var privateKey  = fs.readFileSync('/home/kasper/newssl_2016/nopass.key', 'utf8');
+    //var certificate = fs.readFileSync('/home/kasper/newssl_2016/zoff.no/ApacheServer/2_zoff.no.crt', 'utf8');
+    //var ca          = fs.readFileSync('/home/kasper/newssl_2016/zoff.no/ApacheServer/1_root_bundle.crt');
+    var privateKey  = fs.readFileSync('/etc/letsencrypt/live/etys.no/privkey.pem').toString();
+    var certificate = fs.readFileSync('/etc/letsencrypt/live/etys.no/cert.pem').toString();
+    var ca          = fs.readFileSync('/etc/letsencrypt/live/etys.no/chain.pem').toString();
+
+    //var ca_bundle   = fs.readFileSync('/home/kasper/startssl/ca-bundle.pem')
+    //var credentials = {key: privateKey, cert: certificate, ca: ca,};
+    var credentials = {
+      key: privateKey,
+      cert: certificate,
+      ca: ca
+    };
+
+    var https = require('https');
+    server = https.createServer(credentials, app);
+}
+catch(err){
+    console.log("Starting without https (probably on localhost)");
+var http = require('http');
+    server = http.createServer(app);
+}
+
+var io = require('socket.io')(server);
 var crypto = require('crypto');
 var unique_ids = [];
 
