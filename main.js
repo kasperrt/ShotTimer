@@ -14,7 +14,7 @@ var previous_drinker = "";
 var sound_on = true;
 var zoffWindow;
 var id = "";
-var socket = io("http://etys.no:3000");
+var socket = io("https://etys.no:3000");
 
 socket.on("joined", function(obj){
 	addDeltaker({name: {value: obj._name}});
