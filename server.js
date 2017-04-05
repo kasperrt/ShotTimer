@@ -24,7 +24,7 @@ try{
 }
 catch(err){
     console.log("Starting without https (probably on localhost)");
-var http = require('http');
+    var http = require('http');
     server = http.createServer(app);
 }
 
@@ -126,6 +126,6 @@ function contains(a, obj) {
     }
 }
 
-http.listen(3000, function(){
+server.listen(3000, function(){
   console.log('listening on *:3000');
 });
