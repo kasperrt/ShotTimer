@@ -165,11 +165,11 @@ function endtalk(){
 }
 
 function lowerVolume(){
-	if(zoffWindow !== undefined) zoffWindow.postMessage("lower", "https://zoff.no");
+	if(zoffWindow !== undefined) zoffWindow.postMessage("lower", "https://zoff.me");
 }
 
 function resetVolume() {
-	if(zoffWindow !== undefined) zoffWindow.postMessage("reset", "https://zoff.no");
+	if(zoffWindow !== undefined) zoffWindow.postMessage("reset", "https://zoff.me");
 }
 
 function newTimer(){
