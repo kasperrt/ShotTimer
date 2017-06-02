@@ -41,7 +41,7 @@ io.on('connection', function(socket){
   var guid = uniqueID(socketid, 4);
   unique_ids.push(guid);
   socket.on("join", function(obj){
-    io.to(obj.id).emit("joined", {_name: obj.name});
+    io.to(obj.id).emit("joined", {_name: obj.name, _drawing: obj.drawing});
   });
 
   socket.on("host", function(){

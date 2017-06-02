@@ -42,9 +42,11 @@ background-color: #FFF;
 	z-index: -1;
 
 }
-#qr_container{height:200px;opacity:0;-webkit-transition:opacity 1s; /* Safari */
+#qr_container{    display: flex;
+    flex-direction: row;height:200px;opacity:0;-webkit-transition:opacity 1s; /* Safari */
     transition: opacity 1s;width: 200px;
-    margin: auto;}
+    margin: auto;    align-items: center;
+    justify-content: center;}
 #topLabel{margin-left:21px;}
 .bottomswitch{margin-top:10px;}
 #ok{display:block;margin:auto;height:80%;}
@@ -131,6 +133,15 @@ path{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+#canvas {
+  top: 0;
+  width: 150px;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
 }
 
 @media only screen and (max-width: 736px) and (max-width:600px), only screen and (max-device-width: 736px){
