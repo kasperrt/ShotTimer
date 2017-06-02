@@ -138,12 +138,16 @@ path{
 }
 
 #canvas {
+  position: absolute;
   top: 0;
-  height: 200px;
+  height: 100vh;
   bottom: 0;
-  margin: auto;
+  /* margin: auto; */
   left: 0;
+  z-index: -1;
   right: 0;
+  -webkit-animation: animation 5s infinite; /* Chrome, Safari, Opera */
+  animation: animation 5s infinite;
 }
 
 @media only screen and (max-width: 736px) and (max-width:600px), only screen and (max-device-width: 736px){
@@ -186,3 +190,19 @@ path{
     right: 10px;
   }
 }
+
+
+@-webkit-keyframes animation
+    {
+    0%   { left:0%; top:0px;transform:rotate(0deg)}
+    50%  {left:70%;}
+    100% {left:0px; top:0px;transform:rotate(0deg)}
+    }
+
+    /* Standard syntax */
+    @keyframes animation
+    {
+    0%   { left:0%; top:0px;transform:rotate(0deg)}
+    50%  {left:70%;}
+    100% {left:0px; top:0px;transform:rotate(0deg)}
+    }
