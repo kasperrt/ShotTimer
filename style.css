@@ -42,6 +42,8 @@ background-color: #FFF;
 	z-index: -1;
 
 }
+
+#intervalnumber {width:50px;text-align: center;}
 #qr_container{    display: flex;
     flex-direction: row;height:200px;opacity:0;-webkit-transition:opacity 1s; /* Safari */
     transition: opacity 1s;width: 200px;

@@ -1,5 +1,5 @@
 var socket = io("https://etys.no:3000");
-var height = $(window).height()-50;
+var height = $(window).height()-110;
 var width = $(window).width()-20;
 var name = "";
 
@@ -11,6 +11,7 @@ window.addEventListener("load", function(){
 		e.preventDefault();
     $(".canvas-container").removeClass("hide");
     name = this.name.value;
+    $("#inp").blur();
 		/*socket.emit("join", {id: window.location.search.substring(1), name: this.name.value});
     document.getElementsByClassName("valign")[0].innerHTML = "<div style='text-align:center;font-size:4rem;'>You have joined the game!</span>";
     socket.disconnect();*/
