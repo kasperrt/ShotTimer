@@ -21,7 +21,7 @@ window.addEventListener("load", function(){
     e.preventDefault();
     socket.emit("join", {id: window.location.search.substring(1), name: name, drawing: [clickX, clickY, clickDrag, height, width, color]});
     socket.disconnect();
-    window.location = "https://zoff.no";
+    window.location = "https://zoff.me";
   });
 
   var clickX = new Array();
