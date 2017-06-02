@@ -170,14 +170,19 @@ function update_time(){
 function endtalk(){
 	responsiveVoice.cancel();
 	resetVolume();
-	if(sound_on) snd.play();
+	if(sound_on) {
+		snd.play();
+	}
     flash=0;
     setTimeout("lightning()",1);
 		setTimeout(function(){
 		document.getElementById("previous").innerHTML = "Previous drinker: "+previous_drinker;
 		//$("#canvas").remove();
         flash=7;
-        if(sound_on) snd.pause();
+        if(sound_on) {
+					snd.pause();
+					snd.currentTime = 0;
+				}
         document.getElementById("bgimage").style.backgroundColor='white';
 	}, 10000);
 }
