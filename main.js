@@ -33,6 +33,9 @@ socket.on("id", function(_id){
 socket.emit("host");
 
 window.addEventListener("load", function(){
+	$(".button-collapse").sideNav({
+		menuWidth: 300, // Default is 300
+	});
 	$("#thing").on("click", function() {
 		/*togg = !togg;
 		if(togg){

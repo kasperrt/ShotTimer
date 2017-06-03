@@ -29,12 +29,16 @@ background-color: #FFF;
     background-color: #74DE74 !important;
 }
 #zofform_container{
-  width: 200px;
   /* margin: auto; */
   /* height: 150px; */
   align-items: center;
   justify-content: center;
   /* text-align: left; */
+  text-align: -webkit-center;
+}
+
+#zofform_container:hover{
+  background: white;
 }
 #hidden-height{
       height: 140px;
@@ -200,6 +204,13 @@ path{
 
 .stop_zoff {
   margin-bottom: 10px;
+  width: 80%;
+color: white;
+height: 40px;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
 }
 
 .now_playing {
@@ -213,6 +224,24 @@ path{
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.switch-right {
+  float: right;
+}
+
+.side-nav {
+  text-align: left;
+}
+
+.interval-li {
+  padding-top: 35px;
+}
+
+.button-collapse {
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 
