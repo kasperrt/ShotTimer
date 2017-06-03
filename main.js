@@ -1,4 +1,4 @@
-http://localhostvar toggled;
+var toggled;
 var interval;
 var date;
 var reset;
@@ -66,7 +66,7 @@ window.addEventListener("load", function(){
 			$("#iframe_container").html("");
 		} else {
 			//zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
-			$("#iframe_container").html("<iframe id='iframe' src='http://localhost/_embed#" + channel + "&71C387&autoplay&videoonly' onload='postMessageZoff()'></iframe>");
+			$("#iframe_container").html("<iframe id='iframe' src='https://zoff.me/_embed#" + channel + "&71C387&autoplay&videoonly' onload='postMessageZoff()'></iframe>");
 			zoffWindow = document.getElementById('iframe').contentWindow;
 			$("#zofform").toggleClass("hide");
 			$(".stop_zoff").toggleClass("hide");
@@ -107,7 +107,7 @@ window.addEventListener("load", function(){
 });
 
 function postMessageZoff() {
-	zoffWindow.postMessage("parent", "http://localhost");
+	zoffWindow.postMessage("parent", "https://zoff.me");
 }
 
 //Dynamic listener
@@ -223,11 +223,11 @@ function endtalk(){
 }
 
 function lowerVolume(){
-	if(zoffWindow !== undefined) zoffWindow.postMessage("lower", "http://localhost");
+	if(zoffWindow !== undefined) zoffWindow.postMessage("lower", "https://zoff.me");
 }
 
 function resetVolume() {
-	if(zoffWindow !== undefined) zoffWindow.postMessage("reset", "http://localhost");
+	if(zoffWindow !== undefined) zoffWindow.postMessage("reset", "https://zoff.me");
 }
 
 function newTimer(){
