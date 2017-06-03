@@ -26,9 +26,9 @@ socket.on("joined", function(obj){
 
 socket.on("id", function(_id){
 	id = encodeURI("?" + _id);
-	document.getElementById("qr_container").innerHTML = "<img src='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://etys.no/mobile/" + id + "&choe=UTF-8&chld=L%7C1' alt='qr' />";
+	document.getElementById("qr_container").innerHTML = "<img src='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://etys.no/m/" + id + "&choe=UTF-8&chld=L%7C1' alt='qr' />";
 	document.getElementById("qr_container").style.opacity = 1;
-	$("#link_join").text("Join link: https://etys.no/mobile/" + id);
+	$("#link_join").text("Join link: https://etys.no/m/" + id);
 });
 socket.emit("host");
 
