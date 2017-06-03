@@ -244,6 +244,9 @@ path{
   left: 5px;
 }
 
+.hide {
+  display: none !important;
+}
 
 @-webkit-keyframes animation
     {
