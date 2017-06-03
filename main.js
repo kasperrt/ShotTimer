@@ -6,6 +6,7 @@ var players = Array();
 var players_all = Array();
 var interval;
 var snd = new Audio("sound/bell.mp3"); // buffers automatically when created
+var sanic = new Audio("sound/sanic.mp3");
 var togg;
 var times = 0;
 var show = true;
@@ -33,6 +34,7 @@ socket.on("id", function(_id){
 socket.emit("host");
 
 window.addEventListener("load", function(){
+	sanic.volume = 0.2;
 	$(".button-collapse").sideNav({
 		menuWidth: 300, // Default is 300
 	});
@@ -205,8 +207,13 @@ function update_time(){
 function endtalk(){
 	responsiveVoice.cancel();
 	resetVolume();
+	var sanicRandom = Math.floor((Math.random() * 10000) + 1);
 	if(sound_on) {
-		snd.play();
+		if(sanicRandom == 137) {
+			sanic.play();
+		} else {
+			snd.play();
+		}
 	}
     flash=0;
     setTimeout("lightning()",1);
@@ -215,8 +222,13 @@ function endtalk(){
 		//$("#canvas").remove();
         flash=7;
         if(sound_on) {
-					snd.pause();
-					snd.currentTime = 0;
+					if(sanicRandom == 137) {
+						sanic.pause();
+						sanic.currentTime = 0;
+					} else {
+						snd.pause();
+						snd.currentTime = 0;
+					}
 				}
         document.getElementById("container").style.background = "rgba(255,255,255,0.95)"
 	}, 10000);
@@ -233,7 +245,9 @@ function resetVolume() {
 function newTimer(){
 	dateNow = new Date();
 	if($("#interval").prop("checked")) {
-		fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+parseInt($("#intervalnumber").val()), dateNow.getSeconds(), dateNow.getMilliseconds());
+		var intervalNumber = parseInt($("#intervalnumber").val());
+		if(intervalNumber <= 0) intervalNumber = 1;
+		fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+intervalNumber, dateNow.getSeconds(), dateNow.getMilliseconds());
 	} else {
 		fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+Math.floor(Math.random()*6)+1, dateNow.getSeconds(), dateNow.getMilliseconds());
 	}//fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes(), dateNow.getSeconds() + 10, dateNow.getMilliseconds());
