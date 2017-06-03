@@ -11,10 +11,15 @@ When navigating to the site, anyone can join the game by using their phone, and 
 
 ### Screenshots
 
-![alt tag](https://puu.sh/w8QxN/db44b69ef6.png)
+![alt tag](https://puu.sh/w9RVn/e0cee39271.png)
 
-![alt tag](http://imgur.com/2kr7Gye.png)
+![alt tag](https://puu.sh/w9S2v/eb1dc32c21.png)
+
+![alt tag](https://puu.sh/w9S3L/7f6bb9dff9.png)
+
+![alt tag](https://puu.sh/w9S64/2964e26f05.png)
 
 Settings
 =================================
-You can click the checkbox to hide it or show it.
+You can chose to turn on or off the sounds + speech
+You can chose to
