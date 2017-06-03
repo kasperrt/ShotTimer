@@ -218,7 +218,7 @@ function endtalk(){
 					snd.pause();
 					snd.currentTime = 0;
 				}
-        document.getElementById("container").style.backgroundColor='white';
+        document.getElementById("container").style.background = "rgba(255,255,255,0.95)"
 	}, 10000);
 }
 
