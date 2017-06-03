@@ -205,12 +205,12 @@ path{
 .stop_zoff {
   margin-bottom: 10px;
   width: 80%;
-color: white;
-height: 40px;
-display: flex;
-justify-content: center;
-align-items: center;
-text-align: center;
+  color: white !important;
+  height: 40px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .now_playing {
