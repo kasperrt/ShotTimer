@@ -30,10 +30,11 @@ background-color: #FFF;
 }
 #zofform_container{
   width: 200px;
-  margin: auto;
-  height: 150px;
+  /* margin: auto; */
+  /* height: 150px; */
   align-items: center;
   justify-content: center;
+  /* text-align: left; */
 }
 #hidden-height{
       height: 140px;
@@ -44,11 +45,15 @@ background-color: #FFF;
 }
 
 #intervalnumber {width:50px;text-align: center;}
-#qr_container{    display: flex;
-    flex-direction: row;height:200px;opacity:0;-webkit-transition:opacity 1s; /* Safari */
-    transition: opacity 1s;width: 200px;
-    margin: auto;    align-items: center;
-    justify-content: center;}
+#qr_container{
+    height:200px;
+    opacity:0;
+    -webkit-transition:opacity 1s; /* Safari */
+    transition: opacity 1s;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    }
 #topLabel{margin-left:21px;}
 .bottomswitch{margin-top:10px;}
 #ok{display:block;margin:auto;height:80%;}
@@ -74,6 +79,8 @@ background-color: rgba(255, 255, 255, 0);}
 
 #zoffchannel{
     font-size: 15px;
+    text-align: left;
+    padding-left: 10px;
 }
 
 #github{
@@ -189,6 +196,23 @@ path{
   	/*left: calc(50vw - 18.5px);*/
     right: 10px;
   }
+}
+
+.stop_zoff {
+  margin-bottom: 10px;
+}
+
+.now_playing {
+  margin-top: -22px;
+  font-size: 1rem;
+  width: 200px;
+}
+
+#qr_zoff_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 

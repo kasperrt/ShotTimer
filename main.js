@@ -33,60 +33,92 @@ socket.on("id", function(_id){
 socket.emit("host");
 
 window.addEventListener("load", function(){
-	document.getElementById("thing").addEventListener("click", function(){
+	$("#thing").on("click", function() {
 		/*togg = !togg;
 		if(togg){
 			document.getElementById("display-area").style.cssText = "visibility:hidden;";
 		}else document.getElementById("display-area").style.cssText = "visibility:visible;";*/
 	});
 
-	document.getElementById("check-count").addEventListener("change", function(){
+	$("#check-count").on("change", function() {
 		show = this.checked;
 		val = show ? "visible" : "hidden";
 		/*document.getElementById("display-area").style.cssText = "visibility:"+val+";"; */
 	});
 
-	document.getElementById("fair-game").addEventListener("change", function(){
+	$("#fair-game").on("change", function() {
 		fair_game = !fair_game;
 	});
 
-	document.getElementById("sound").addEventListener("change", function(){
+	$("#sound").on("change", function() {
 		sound_on = !sound_on;
 	});
 
-	document.getElementById("zofform").addEventListener("submit", function(e){
+	$("#zofform").on("submit", function(e) {
 		e.preventDefault();
 
-		var channel    = document.getElementById("zoffchannel").value;
-		document.getElementById("zoffchannel").value = "";
+		var channel    = $("#zoffchannel").val();
+		$("#zoffchannel").val("");
 		if(channel == ""){
-			document.getElementById("iframe_container").innerHTML = "";
+			$("#iframe_container").html("");
 		} else {
 			//zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
-			document.getElementById("iframe_container").innerHTML = "<iframe id='iframe' src='https://zoff.me/_embed#" + channel + "&71C387&autoplay'></iframe>";
+			$("#iframe_container").html("<iframe id='iframe' src='https://zoff.me/_embed#" + channel + "&71C387&autoplay' onload='postMessageZoff()'></iframe>");
 			zoffWindow = document.getElementById('iframe').contentWindow;
+			$("#zofform").toggleClass("hide");
+			$(".stop_zoff").toggleClass("hide");
 		}
-		document.getElementById("qr_container").style.display = "block";
+		/*document.getElementById("qr_container").style.display = "block";
 		document.getElementById("zofform_container").style.display = "none";
-		document.getElementById("zofform").style.display = "none";
+		document.getElementById("zofform").style.display = "none";*/
 		document.getElementById("inp").focus();
 	});
 
-	document.getElementById("qr_container").addEventListener("click", function(){
+	$(".stop_zoff").on("click", function(e) {
+		e.preventDefault();
+		$("#iframe_container").html("");
+		$(".stop_zoff").toggleClass("hide");
+		$("#zofform").toggleClass("hide");
+		if(!$(".now_playing").hasClass("hide")) {
+			$(".now_playing").addClass("hide");
+		}
+		delete zoffWindow;
+	});
+
+
+
+	/*document.getElementById("qr_container").addEventListener("click", function(){
 		document.getElementById("qr_container").style.display = "none";
 		document.getElementById("zofform_container").style.display = "flex";
 		document.getElementById("zofform").style.display = "block";
 		document.getElementById("zoffchannel").focus();
-	});
+	});*/
 
 	document.getElementById("playerform").addEventListener("submit", function(e){
 		e.preventDefault();
 
 		addDeltaker(this);
 	});
+
+	window.addEventListener("message", receiveMessage, false);
 });
 
+function postMessageZoff() {
+	zoffWindow.postMessage("parent", "https://zoff.me");
+}
+
 //Dynamic listener
+
+function receiveMessage(event) {
+  // Do we trust the sender of this message?  (might be
+  // different from what we originally opened, for example).
+	if(event.data.title) {
+	  $("#now_playing_title").text(event.data.title);
+		$(".now_playing").removeClass("hide");
+	}
+  // event.source is popup
+  // event.data is "hi there yourself!  the secret response is: rheeeeet!"
+}
 
 $(document).on('click', '#toast-container', function(){
 	window.location.href = 'https://etys.no';

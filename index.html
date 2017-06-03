@@ -75,6 +75,12 @@
             </div>
 
             <br>
+            <div id="zofform_container">
+                <form id="zofform">
+                <input id="zoffchannel" placeholder="Zoff channel" autocomplete="off" />
+                </form>
+                <a href="#" class="red lighten-1 btn stop_zoff waves-effect waves-light hide">Stop Zoff</a>
+            </div>
             <span>In collab with <a href="https://zoff.me">Zoff</a></span>
     	</div>
       <a id="rulesbutton" class="waves-effect waves-green btn-flat" onclick="$('#rules').openModal()">Rules</a>
@@ -91,13 +97,15 @@
 	            	<input id="inp" name="name" autocomplete="off" placeholder="Type Player Name Here...">
 	            	<input type="submit" style="display:none;">
 	            </form>
-                <div id="qr_container" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click to choose Zoff channel!"></div>
-                <p id="link_join"></p>
-                <div id="zofform_container" style="display:none;">
-                    <form id="zofform" style="display:none;" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Submit an empty list to stop the music">
-                    <input id="zoffchannel" placeholder="Zoff channel" autocomplete="off" />
-                    </form>
+                <div id="qr_zoff_container">
+                    <div id="qr_container">
+                    </div>
+                    <div class="now_playing hide">
+                        <p>Now Playing:</p>
+                        <p id="now_playing_title"></p>
+                    </div>
                 </div>
+                <p id="link_join"></p>
             </div>
         </div>
         </div>
