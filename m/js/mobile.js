@@ -22,7 +22,7 @@ window.addEventListener("load", function(){
 
   $("#submit_drawing").on("click", function(e) {
     e.preventDefault();
-    socket.emit("join", {id: window.location.search.substring(1), name: name, drawing: [clickX, clickY, clickDrag, height, width, color]});
+    socket.emit("join", {id: window.location.pathname.split("/")[2], name: name, drawing: [clickX, clickY, clickDrag, height, width, color]});
     socket.disconnect();
     window.location = "https://zoff.me";
   });

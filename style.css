@@ -275,6 +275,7 @@ p#link_join {
 span#join_id {
     font-size: 2.5rem;
     font-weight: bold;
+    padding-left: 4px;
 }
 
 @-webkit-keyframes animation
