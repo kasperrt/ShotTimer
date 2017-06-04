@@ -266,6 +266,17 @@ iframe {
   height: 100vh;
 }
 
+p#link_join {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span#join_id {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
 @-webkit-keyframes animation
     {
     0%   { left:0%; top:0px;transform:rotate(0deg)}
