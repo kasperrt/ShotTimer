@@ -183,7 +183,8 @@ path{
   	position:fixed;
   	bottom:0px;
   	left: calc(50vw - 18.5px);
-    right:auto;
+  	right:auto;
+  	z-index: 9;
   }
 }
 
