@@ -266,6 +266,11 @@ iframe {
   height: 100vh;
 }
 
+#relative {
+	position: relative;
+  z-index: 99;
+}
+
 p#link_join {
     display: flex;
     justify-content: center;

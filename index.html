@@ -88,10 +88,9 @@
                         <a href="https://zoff.me" target="_blank">In collab with Zoff</a>
                     </li>
             </ul>
-
+        <div id="relative">
           <a href="#" data-activates="slide-out" class="button-collapse btn-flat waves-effect waves-red">Settings</a>
           <a id="rulesbutton" class="waves-effect waves-green btn-flat" onclick="$('#rules').openModal()">Rules</a>
-        	<div id="bgimage"></div>
         	<div id="ok">
         	<div id="vertical">
     	        <div id="thing">
@@ -118,20 +117,21 @@
             </div>
 
             <a href="https://github.com/kasperrt/ShotTimer" id="github"><img src="github.png" alt="GitHub" title="GitHub"></a>
-            <div id="rules" class="modal">
-                <div class="modal-content">
-                    <h4>Rules</h4>
-                    <p>To start a game, enter a name in the input field. Then a random countdown between 1 and 6 minutes will start. When the timer hits 00:00.000, a name will popup on the middle of the screen, a voice will yell out his/hers name, and the screen will go crazy with blinking. If you're the one picked, you are supposed to drink/do a shot.</p>
-                    <p>Depending on the rules (you should figure it out before starting the timer), the player has to stand while drinking, do a shot, or just take a sip of their drink.</p>
-                    <p>There are two modes: fair and anarchy. With anarcy, the namepicking is random, which can result in one person being chosen n-times in a row. With fair, no player can be more than 3 drinks ahead of the others.</p>
-                    <p>To make the game more fun, players can join via phone, by scanning the QR-code, or navigating to the URL underneath the QR-code. Here the player can chose their own name, and create a portrait of themselves!</p>
-                    <p>To change any of the settings (change from fair to anarchy (has to be done before a game is started), or turn of sound), click the "Settings" in the top left corner. Here you'll also have the option of starting a Zoff channing in the background!</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-                </div>
-            </div>
         </div>
+      </div>
+      <div id="rules" class="modal">
+          <div class="modal-content">
+              <h4>Rules</h4>
+              <p>To start a game, enter a name in the input field. Then a random countdown between 1 and 6 minutes will start. When the timer hits 00:00.000, a name will popup on the middle of the screen, a voice will yell out his/hers name, and the screen will go crazy with blinking. If you're the one picked, you are supposed to drink/do a shot.</p>
+              <p>Depending on the rules (you should figure it out before starting the timer), the player has to stand while drinking, do a shot, or just take a sip of their drink.</p>
+              <p>There are two modes: fair and anarchy. With anarcy, the namepicking is random, which can result in one person being chosen n-times in a row. With fair, no player can be more than 3 drinks ahead of the others.</p>
+              <p>To make the game more fun, players can join via phone, by scanning the QR-code, or navigating to the URL underneath the QR-code. Here the player can chose their own name, and create a portrait of themselves!</p>
+              <p>To change any of the settings (change from fair to anarchy (has to be done before a game is started), or turn of sound), click the "Settings" in the top left corner. Here you'll also have the option of starting a Zoff channing in the background!</p>
+          </div>
+          <div class="modal-footer">
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+          </div>
+      </div>
         <div id="iframe_container" style=""></div>
 	</body>
 </html>

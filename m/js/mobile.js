@@ -1,4 +1,4 @@
-var socket = io("https://etys.no:3000");
+var socket = io(window.location.protocol + "//" + window.location.host + ":3000");
 var height = $(window).height()-110;
 var width = $(window).width()-20;
 var name = "";

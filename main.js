@@ -19,7 +19,7 @@ var drawings = {};
 var player_names = [];
 var deltager_identifiers = {};
 var current_deltager_id = 0;
-var socket = io("https://etys.no:3000");
+var socket = io(window.location.protocol + "//" + window.location.host + ":3000");
 
 socket.on("joined", function(obj){
 	addDeltaker({name: {value: obj._name}, drawing: obj._drawing});
@@ -27,9 +27,9 @@ socket.on("joined", function(obj){
 
 socket.on("id", function(_id){
 	id = encodeURI(_id);
-	document.getElementById("qr_container").innerHTML = "<img src='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://etys.no/m/" + id + "&choe=UTF-8&chld=L%7C1' alt='qr' />";
+	document.getElementById("qr_container").innerHTML = "<img src='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=" + window.location.protocol + "//" + window.location.host + "/m/" + id + "&choe=UTF-8&chld=L%7C1' alt='qr' />";
 	document.getElementById("qr_container").style.opacity = 1;
-	$("#link_join").html("Join link: https://etys.no/m/<span id='join_id'>" + id + "</span>");
+	$("#link_join").html("Join link: " + window.location.protocol + "//" + window.location.host + "/m/<span id='join_id'>" + id + "</span>");
 });
 socket.emit("host");
 
@@ -162,6 +162,7 @@ function addDeltaker(form){
 		document.getElementById("players").innerHTML = "Players:<br>"+player_names.join(", ");
 		document.getElementById("players").style.paddingBottom = "9.5px";
 		document.getElementById("players").style.paddingTop = "9.5px";
+		
 		current_deltager_id += 1;
 		form.name.value = "";
 	} else alert("Please enter a name..");
@@ -186,7 +187,7 @@ function update_time(){
 		responsiveVoice.speak("Your turn to drink " + deltager_identifiers[players[rng]], "US English Male", {onend: endtalk});
 		$("#canvas").remove();
 		if(drawings[players[rng]]) {
-			$("#qr_container").append("<canvas id='canvas' height=\"" + drawings[players[rng]][3] + "\" width=\"" + drawings[players[rng]][4] + "\"></canvas>");
+			$("#container").append("<canvas id='canvas' height=\"" + drawings[players[rng]][3] + "\" width=\"" + drawings[players[rng]][4] + "\"></canvas>");
 			context = document.getElementById("canvas").getContext("2d");
 			main.redraw(drawings[players[rng]][0], drawings[players[rng]][1], drawings[players[rng]][2], drawings[players[rng]][5], true);
 		}
