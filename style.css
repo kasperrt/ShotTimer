@@ -1,5 +1,5 @@
 html, body{height:100%;}
-body{/* width:75%; */margin:auto;text-align:center;font-family: 'Open Sans', sans-serif;overflow: hidden;}
+body{/* width:75%; */margin:auto;text-align:center;font-family: 'Open Sans', sans-serif;overflow-x: hidden;}
 #bgimage {
 	z-index: -1;
 	background-size: 180%;
