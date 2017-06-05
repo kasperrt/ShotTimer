@@ -9,6 +9,7 @@ var snd = new Audio("sound/bell.mp3"); // buffers automatically when created
 var sanic = new Audio("sound/sanic.mp3");
 var togg;
 var times = 0;
+var intervalNumber = 0;
 var show = true;
 var fair_game = true;
 var previous_drinker = "";
@@ -16,6 +17,7 @@ var sound_on = true;
 var zoffWindow;
 var id = "";
 var drawings = {};
+var right = true;
 var player_names = [];
 var deltager_identifiers = {};
 var current_deltager_id = 0;
@@ -162,7 +164,7 @@ function addDeltaker(form){
 		document.getElementById("players").innerHTML = "Players:<br>"+player_names.join(", ");
 		document.getElementById("players").style.paddingBottom = "9.5px";
 		document.getElementById("players").style.paddingTop = "9.5px";
-		
+
 		current_deltager_id += 1;
 		form.name.value = "";
 	} else alert("Please enter a name..");
@@ -187,7 +189,8 @@ function update_time(){
 		responsiveVoice.speak("Your turn to drink " + deltager_identifiers[players[rng]], "US English Male", {onend: endtalk});
 		$("#canvas").remove();
 		if(drawings[players[rng]]) {
-			$("#container").append("<canvas id='canvas' height=\"" + drawings[players[rng]][3] + "\" width=\"" + drawings[players[rng]][4] + "\"></canvas>");
+			$("#container").append("<canvas id='canvas' style='-webkit-animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;' height=\"" + drawings[players[rng]][3] + "\" width=\"" + drawings[players[rng]][4] + "\"></canvas>");
+			right = !right;
 			context = document.getElementById("canvas").getContext("2d");
 			main.redraw(drawings[players[rng]][0], drawings[players[rng]][1], drawings[players[rng]][2], drawings[players[rng]][5], true);
 		}
@@ -246,11 +249,12 @@ function resetVolume() {
 function newTimer(){
 	dateNow = new Date();
 	if($("#interval").prop("checked")) {
-		var intervalNumber = parseInt($("#intervalnumber").val());
+		intervalNumber = parseInt($("#intervalnumber").val());
 		if(intervalNumber <= 0) intervalNumber = 1;
 		fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+intervalNumber, dateNow.getSeconds(), dateNow.getMilliseconds());
 	} else {
-		fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+Math.floor(Math.random()*6)+1, dateNow.getSeconds(), dateNow.getMilliseconds());
+		intervalNumber = Math.floor(Math.random()*6)+1;
+		fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+intervalNumber, dateNow.getSeconds(), dateNow.getMilliseconds());
 	}//fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes(), dateNow.getSeconds() + 10, dateNow.getMilliseconds());
 }
 

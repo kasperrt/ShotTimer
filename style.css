@@ -152,11 +152,8 @@ path{
   height: 100vh;
   bottom: 0;
   /* margin: auto; */
-  left: 0;
   z-index: -1;
   right: 0;
-  -webkit-animation: animation 5s infinite; /* Chrome, Safari, Opera */
-  animation: animation 5s infinite;
   z-index: 9;
 }
 
@@ -267,7 +264,8 @@ iframe {
 }
 
 #relative {
-	position: relative;
+	position: absolute;
+  width: 100vw;
   z-index: 99;
 }
 
@@ -283,17 +281,40 @@ span#join_id {
     padding-left: 4px;
 }
 
-@-webkit-keyframes animation
+.animate-right {
+  left: 0;
+}
+
+.animate-left {
+  right: 0;
+}
+
+@-webkit-keyframes animation-right
     {
     0%   { left:0%; top:0px;transform:rotate(0deg)}
-    50%  {left:70%;}
-    100% {left:0px; top:0px;transform:rotate(0deg)}
+    100%  {left:70%;}
+
     }
 
     /* Standard syntax */
-    @keyframes animation
+    @keyframes animation-right
     {
     0%   { left:0%; top:0px;transform:rotate(0deg)}
-    50%  {left:70%;}
-    100% {left:0px; top:0px;transform:rotate(0deg)}
+    100%  {left:70%;}
+
     }
+
+    @-webkit-keyframes animation-left
+        {
+        0%   { left:0%; top:0px;transform:rotate(0deg)}
+        100%  {left:70%;}
+
+        }
+
+        /* Standard syntax */
+        @keyframes animation-left
+        {
+        0%   { left:70%; top:0px;transform:rotate(0deg)}
+        100%  {left:0%;}
+
+        }
