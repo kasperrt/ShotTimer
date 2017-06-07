@@ -90,6 +90,7 @@ window.addEventListener("load", function(){
 			$(".now_playing").addClass("hide");
 		}
 		delete zoffWindow;
+		zoffWindow = false;
 	});
 
 
@@ -239,11 +240,11 @@ function endtalk(){
 }
 
 function lowerVolume(){
-	if(zoffWindow !== undefined) zoffWindow.postMessage("lower", "https://zoff.me");
+	if(zoffWindow !== undefined && zoffWindow) zoffWindow.postMessage("lower", "https://zoff.me");
 }
 
 function resetVolume() {
-	if(zoffWindow !== undefined) zoffWindow.postMessage("reset", "https://zoff.me");
+	if(zoffWindow !== undefined && zoffWindow) zoffWindow.postMessage("reset", "https://zoff.me");
 }
 
 function newTimer(){
