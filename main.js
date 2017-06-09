@@ -18,7 +18,7 @@ var zoffWindow;
 var id = "";
 var drawings = {};
 var right = true;
-var player_names = [];
+var show_score = true;
 var deltager_identifiers = {};
 var current_deltager_id = 0;
 var socket = io(window.location.protocol + "//" + window.location.host + ":3000");
@@ -51,6 +51,17 @@ window.addEventListener("load", function(){
 		show = this.checked;
 		val = show ? "visible" : "hidden";
 		/*document.getElementById("display-area").style.cssText = "visibility:"+val+";"; */
+	});
+
+	$("#show-score").on("change", function() {
+		show_score = this.checked;
+		if(show_score) {
+			$(".scoreboard").removeClass("hide");
+		} else {
+			if(!$(".scoreboard").hasClass("hide")) {
+				$(".scoreboard").addClass("hide");
+			}
+		}
 	});
 
 	$("#fair-game").on("change", function() {
@@ -108,8 +119,29 @@ window.addEventListener("load", function(){
 		addDeltaker(this);
 	});
 
+	$(document).on("click", ".player-remove-name", function(e) {
+		e.preventDefault();
+		console.log(this.id);
+		var to_remove_id = parseInt(this.id.split("-")[1]);
+		if(players.length > 1 && players_all.length > 1) {
+			players = removeAll(players, to_remove_id);
+			players_all = removeAll(players_all, to_remove_id);
+			$("#" + this.id).remove();
+			$("#score-" + to_remove_id).remove();
+			delete deltager_identifiers[to_remove_id];
+			delete drawings[to_remove_id];
+		}
+	});
+
 	window.addEventListener("message", receiveMessage, false);
 });
+
+function removeAll(array, elem) {
+	var filtered = array.filter(function(element) {
+			return element !== elem;
+	}); // filtered contains no occurrences of hello
+	return filtered;
+}
 
 function postMessageZoff() {
 	zoffWindow.postMessage("parent", "https://zoff.me");
@@ -120,8 +152,13 @@ function postMessageZoff() {
 function receiveMessage(event) {
   // Do we trust the sender of this message?  (might be
   // different from what we originally opened, for example).
-	if(event.data.title) {
+	if(event.data.type == "np") {
 	  $("#now_playing_title").text(event.data.title);
+		$(".now_playing").removeClass("hide");
+	} else if(event.data.type == "duration") {
+		$(".durationBar").css("width", event.data.percent + 1 + "vw");
+	} else if(event.data.type == "nextVideo") {
+		$("#next_title").text(event.data.title);
 		$(".now_playing").removeClass("hide");
 	}
   // event.source is popup
@@ -146,25 +183,25 @@ function addDeltaker(form){
 			players.push(current_deltager_id);
 			players.push(current_deltager_id);
 			players.push(current_deltager_id);
-			/*players_all.push(capitaliseFirstLetter(name));
-			players.push(capitaliseFirstLetter(name));
-			players.push(capitaliseFirstLetter(name));
-			players.push(capitaliseFirstLetter(name));*/
 		} else {
-			//players.push(capitaliseFirstLetter(name));
 			players.push(current_deltager_id);
 		}
-		player_names.push(capitaliseFirstLetter(name));
 		deltager_identifiers[current_deltager_id] = capitaliseFirstLetter(name);
 		if(!interval && ((players.length >= 1 && !fair_game) || (players_all.length >= 1 && fair_game))){
 			dateNow = new Date();
 			newTimer();
 			interval = window.setInterval(update_time, 1);
 			document.getElementById("fairgame-div").style.display = "none";
+			$("#players").html("Players:<br>");
+			$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
+		} else {
+			$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
 		}
-		document.getElementById("players").innerHTML = "Players:<br>"+player_names.join(", ");
+
 		document.getElementById("players").style.paddingBottom = "9.5px";
 		document.getElementById("players").style.paddingTop = "9.5px";
+
+		$(".scoreboard").append('<li id="score-' + current_deltager_id + '"><span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
 
 		current_deltager_id += 1;
 		form.name.value = "";
@@ -195,6 +232,9 @@ function update_time(){
 			context = document.getElementById("canvas").getContext("2d");
 			main.redraw(drawings[players[rng]][0], drawings[players[rng]][1], drawings[players[rng]][2], drawings[players[rng]][5], true);
 		}
+
+		var current_score_deltager = $($("#" +players[rng]).children()[1]).html();
+		$($("#score-" +players[rng]).children()[1]).html(parseInt(current_score_deltager) + 1);
 		if(fair_game){
 			players.splice(rng, 1);
 			if(players.length == 0) {
@@ -249,6 +289,7 @@ function resetVolume() {
 
 function newTimer(){
 	dateNow = new Date();
+	$(".scoreboard").removeClass("hide");
 	if($("#interval").prop("checked")) {
 		intervalNumber = parseInt($("#intervalnumber").val());
 		if(intervalNumber <= 0) intervalNumber = 1;

@@ -50,6 +50,15 @@
                           On
                         </label>
                     </li>
+                    <li class="switch bottomswitch" id="">
+                        Score&nbsp;&nbsp;
+                        <label class="switch-right">
+                          Hide
+                          <input type="checkbox" id="show-score" checked>
+                          <span class="lever"></span>
+                          Show
+                        </label>
+                    </li>
                     <li class="switch bottomswitch" id="fairgame-div">
                         Type&nbsp;&nbsp;
                         <label class="switch-right">
@@ -88,9 +97,14 @@
                         <a href="https://zoff.me" target="_blank">In collab with Zoff</a>
                     </li>
             </ul>
-            <a href="#" data-activates="slide-out" class="button-collapse btn-flat waves-effect waves-red">Settings</a>
-            <a id="rulesbutton" class="waves-effect waves-green btn-flat" onclick="$('#rules').openModal()">Rules</a>
-
+            <div class="top-elements">
+                <a href="#" data-activates="slide-out" class="button-collapse btn-flat waves-effect waves-red">Settings</a>
+                <a id="rulesbutton" class="waves-effect waves-green btn-flat" onclick="$('#rules').openModal()">Rules</a>
+                <ul class="scoreboard hide">
+                  <li>Scoreboard</li>
+                </ul>
+            </div>
+            <div class="durationBar"></div>
         <div id="relative">
         	<div id="ok">
         	<div id="vertical">
@@ -108,8 +122,10 @@
                         <div id="qr_container">
                         </div>
                         <div class="now_playing hide">
-                            <p>Now Playing:</p>
+                            <p class="np_info">Now Playing:</p>
                             <p id="now_playing_title"></p>
+                            <p class="np_info">Up Next:</p>
+                            <p id="next_title"></p>
                         </div>
                     </div>
                     <p id="link_join"></p>
@@ -128,6 +144,7 @@
               <p>There are two modes: fair and anarchy. With anarcy, the namepicking is random, which can result in one person being chosen n-times in a row. With fair, no player can be more than 3 drinks ahead of the others.</p>
               <p>To make the game more fun, players can join via phone, by scanning the QR-code, or navigating to the URL underneath the QR-code. Here the player can chose their own name, and create a portrait of themselves!</p>
               <p>To change any of the settings (change from fair to anarchy (has to be done before a game is started), or turn of sound), click the "Settings" in the top left corner. Here you'll also have the option of starting a Zoff channing in the background!</p>
+              <p>If a player wants to leave the game/has to leave the party, his or hers name can be removed from the name-pool by clicking his or hers name underneath the timer.</p>
           </div>
           <div class="modal-footer">
               <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>

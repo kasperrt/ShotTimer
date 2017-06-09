@@ -56,6 +56,7 @@ filter: blur(50px) brightness(0.8);*/
     align-items: center;
     justify-content: center;
     }
+    .np_info{font-weight:100;}
 #topLabel{margin-left:21px;}
 .bottomswitch{margin-top:10px;}
 #ok{display:block;margin:auto;height:80%;width: 75%;}
@@ -157,46 +158,33 @@ path{
   z-index: 9;
 }
 
-@media only screen and (max-width: 736px) and (max-width:600px), only screen and (max-device-width: 736px){
-  #display-area{
-    display: block;
-    margin-top: 10rem;
-    font-size: 3rem;
-  }
-
-  #qr_container{
-    display: none;
-  }
-
-  #previous{
-    font-size: 3rem;
-  }
-
-  #inp, #zoffchannel{
-    font-size: 1.5rem;
-  }
-
-  #github{
-  	position:fixed;
-  	bottom:0px;
-  	left: calc(50vw - 18.5px);
-  	right:auto;
-  	z-index: 9;
-  }
+.top-elements {
+  position: relative;
 }
 
+.scoreboard {
+  width: 150px;
+  top: 50px;
+  left: 14px;
+  position: absolute;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  /* font-size: 14.5px; */
+  font-weight: 300;
+}
 
-@media screen and (orientation:landscape) {
-  #display-area{
-    margin-top: 0rem;
-  }
+.scoreboard li:first-child {
+  font-weight: bold;
+  text-align: center;
+}
 
-  #github{
-  	position:fixed;
-  	bottom:0px;
-  	/*left: calc(50vw - 18.5px);*/
-    right: 10px;
-  }
+.scoreboard .score {
+  float: right;
+}
+
+.scoreboard .name {
+  float: left;
 }
 
 .stop_zoff {
@@ -214,6 +202,18 @@ path{
   margin-top: -22px;
   font-size: 1rem;
   width: 200px;
+}
+
+.player-remove-name {
+  cursor: pointer;
+}
+
+.player-remove-name:after {
+  content: ", ";
+}
+
+.player-remove-name:last-child:after {
+  content: "";
 }
 
 #qr_zoff_container {
@@ -257,6 +257,16 @@ path{
 	background: rgba(255,255,255,.95);
 }
 
+.durationBar {
+	background: black;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 7px;
+	width: 0vw;
+	border-top-right-radius: 4px;
+}
+
 iframe {
   position: fixed;
   left: 0px;
@@ -293,6 +303,52 @@ span#join_id {
 
 .animate-left {
   right: 0;
+}
+
+@media only screen and (max-width: 736px) and (max-width:600px), only screen and (max-device-width: 736px){
+  #display-area{
+    display: block;
+    margin-top: 10rem;
+    font-size: 3rem;
+  }
+
+  #qr_container{
+    display: none;
+  }
+
+  #previous{
+    font-size: 3rem;
+  }
+
+  #inp, #zoffchannel{
+    font-size: 1.5rem;
+  }
+
+  #github{
+  	position:fixed;
+  	bottom:0px;
+  	left: calc(50vw - 18.5px);
+  	right:auto;
+  	z-index: 9;
+  }
+
+  .scoreboard {
+    display: none !important;
+  }
+}
+
+
+@media screen and (orientation:landscape) {
+  #display-area{
+    margin-top: 0rem;
+  }
+
+  #github{
+  	position:fixed;
+  	bottom: 15px;
+  	/*left: calc(50vw - 18.5px);*/
+  	right: 15px;
+  }
 }
 
 @-webkit-keyframes animation-right
