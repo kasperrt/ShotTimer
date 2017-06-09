@@ -116,5 +116,42 @@ function getRandomColor() {
     for (var i = 0; i < 6; i++ ) {
         color += letters[Math.floor(Math.random() * 16)];
     }
-    return color;
+
+    rgb = [];
+
+    for (var i = 0; i < 6; i+=2) {
+
+			   rgb.push(parseInt(color.substring(i+1, i+3),16));
+			   //fail = fail || rgb[rgb.length - 1].toString() === 'NaN';
+		}
+
+    hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+    return hsl;
+}
+
+
+function rgbToHsl(r, g, b){
+	r /= 255, g /= 255, b /= 255;
+	var max = Math.max(r, g, b), min = Math.min(r, g, b);
+	var h, s, l = (max + min) / 2;
+
+	if (max == min) { h = s = 0; }
+	else {
+		var d = max - min;
+		s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+		switch (max){
+			case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+			case g: h = (b - r) / d + 2; break;
+			case b: h = (r - g) / d + 4; break;
+		}
+
+		h /= 6;
+	}
+
+  if(l>0.5)l=0.4; //make sure it isnt too light
+
+	//return [(h*100+0.5)|0, ((s*100+0.5)|0) + '%', ((l*100+0.5)|0) + '%'];
+  return "hsl("+Math.floor(h*360)+", "+Math.floor(s*100)+"%, "+Math.floor(l*100)+"%)";
+
 }
