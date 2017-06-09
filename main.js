@@ -129,6 +129,25 @@ window.addEventListener("load", function(){
 			$("#score-" + to_remove_id).remove();
 			delete deltager_identifiers[to_remove_id];
 			delete drawings[to_remove_id];
+		} else if(fair_game && players.indexOf(to_remove_id) == -1) {
+			players_all = removeAll(players_all, to_remove_id);
+			$("#" + this.id).remove();
+			$("#score-" + to_remove_id).remove();
+			delete deltager_identifiers[to_remove_id];
+			delete drawings[to_remove_id];
+		}else if(!fair_game && players.length > 1 && players.indexOf(to_remove_id) > -1) {
+				players = removeAll(players, to_remove_id);
+				$("#" + this.id).remove();
+				$("#score-" + to_remove_id).remove();
+				delete deltager_identifiers[to_remove_id];
+				delete drawings[to_remove_id];
+		} else if(!fair_game && players.indexOf(to_remove_id) == -1) {
+				$("#" + this.id).remove();
+				$("#score-" + to_remove_id).remove();
+				delete deltager_identifiers[to_remove_id];
+				delete drawings[to_remove_id];
+		} else {
+			Materialize.toast("You can't delete a player when that player is the only possible next drinker..!", 3000);
 		}
 	});
 
@@ -165,7 +184,6 @@ function receiveMessage(event) {
 }
 
 $(document).on('click', '#toast-container', function(){
-	window.location.href = 'https://etys.no';
     $(this).fadeOut(function(){
 	    $(this).remove();
 	});
