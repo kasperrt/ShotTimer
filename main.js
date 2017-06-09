@@ -121,7 +121,6 @@ window.addEventListener("load", function(){
 
 	$(document).on("click", ".player-remove-name", function(e) {
 		e.preventDefault();
-		console.log(this.id);
 		var to_remove_id = parseInt(this.id.split("-")[1]);
 		if(players.length > 1 && players_all.length > 1) {
 			players = removeAll(players, to_remove_id);
@@ -233,7 +232,7 @@ function update_time(){
 			main.redraw(drawings[players[rng]][0], drawings[players[rng]][1], drawings[players[rng]][2], drawings[players[rng]][5], true);
 		}
 
-		var current_score_deltager = $($("#" +players[rng]).children()[1]).html();
+		var current_score_deltager = $($("#score-" +players[rng]).children()[1]).html();
 		$($("#score-" +players[rng]).children()[1]).html(parseInt(current_score_deltager) + 1);
 		if(fair_game){
 			players.splice(rng, 1);
