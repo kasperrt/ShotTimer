@@ -130,24 +130,12 @@ window.addEventListener("load", function(){
 			$("#score-" + to_remove_id).remove();
 			delete deltager_identifiers[to_remove_id];
 			delete drawings[to_remove_id];
-		} else if(fair_game && players.indexOf(to_remove_id) == -1) {
-			players_all = removeAll(players_all, to_remove_id);
-			$("#" + this.id).remove();
-			$("#score-" + to_remove_id).remove();
-			delete deltager_identifiers[to_remove_id];
-			delete drawings[to_remove_id];
-		}else if(!fair_game && players.length > 1 && players.indexOf(to_remove_id) > -1) {
-				players = removeAll(players, to_remove_id);
-				$("#" + this.id).remove();
-				$("#score-" + to_remove_id).remove();
-				delete deltager_identifiers[to_remove_id];
-				delete drawings[to_remove_id];
-		} else if(!fair_game && players.indexOf(to_remove_id) == -1) {
-				$("#" + this.id).remove();
-				$("#score-" + to_remove_id).remove();
-				delete deltager_identifiers[to_remove_id];
-				delete drawings[to_remove_id];
+			var scoreboard_id = scoreboard.find(function(scores) {
+				return scores.id === to_remove_id;
+			});
+			scoreboard.splice(scoreboard.indexOf(scoreboard_id), 1);
 		} else {
+	    $(".toast").remove();
 			Materialize.toast("You can't delete a player when that player is the only possible next drinker..!", 3000);
 		}
 	});
