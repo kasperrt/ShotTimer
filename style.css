@@ -162,7 +162,7 @@ path{
   position: relative;
 }
 
-.scoreboard {
+.scoreboard-container {
   width: 150px;
   top: 50px;
   left: 14px;
@@ -174,11 +174,24 @@ path{
   font-weight: 300;
 }
 
-.scoreboard li:first-child {
-  /* font-weight: bold; */
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+}
+
+/*.scoreboard li:first-child {
+  /* font-weight: bold;
   text-align: center;
   text-transform: uppercase;
   font-weight: 400;
+}*/
+
+.scoreboard-container h4 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 15px;
+  margin-bottom: 0;
 }
 
 .scoreboard .score {
@@ -187,6 +200,10 @@ path{
 
 .scoreboard .name {
   float: left;
+}
+
+.score-element {
+  position: relative;
 }
 
 .stop_zoff {
@@ -334,7 +351,7 @@ span#join_id {
   	z-index: 9;
   }
 
-  .scoreboard {
+  .scoreboard-container {
     display: none !important;
   }
 }

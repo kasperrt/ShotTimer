@@ -21,6 +21,7 @@ var right = true;
 var show_score = true;
 var deltager_identifiers = {};
 var current_deltager_id = 0;
+var scoreboard = [];
 var socket = io(window.location.protocol + "//" + window.location.host + ":3000");
 
 socket.on("joined", function(obj){
@@ -56,10 +57,10 @@ window.addEventListener("load", function(){
 	$("#show-score").on("change", function() {
 		show_score = this.checked;
 		if(show_score) {
-			$(".scoreboard").removeClass("hide");
+			$(".scoreboard-container").removeClass("hide");
 		} else {
-			if(!$(".scoreboard").hasClass("hide")) {
-				$(".scoreboard").addClass("hide");
+			if(!$(".scoreboard-container").hasClass("hide")) {
+				$(".scoreboard-container").addClass("hide");
 			}
 		}
 	});
@@ -195,20 +196,20 @@ function addDeltaker(form){
 		if(form.drawing) {
 			drawings[current_deltager_id] = form.drawing;
 		}
-		if(fair_game) {
+		//if(fair_game) {
 			players_all.push(current_deltager_id);
 			players.push(current_deltager_id);
 			players.push(current_deltager_id);
 			players.push(current_deltager_id);
-		} else {
+		/*} else {
 			players.push(current_deltager_id);
-		}
+		}*/
 		deltager_identifiers[current_deltager_id] = capitaliseFirstLetter(name);
-		if(!interval && ((players.length >= 1 && !fair_game) || (players_all.length >= 1 && fair_game))){
+		if(!interval && players_all.length > 0){
 			dateNow = new Date();
 			newTimer();
 			interval = window.setInterval(update_time, 1);
-			document.getElementById("fairgame-div").style.display = "none";
+			//document.getElementById("fairgame-div").style.display = "none";
 			$("#players").html("Players:<br>");
 			$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
 		} else {
@@ -218,8 +219,11 @@ function addDeltaker(form){
 		document.getElementById("players").style.paddingBottom = "9.5px";
 		document.getElementById("players").style.paddingTop = "9.5px";
 
-		$(".scoreboard").append('<li id="score-' + current_deltager_id + '"><span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
-
+		$(".scoreboard").append('<li id="score-' + current_deltager_id + '" class="score-element"><span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
+		scoreboard[current_deltager_id] = {};
+		scoreboard[current_deltager_id].id = current_deltager_id;
+		scoreboard[current_deltager_id].score = 0;
+		scoreboard[current_deltager_id].html = '<li id="score-' + current_deltager_id + '" class="score-element"><span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>';
 		current_deltager_id += 1;
 		form.name.value = "";
 	} else alert("Please enter a name..");
@@ -237,23 +241,29 @@ function update_time(){
     }
 	if(minutes < 0){
 		newTimer();
-		rng = Math.floor(Math.random() * players.length);
-		document.getElementById("previous").innerHTML = "Your turn to drink "+deltager_identifiers[players[rng]]+"!";
+		rng = fair_game ? rnd(players) : rnd(players_all);
+		document.getElementById("previous").innerHTML = "Your turn to drink "+deltager_identifiers[rng]+"!";
 		previous_drinker = deltager_identifiers[players[rng]];
 		lowerVolume();
-		responsiveVoice.speak("Your turn to drink " + deltager_identifiers[players[rng]], "US English Male", {onend: endtalk});
+		responsiveVoice.speak("Your turn to drink " + deltager_identifiers[rng], "US English Male", {onend: endtalk});
 		$("#canvas").remove();
-		if(drawings[players[rng]]) {
+		if(drawings[rng]) {
 			$("#container").append("<canvas id='canvas' style='-webkit-animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;' height=\"" + drawings[players[rng]][3] + "\" width=\"" + drawings[players[rng]][4] + "\"></canvas>");
 			right = !right;
 			context = document.getElementById("canvas").getContext("2d");
-			main.redraw(drawings[players[rng]][0], drawings[players[rng]][1], drawings[players[rng]][2], drawings[players[rng]][5], true);
+			redraw(drawings[rng][0], drawings[rng][1], drawings[rng][2], drawings[rng][5], true);
 		}
 
-		var current_score_deltager = $($("#score-" +players[rng]).children()[1]).html();
-		$($("#score-" +players[rng]).children()[1]).html(parseInt(current_score_deltager) + 1);
+		scoreboard.find(function(scores) {
+			return scores.id === rng;
+		}).score += 1;
+
+
+		scoreboard.sort(predicate({name: 'score', reverse: true}))
+		update_scoreboard(scoreboard);
 		if(fair_game){
-			players.splice(rng, 1);
+			var index = players.indexOf(rng);
+			players.splice(index, 1);
 			if(players.length == 0) {
 				for(x in players_all) {
 					players.push(players_all[x]);
@@ -269,7 +279,7 @@ function update_time(){
 function endtalk(){
 	responsiveVoice.cancel();
 	resetVolume();
-	var sanicRandom = Math.floor((Math.random() * 10000) + 1);
+	var sanicRandom = Math.floor((Math.random() * 1000) + 1);
 	if(sound_on) {
 		if(sanicRandom == 137) {
 			sanic.play();
@@ -306,7 +316,7 @@ function resetVolume() {
 
 function newTimer(){
 	dateNow = new Date();
-	$(".scoreboard").removeClass("hide");
+	$(".scoreboard-container").removeClass("hide");
 	if($("#interval").prop("checked")) {
 		intervalNumber = parseInt($("#intervalnumber").val());
 		if(intervalNumber <= 0) intervalNumber = 1;
@@ -314,20 +324,9 @@ function newTimer(){
 	} else {
 		intervalNumber = Math.floor(Math.random()*6)+1;
 		fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes()+intervalNumber, dateNow.getSeconds(), dateNow.getMilliseconds());
+		//fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes(), dateNow.getSeconds() + 15, dateNow.getMilliseconds());
 	}//fDate = new Date(dateNow.getYear()+1900, dateNow.getMonth(), dateNow.getDate(), dateNow.getHours(), dateNow.getMinutes(), dateNow.getSeconds() + 10, dateNow.getMilliseconds());
 }
-
-function pad(t, num){
-	if(num == 2) out = t < 10 ? "0"+t : t;
-	else if(num == 3) out = t < 10 ? "00"+t : t < 100 ? "0"+t : t;
-	return out;
-}
-
-function capitaliseFirstLetter(string)
-{
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 
 var flash=0
 function lightning()
@@ -339,44 +338,4 @@ function lightning()
     if(flash==4){document.getElementById("container").style.backgroundColor='yellow'; setTimeout("lightning()",75);}
     if(flash==5){document.getElementById("container").style.backgroundColor='green'; setTimeout("lightning()",75);}
     if(flash==6){flash=0; setTimeout("lightning()",1);}
-}
-
-
-var main =
-{
-  redraw: function(clickX, clickY, clickDrag, color, fulldraw){
-    //context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
-
-    context.strokeStyle = color;
-    context.lineJoin = "round";
-    context.lineWidth = 5;
-
-    if(!fulldraw)
-    {
-      context.beginPath();
-      if(clickDrag[clickDrag.length-1]){
-        context.moveTo(clickX[clickDrag.length-2], clickY[clickDrag.length-2]);
-       }else{
-         context.moveTo(clickX[clickDrag.length-1]-1, clickY[clickDrag.length-1]);
-       }
-       context.lineTo(clickX[clickDrag.length-1], clickY[clickDrag.length-1]);
-       context.closePath();
-       context.stroke();
-    }else
-    {
-      for(var i=0; i < clickX.length; i++) {
-        context.beginPath();
-        if(clickDrag[i] && i){
-          context.moveTo(clickX[i-1], clickY[i-1]);
-         }else{
-           context.moveTo(clickX[i]-1, clickY[i]);
-         }
-         context.lineTo(clickX[i], clickY[i]);
-         context.closePath();
-         context.stroke();
-      }
-    }
-    /*
-    */
-  }
 }
