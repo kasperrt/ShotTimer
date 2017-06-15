@@ -170,8 +170,10 @@ path{
 .scoreboard-container {
   width: 150px;
   top: 50px;
+  align-self: baseline;
   /* height: calc(100vh - 50px); */
   /* overflow: scroll; */
+  z-index: 999;
   left: 14px;
   margin-left: 10px !important;
   margin-right: -10px;
@@ -202,6 +204,8 @@ path{
   font-weight: 400;
   font-size: 15px;
   margin-bottom: 0;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
 }
 
 .scoreboard .score {
@@ -240,15 +244,29 @@ path{
 
 .player-remove-name {
   cursor: pointer;
+  /* padding-bottom: 1px; */
+  -webkit-transition: border-bottom .3s;
+  transition: border-bottom .3s;
+  border-bottom: 1px solid transparent;
+  -moz-transition: border-bottom .3s;
+  -o-transition: border-bottom .3s;
 }
 
-.player-remove-name:after {
+.center-container {
+  /* height: 100vh; */
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* align-items: center; */
+  margin-bottom: 0px;
+}
+
+/*.player-remove-name:after {
   content: ", ";
 }
 
 .player-remove-name:last-child:after {
   content: "";
-}
+}*/
 
 .row {
   position: relative;
@@ -285,6 +303,10 @@ path{
   display: none !important;
 }
 
+#thing {
+  margin-top: 30px;
+}
+
 .container {
 	position: absolute;
 	top: 0px;
@@ -305,6 +327,11 @@ path{
 	width: 0vw;
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
+}
+
+.player-remove-name:hover {
+  border-bottom: 1px solid lightgrey;
+  /* padding-bottom: 0px; */
 }
 
 iframe {

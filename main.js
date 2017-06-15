@@ -195,18 +195,19 @@ function addDeltaker(form){
 		}*/
 		deltager_identifiers[current_deltager_id] = capitaliseFirstLetter(name);
 		if(!interval && players_all.length > 0){
+			$(".scoreboard").empty();
 			dateNow = new Date();
 			newTimer();
 			interval = window.setInterval(update_time, 1);
 			//document.getElementById("fairgame-div").style.display = "none";
-			$("#players").html("Players:<br>");
-			$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
+			//$("#players").html("Players:<br>");
+			//$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
 		} else {
-			$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
+			//$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
 		}
 
-		document.getElementById("players").style.paddingBottom = "9.5px";
-		document.getElementById("players").style.paddingTop = "9.5px";
+		//document.getElementById("players").style.paddingBottom = "9.5px";
+		//document.getElementById("players").style.paddingTop = "9.5px";
 
 		/*$("#container").append("<canvas id='canvas-" + current_deltager_id + "' class='player-icon' height=\"" + drawings[current_deltager_id][3] + "\" width=\"" + drawings[current_deltager_id][4] + "\"></canvas>");
 		context = document.getElementById("canvas").getContext("2d");
@@ -217,7 +218,7 @@ function addDeltaker(form){
 		if(form.drawing) {
 			drawing_add = "<canvas id='canvas-" + current_deltager_id + "' class='player-icon' height=\"" + drawings[current_deltager_id][3] + "\" width=\"" + drawings[current_deltager_id][4] + "\"></canvas>";
 		}
-		$(".scoreboard").append('<li id="score-' + current_deltager_id + '" class="score-element">' + drawing_add + '<span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
+		$(".scoreboard").append('<li id="score-' + current_deltager_id + '" title="Click to remove the player" class="score-element player-remove-name">' + drawing_add + '<span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
 		if(form.drawing) {
 			context = document.getElementById("canvas-" + current_deltager_id).getContext("2d");
 			redraw(drawings[current_deltager_id][0], drawings[current_deltager_id][1], drawings[current_deltager_id][2], drawings[current_deltager_id][5], true, 50);
