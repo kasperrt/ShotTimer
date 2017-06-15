@@ -233,6 +233,11 @@ path{
   width: 200px;
 }
 
+.player-icon {
+	height: 20px !important;
+	float: left;
+}
+
 .player-remove-name {
   cursor: pointer;
 }

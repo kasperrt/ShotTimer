@@ -4,12 +4,12 @@
   }
 })(jQuery);
 
-function redraw(clickX, clickY, clickDrag, color, fulldraw){
+function redraw(clickX, clickY, clickDrag, color, fulldraw, lineWidth){
   //context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
   context.strokeStyle = color;
   context.lineJoin = "round";
-  context.lineWidth = 5;
+  context.lineWidth = lineWidth;
 
   if(!fulldraw)
   {

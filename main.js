@@ -207,13 +207,20 @@ function addDeltaker(form){
 		document.getElementById("players").style.paddingBottom = "9.5px";
 		document.getElementById("players").style.paddingTop = "9.5px";
 
-		/*$("#container").append("<canvas id='canvas' style='-webkit-animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;' height=\"" + drawings[current_deltager_id][3] + "\" width=\"" + drawings[current_deltager_id][4] + "\"></canvas>");
-		right = !right;
+		/*$("#container").append("<canvas id='canvas-" + current_deltager_id + "' class='player-icon' height=\"" + drawings[current_deltager_id][3] + "\" width=\"" + drawings[current_deltager_id][4] + "\"></canvas>");
 		context = document.getElementById("canvas").getContext("2d");
 		redraw(drawings[current_deltager_id][0], drawings[current_deltager_id][1], drawings[current_deltager_id][2], drawings[current_deltager_id][5], true);
 		*/
 
-		$(".scoreboard").append('<li id="score-' + current_deltager_id + '" class="score-element"><span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
+		var drawing_add = "";
+		if(form.drawing) {
+			drawing_add = "<canvas id='canvas-" + current_deltager_id + "' class='player-icon' height=\"" + drawings[current_deltager_id][3] + "\" width=\"" + drawings[current_deltager_id][4] + "\"></canvas>";
+		}
+		$(".scoreboard").append('<li id="score-' + current_deltager_id + '" class="score-element">' + drawing_add + '<span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
+		if(form.drawing) {
+			context = document.getElementById("canvas-" + current_deltager_id).getContext("2d");
+			redraw(drawings[current_deltager_id][0], drawings[current_deltager_id][1], drawings[current_deltager_id][2], drawings[current_deltager_id][5], true, 50);
+		}
 		scoreboard[current_deltager_id] = {};
 		scoreboard[current_deltager_id].id = current_deltager_id;
 		scoreboard[current_deltager_id].score = 0;
@@ -245,7 +252,7 @@ function update_time(){
 			$("#container").append("<canvas id='canvas' style='-webkit-animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;' height=\"" + drawings[players[rng]][3] + "\" width=\"" + drawings[players[rng]][4] + "\"></canvas>");
 			right = !right;
 			context = document.getElementById("canvas").getContext("2d");
-			redraw(drawings[rng][0], drawings[rng][1], drawings[rng][2], drawings[rng][5], true);
+			redraw(drawings[rng][0], drawings[rng][1], drawings[rng][2], drawings[rng][5], true, 5);
 		}
 
 		scoreboard.find(function(scores) {
