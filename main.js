@@ -101,6 +101,7 @@ window.addEventListener("load", function(){
 		if(!$(".now_playing").hasClass("hide")) {
 			$(".now_playing").addClass("hide");
 		}
+		$(".durationBar").css("width", "0vw");
 		delete zoffWindow;
 		zoffWindow = false;
 	});
