@@ -124,18 +124,27 @@ window.addEventListener("load", function(){
 	$(document).on("click", ".player-remove-name", function(e) {
 		e.preventDefault();
 		var to_remove_id = parseInt(this.id.split("-")[1]);
-		if(players.length > 1 && players_all.length > 1) {
+		if(players.length > 1 && players_all.length > 1 && !$("#score-" + to_remove_id).hasClass("remove-left")) {
+			var next_element = $("#score-" + to_remove_id).next();
+			next_element.animate({
+		    marginTop: '-22px',
+		  }, 400, "linear", function() {
+		  });
 			players = removeAll(players, to_remove_id);
 			players_all = removeAll(players_all, to_remove_id);
-			$("#" + this.id).remove();
-			$("#score-" + to_remove_id).remove();
+			$("#score-" + to_remove_id).addClass("remove-left");
 			delete deltager_identifiers[to_remove_id];
 			delete drawings[to_remove_id];
 			var scoreboard_id = scoreboard.find(function(scores) {
-				return scores.id === to_remove_id;
+				if(scores !== undefined) return scores.id === to_remove_id;
+				else return false;
 			});
 			scoreboard.splice(scoreboard.indexOf(scoreboard_id), 1);
-		} else {
+			setTimeout(function() {
+				next_element.css("margin-top", "0px");
+				$("#score-" + to_remove_id).remove();
+			}, 500);
+		} else if(!$("#score-" + to_remove_id).hasClass("remove-left")){
 	    $(".toast").remove();
 			Materialize.toast("You can't delete a player when that player is the only possible next drinker..!", 3000);
 		}

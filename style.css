@@ -198,6 +198,10 @@ path{
   font-weight: 400;
 }*/
 
+.remove-left {
+  left: -150% !important;
+}
+
 .scoreboard-container h4 {
   text-align: center;
   text-transform: uppercase;
@@ -244,9 +248,12 @@ path{
 
 .player-remove-name {
   cursor: pointer;
+  position: relative;
+  left: -150%;
+  left: 0%;
   /* padding-bottom: 1px; */
   -webkit-transition: border-bottom .3s;
-  transition: border-bottom .3s;
+  transition: border-bottom .3s, left .5s;
   border-bottom: 1px solid transparent;
   -moz-transition: border-bottom .3s;
   -o-transition: border-bottom .3s;
@@ -290,6 +297,10 @@ path{
 
 .interval-li {
   padding-top: 35px;
+}
+
+.margin-up {
+  margin-top: -22px;
 }
 
 .button-collapse {
