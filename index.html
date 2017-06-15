@@ -101,42 +101,45 @@
             <div class="top-elements">
                 <a href="#" data-activates="slide-out" class="button-collapse btn-flat waves-effect waves-red">Settings</a>
                 <a id="rulesbutton" class="waves-effect waves-green btn-flat" onclick="$('#rules').openModal()">Rules</a>
-                <div class="scoreboard-container hide">
-                    <h4>Scoreboard</h4>
-                    <ul class="scoreboard">
-                    </ul>
-                </div>
+
             </div>
             <div class="durationBar"></div>
-        <div id="relative">
-        	<div id="ok">
-        	<div id="vertical">
-    	        <div id="thing">
-    	            <output id="display-area">Shottimer</output>
-    	        </div>
-    	        <div id="players">Waiting for players</div>
-    	        <div id="previous">&nbsp;</div>
-    	        <div>
-    	            <form id="playerform" method="get">
-    	            	<input id="inp" name="name" autocomplete="off" placeholder="Type Player Name Here...">
-    	            	<input type="submit" style="display:none;">
-    	            </form>
-                    <div id="qr_zoff_container">
-                        <div id="qr_container">
-                        </div>
-                        <div class="now_playing hide">
-                            <p class="np_info">Now Playing:</p>
-                            <p id="now_playing_title"></p>
-                            <p class="np_info">Up Next:</p>
-                            <p id="next_title"></p>
-                        </div>
-                    </div>
-                    <p id="link_join"></p>
-                </div>
-            </div>
-            </div>
+        <div class="row">
+          <div class="scoreboard-container col s2">
+              <h4>Scoreboard</h4>
+              <ul class="scoreboard">
+              </ul>
+          </div>
+          <div id="relative" class="col s12 m10">
+          	<div id="ok">
+          	<div id="vertical">
+      	        <div id="thing">
+      	            <output id="display-area">Shottimer</output>
+      	        </div>
+      	        <div id="players">Waiting for players</div>
+      	        <div id="previous">&nbsp;</div>
+      	        <div>
+      	            <form id="playerform" method="get">
+      	            	<input id="inp" name="name" autocomplete="off" placeholder="Type Player Name Here...">
+      	            	<input type="submit" style="display:none;">
+      	            </form>
+                      <div id="qr_zoff_container">
+                          <div id="qr_container">
+                          </div>
+                          <div class="now_playing hide">
+                              <p class="np_info">Now Playing:</p>
+                              <p id="now_playing_title"></p>
+                              <p class="np_info">Up Next:</p>
+                              <p id="next_title"></p>
+                          </div>
+                      </div>
+                      <p id="link_join"></p>
+                  </div>
+              </div>
+              </div>
 
-            <a href="https://github.com/kasperrt/ShotTimer" id="github"><img src="github.png" alt="GitHub" title="GitHub"></a>
+              <a href="https://github.com/kasperrt/ShotTimer" id="github"><img src="github.png" alt="GitHub" title="GitHub"></a>
+          </div>
         </div>
       </div>
       <div id="rules" class="modal">

@@ -57,10 +57,10 @@ window.addEventListener("load", function(){
 	$("#show-score").on("change", function() {
 		show_score = this.checked;
 		if(show_score) {
-			$(".scoreboard-container").removeClass("hide");
+			$(".scoreboard-container").removeClass("invisible");
 		} else {
-			if(!$(".scoreboard-container").hasClass("hide")) {
-				$(".scoreboard-container").addClass("hide");
+			if(!$(".scoreboard-container").hasClass("invisible")) {
+				$(".scoreboard-container").addClass("invisible");
 			}
 		}
 	});
@@ -206,6 +206,12 @@ function addDeltaker(form){
 
 		document.getElementById("players").style.paddingBottom = "9.5px";
 		document.getElementById("players").style.paddingTop = "9.5px";
+
+		/*$("#container").append("<canvas id='canvas' style='-webkit-animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;' height=\"" + drawings[current_deltager_id][3] + "\" width=\"" + drawings[current_deltager_id][4] + "\"></canvas>");
+		right = !right;
+		context = document.getElementById("canvas").getContext("2d");
+		redraw(drawings[current_deltager_id][0], drawings[current_deltager_id][1], drawings[current_deltager_id][2], drawings[current_deltager_id][5], true);
+		*/
 
 		$(".scoreboard").append('<li id="score-' + current_deltager_id + '" class="score-element"><span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>');
 		scoreboard[current_deltager_id] = {};
