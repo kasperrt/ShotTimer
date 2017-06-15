@@ -9,6 +9,7 @@ var snd = new Audio("sound/bell.mp3"); // buffers automatically when created
 var sanic = new Audio("sound/sanic.mp3");
 var togg;
 var times = 0;
+var title_timeout;
 var intervalNumber = 0;
 var show = true;
 var fair_game = true;
@@ -82,10 +83,11 @@ window.addEventListener("load", function(){
 			$("#iframe_container").html("");
 		} else {
 			//zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
-			$("#iframe_container").html("<iframe id='iframe' src='https://zoff.me/_embed#" + channel + "&71C387&autoplay&videoonly' onload='postMessageZoff()'></iframe>");
+			$("#iframe_container").html("<iframe id='iframe' src='https://zoff.me/_embed#" + channel + "&71C387&autoplay&videoonly&controll' onload='postMessageZoff()'></iframe>");
 			zoffWindow = document.getElementById('iframe').contentWindow;
 			$("#zofform").toggleClass("hide");
 			$(".stop_zoff").toggleClass("hide");
+			$(".controller-container").toggleClass("hide");
 		}
 		/*document.getElementById("qr_container").style.display = "block";
 		document.getElementById("zofform_container").style.display = "none";
@@ -162,6 +164,9 @@ function removeAll(array, elem) {
 
 function postMessageZoff() {
 	zoffWindow.postMessage("parent", "https://zoff.me");
+	setTimeout(function(){
+		zoffWindow.postMessage("get_info", "https://zoff.me");
+	}, 1000);
 }
 
 //Dynamic listener
@@ -172,11 +177,21 @@ function receiveMessage(event) {
 	if(event.data.type == "np") {
 	  $("#now_playing_title").text(event.data.title);
 		$(".now_playing").removeClass("hide");
+		if(event.data.title == "" || event.data.title == undefined) {
+			clearTimeout(title_timeout);
+			title_timeout = setTimeout(function() {
+				console.log("trying again");
+				zoffWindow.postMessage("get_info", "https://zoff.me");
+			}, 1000);
+		}
 	} else if(event.data.type == "duration") {
 		$(".durationBar").css("width", event.data.percent + 1 + "vw");
 	} else if(event.data.type == "nextVideo") {
 		$("#next_title").text(event.data.title);
 		$(".now_playing").removeClass("hide");
+	} else if(event.data.type == "controller") {
+		$(".controller-container").removeClass("hide");
+		$("#controller_id").html(event.data.id.toUpperCase());
 	}
   // event.source is popup
   // event.data is "hi there yourself!  the secret response is: rheeeeet!"
@@ -208,20 +223,7 @@ function addDeltaker(form){
 			dateNow = new Date();
 			newTimer();
 			interval = window.setInterval(update_time, 1);
-			//document.getElementById("fairgame-div").style.display = "none";
-			//$("#players").html("Players:<br>");
-			//$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
-		} else {
-			//$("#players").append("<span class='player-remove-name' id='player-" + current_deltager_id + "'>" + capitaliseFirstLetter(name) + "</span>");
 		}
-
-		//document.getElementById("players").style.paddingBottom = "9.5px";
-		//document.getElementById("players").style.paddingTop = "9.5px";
-
-		/*$("#container").append("<canvas id='canvas-" + current_deltager_id + "' class='player-icon' height=\"" + drawings[current_deltager_id][3] + "\" width=\"" + drawings[current_deltager_id][4] + "\"></canvas>");
-		context = document.getElementById("canvas").getContext("2d");
-		redraw(drawings[current_deltager_id][0], drawings[current_deltager_id][1], drawings[current_deltager_id][2], drawings[current_deltager_id][5], true);
-		*/
 
 		var drawing_add = "";
 		if(form.drawing) {
@@ -235,7 +237,7 @@ function addDeltaker(form){
 		scoreboard[current_deltager_id] = {};
 		scoreboard[current_deltager_id].id = current_deltager_id;
 		scoreboard[current_deltager_id].score = 0;
-		scoreboard[current_deltager_id].html = '<li id="score-' + current_deltager_id + '" class="score-element">' + drawing_add + '<span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>';
+		scoreboard[current_deltager_id].html = '<li id="score-' + current_deltager_id + '" title="Click to remove the player" class="score-element player-remove-name">' + drawing_add + '<span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>';
 		current_deltager_id += 1;
 		form.name.value = "";
 	} else alert("Please enter a name..");
