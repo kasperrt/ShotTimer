@@ -103,7 +103,14 @@ function update_scoreboard(scoreboard) {
     var html = $(value.html);
     var score = value.score;
     html.find(".score").text(score);
+		var canvas = html.find("canvas").attr("id");
+
     $(".scoreboard").append(html);
+		if(canvas != undefined) {
+			var id = canvas.split("-")[1];
+			context = document.getElementById("canvas-" + id).getContext("2d");
+			redraw(drawings[id][0], drawings[id][1], drawings[id][2], drawings[id][5], true, 50);
+		}
   });
 }
 

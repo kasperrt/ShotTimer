@@ -224,7 +224,7 @@ function addDeltaker(form){
 		scoreboard[current_deltager_id] = {};
 		scoreboard[current_deltager_id].id = current_deltager_id;
 		scoreboard[current_deltager_id].score = 0;
-		scoreboard[current_deltager_id].html = '<li id="score-' + current_deltager_id + '" class="score-element"><span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>';
+		scoreboard[current_deltager_id].html = '<li id="score-' + current_deltager_id + '" class="score-element">' + drawing_add + '<span class="name">' + capitaliseFirstLetter(name) + '</span><span class="score">0</span></li>';
 		current_deltager_id += 1;
 		form.name.value = "";
 	} else alert("Please enter a name..");
