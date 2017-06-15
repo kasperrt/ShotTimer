@@ -105,6 +105,7 @@ window.addEventListener("load", function(){
 		}
 		if(!$(".controller-container").hasClass("hide")) {
 			$(".controller-container").addClass("hide");
+			$("#controller_id").html("");
 		}
 		$(".durationBar").css("width", "0vw");
 		delete zoffWindow;
