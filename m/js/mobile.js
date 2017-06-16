@@ -32,7 +32,6 @@ window.addEventListener("load", function(){
   var clickDrag = new Array();
   var maybePreventPullToRefresh = false;
   var color = getRandomColor();
-  var drawing = false;
   var paint;
 
   $('#canvas').bind("touchstart",function(e){
