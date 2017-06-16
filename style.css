@@ -199,7 +199,7 @@ path{
 }*/
 
 .remove-left {
-  left: -150% !important;
+  transform: translateX(-150%);
 }
 
 .scoreboard-container h4 {
@@ -252,11 +252,11 @@ path{
   left: -150%;
   left: 0%;
   /* padding-bottom: 1px; */
-  -webkit-transition: border-bottom .3s;
-  transition: border-bottom .3s, left .5s;
-  border-bottom: 1px solid transparent;
-  -moz-transition: border-bottom .3s;
-  -o-transition: border-bottom .3s;
+    border-bottom: 1px solid transparent;
+  -webkit-transition: border-bottom .3s, transform .5s;
+  -moz-transition: border-bottom .3s, transform .5s;
+  -o-transition: border-bottom .3s, transform .5s;
+  transition: border-bottom .3s, transform .5s;
 }
 
 .center-container {
