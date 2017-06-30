@@ -303,7 +303,7 @@ function endtalk(){
 		}
 	}
     flash=0;
-    setTimeout(lightning(),1);
+    setTimeout(lightning,1);
 		setTimeout(function(){
 		document.getElementById("previous").innerHTML = "Previous drinker: "+previous_drinker;
 		//$("#canvas").remove();
@@ -347,12 +347,12 @@ var flash=0
 function lightning()
 {
     flash=flash+1;
-    if(flash==1){document.getElementById("container").style.backgroundColor='red'; setTimeout("lightning()",85);}
-    if(flash==2){document.getElementById("container").style.backgroundColor='blue'; setTimeout("lightning()",80);}
-    if(flash==3){document.getElementById("container").style.backgroundColor='purple'; setTimeout("lightning()",75);}
-    if(flash==4){document.getElementById("container").style.backgroundColor='yellow'; setTimeout("lightning()",75);}
-    if(flash==5){document.getElementById("container").style.backgroundColor='green'; setTimeout("lightning()",75);}
-    if(flash==6){flash=0; setTimeout("lightning()",1);}
+    if(flash==1){document.getElementById("container").style.backgroundColor='red'; setTimeout(lightning,85);}
+    if(flash==2){document.getElementById("container").style.backgroundColor='blue'; setTimeout(lightning,80);}
+    if(flash==3){document.getElementById("container").style.backgroundColor='purple'; setTimeout(lightning,75);}
+    if(flash==4){document.getElementById("container").style.backgroundColor='yellow'; setTimeout(lightning,75);}
+    if(flash==5){document.getElementById("container").style.backgroundColor='green'; setTimeout(lightning,75);}
+    if(flash==6){flash=0; setTimeout(lightning,1);}
 }
 
 (function($) {
