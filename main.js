@@ -257,10 +257,10 @@ function update_time(){
 	if(minutes < 0){
 		newTimer();
 		rng = fair_game ? rnd(players) : rnd(players_all);
-		document.getElementById("previous").innerHTML = "Your turn to drink "+deltager_identifiers[rng]+"!";
-		previous_drinker = deltager_identifiers[players[rng]];
+		previous_drinker = deltager_identifiers[rng];
+		document.getElementById("previous").innerHTML = "Your turn to drink "+previous_drinker+"!";
 		lowerVolume();
-		responsiveVoice.speak("Your turn to drink " + deltager_identifiers[rng], "US English Male", {onend: endtalk});
+		responsiveVoice.speak("Your turn to drink " + previous_drinker, "US English Male", {onend: endtalk});
 		$("#canvas").remove();
 		if(drawings[rng]) {
 			$("#container").append("<canvas id='canvas' style='-webkit-animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;animation: animation-" + (right ? "right" : "left") + " " + (intervalNumber * 60) + "s linear infinite;' height=\"" + drawings[players[rng]][3] + "\" width=\"" + drawings[players[rng]][4] + "\"></canvas>");
