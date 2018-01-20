@@ -7,9 +7,9 @@ try{
     //var privateKey  = fs.readFileSync('/home/kasper/newssl_2016/nopass.key', 'utf8');
     //var certificate = fs.readFileSync('/home/kasper/newssl_2016/zoff.no/ApacheServer/2_zoff.no.crt', 'utf8');
     //var ca          = fs.readFileSync('/home/kasper/newssl_2016/zoff.no/ApacheServer/1_root_bundle.crt');
-    var privateKey  = fs.readFileSync('/etc/letsencrypt/live/etys.no/privkey.pem').toString();
-    var certificate = fs.readFileSync('/etc/letsencrypt/live/etys.no/cert.pem').toString();
-    var ca          = fs.readFileSync('/etc/letsencrypt/live/etys.no/chain.pem').toString();
+    var privateKey  = fs.readFileSync('/etc/letsencrypt/live/etys.no-0001/privkey.pem').toString();
+    var certificate = fs.readFileSync('/etc/letsencrypt/live/etys.no-0001/cert.pem').toString();
+    var ca          = fs.readFileSync('/etc/letsencrypt/live/etys.no-0001/chain.pem').toString();
 
     //var ca_bundle   = fs.readFileSync('/home/kasper/startssl/ca-bundle.pem')
     //var credentials = {key: privateKey, cert: certificate, ca: ca,};
