@@ -28,7 +28,7 @@ window.addEventListener("load", function(){
     $("#playerform").remove();
     $(".valign-wrapper").removeClass("hide");
     $(".valign").append("<p class='sent-text'>Sent!</p>");
-    //window.location = "https://zoff.me";
+    
   });
 
   var clickX = new Array();
