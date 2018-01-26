@@ -24,7 +24,10 @@ window.addEventListener("load", function(){
     e.preventDefault();
     socket.emit("join", {id: window.location.pathname.split("/")[2], name: name, drawing: [clickX, clickY, clickDrag, height, width, color]});
     socket.disconnect();
-    window.location = "https://zoff.me";
+    $("#canvas").remove();
+    $(".valign-wrapper").removeClass("hide");
+    $(".valign").append("<p class='sent-text'>Sent!</p>");
+    //window.location = "https://zoff.me";
   });
 
   var clickX = new Array();
