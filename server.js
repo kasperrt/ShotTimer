@@ -37,6 +37,7 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+    console.log("here");
   var socketid = socket.id.substring(2);
   var guid = uniqueID(socketid, 4);
   unique_ids.push(guid);

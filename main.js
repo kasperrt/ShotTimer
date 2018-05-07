@@ -18,7 +18,9 @@ var show_score = true;
 var deltager_identifiers = {};
 var current_deltager_id = 0;
 var scoreboard = [];
-var socket = io(window.location.protocol + "//" + window.location.host + ":3000");
+var socket = io.connect(window.location.protocol + "//" + window.location.hostname + ":3000", {
+	secure: window.location.protocol.indexOf("https") > -1 ? true : false
+});
 
 socket.on("joined", function(obj){
 	addDeltaker({name: {value: obj._name}, drawing: obj._drawing});
