@@ -195,6 +195,7 @@ function receiveMessage(event) {
 		$(".now_playing").removeClass("hide");
 	} else if(event.data.type == "controller") {
 		$(".controller-container").removeClass("hide");
+        console.log(event.data);
 		$("#controller_id").html(event.data.id.toUpperCase());
 	}
   // event.source is popup
