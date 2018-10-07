@@ -82,7 +82,7 @@ window.addEventListener("load", function(){
 		} else {
 			//zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
 			window.postMessageZoff = postMessageZoff;
-			$("#iframe_container").html("<iframe id='iframe' src='https://zoff.me/_embed#" + channel + "&71C387&autoplay&videoonly&controll' onload='postMessageZoff()' allow='autoplay'></iframe>");
+			$("#iframe_container").html("<iframe id='iframe' src='https://zoff.me/api/embed/?channel=" + channel + "&color=71C387&autoplay=true&videoonly=true&control=true&localmode=false' onload='postMessageZoff()' allow='autoplay'></iframe>");
 			zoffWindow = document.getElementById('iframe').contentWindow;
 			//zoffWindow.onload = postMessageZoff;
 			$("#zofform").toggleClass("hide");
