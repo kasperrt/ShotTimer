@@ -11,13 +11,12 @@ When navigating to the site, anyone can join the game by using their phone, and 
 
 ### Screenshots
 
-![alt tag](https://puu.sh/w9RVn/e0cee39271.png)
+![alt tag](https://puu.sh/C4TaC/e0e23a937c.png)
 
 ![alt tag](https://puu.sh/w9S2v/eb1dc32c21.png)
 
 ![alt tag](https://puu.sh/w9S3L/7f6bb9dff9.png)
 
-![alt tag](https://puu.sh/w9S64/2964e26f05.png)
 
 Settings
 =================================
