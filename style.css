@@ -29,10 +29,6 @@ filter: blur(50px) brightness(0.8);*/
 #hidden-height{
       height: 140px;
 }
-#github{
-	z-index: -1;
-
-}
 
 #intervalnumber {width:50px;text-align: center;}
 #qr_container{
@@ -72,13 +68,6 @@ background-color: rgba(255, 255, 255, 0);}
   visibility: hidden;
 }
 
-#github{
-	position:fixed;
-	bottom: 15px;
-	/*left: calc(50vw - 18.5px);*/
-	right: 15px;
-	z-index: 9;
-}
 
 #show-counter{
 	position:absolute;
@@ -383,13 +372,6 @@ span#join_id {
     font-size: 1.5rem;
   }
 
-  #github{
-  	position:fixed;
-  	bottom:0px;
-  	left: calc(50vw - 18.5px);
-  	right:auto;
-  	z-index: 9;
-  }
 
   .scoreboard-container {
     /* display: none !important; */
@@ -409,12 +391,6 @@ span#join_id {
     margin-top: 0rem;
   }
 
-  #github{
-  	position:fixed;
-  	bottom: 15px;
-  	/*left: calc(50vw - 18.5px);*/
-  	right: 15px;
-  }
 }
 
 @-webkit-keyframes animation-right
