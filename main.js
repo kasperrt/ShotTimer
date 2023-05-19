@@ -107,7 +107,6 @@ window.addEventListener("load", function(){
 		}
 	});
 
-	window.addEventListener("message", receiveMessage, false);
 });
 
 function removeAll(array, elem) {

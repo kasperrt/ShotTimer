@@ -34,6 +34,7 @@ filter: blur(50px) brightness(0.8);*/
 #qr_container{
     height:200px;
     opacity:0;
+    margin: auto;
     -webkit-transition:opacity 1s; /* Safari */
     transition: opacity 1s;
     width: 200px;
