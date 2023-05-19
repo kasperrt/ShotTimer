@@ -1,4 +1,5 @@
-var socket = io(window.location.protocol + "//" + window.location.host + ":3000");
+var port = 3001
+var socket = io(window.location.protocol + "//" + window.location.host + ":" + port);
 var height = $(window).height()-110;
 var width = $(window).width()-20;
 var name = "";

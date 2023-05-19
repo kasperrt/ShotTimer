@@ -10,7 +10,6 @@ var show = true;
 var fair_game = true;
 var previous_drinker = "";
 var sound_on = true;
-var zoffWindow;
 var id = "";
 var drawings = {};
 var right = true;
@@ -18,7 +17,8 @@ var show_score = true;
 var deltager_identifiers = {};
 var current_deltager_id = 0;
 var scoreboard = [];
-var socket = io.connect(window.location.protocol + "//" + window.location.hostname + ":3000", {
+var port = 3001
+var socket = io.connect(window.location.protocol + "//" + window.location.hostname + ":"+ port, {
 	secure: window.location.protocol.indexOf("https") > -1 ? true : false
 });
 
@@ -72,55 +72,6 @@ window.addEventListener("load", function(){
 		sound_on = !sound_on;
 	});
 
-	$("#zofform").on("submit", function(e) {
-		e.preventDefault();
-
-		var channel    = $("#zoffchannel").val();
-		$("#zoffchannel").val("");
-		if(channel == ""){
-			$("#iframe_container").html("");
-		} else {
-			//zoffWindow     = window.open("http://zoff.no/embed.html#" + channel + "&71C387&autoplay", "", "width=600, height=400");
-			window.postMessageZoff = postMessageZoff;
-			$("#iframe_container").html("<iframe id='iframe' src='https://zoff.me/api/embed/?channel=" + channel + "&color=71C387&autoplay=true&videoonly=true&control=true&localmode=false' onload='postMessageZoff()' allow='autoplay'></iframe>");
-			zoffWindow = document.getElementById('iframe').contentWindow;
-			//zoffWindow.onload = postMessageZoff;
-			$("#zofform").toggleClass("hide");
-			$(".stop_zoff").toggleClass("hide");
-			$(".controller-container").toggleClass("hide");
-		}
-		/*document.getElementById("qr_container").style.display = "block";
-		document.getElementById("zofform_container").style.display = "none";
-		document.getElementById("zofform").style.display = "none";*/
-		document.getElementById("inp").focus();
-	});
-
-	$(".stop_zoff").on("click", function(e) {
-		e.preventDefault();
-		$("#iframe_container").html("");
-		$(".stop_zoff").toggleClass("hide");
-		$("#zofform").toggleClass("hide");
-		if(!$(".now_playing").hasClass("hide")) {
-			$(".now_playing").addClass("hide");
-		}
-		if(!$(".controller-container").hasClass("hide")) {
-			$(".controller-container").addClass("hide");
-			$("#controller_id").html("");
-		}
-		$(".durationBar").css("width", "0vw");
-		delete zoffWindow;
-		zoffWindow = false;
-	});
-
-
-
-	/*document.getElementById("qr_container").addEventListener("click", function(){
-		document.getElementById("qr_container").style.display = "none";
-		document.getElementById("zofform_container").style.display = "flex";
-		document.getElementById("zofform").style.display = "block";
-		document.getElementById("zoffchannel").focus();
-	});*/
-
 	document.getElementById("playerform").addEventListener("submit", function(e){
 		e.preventDefault();
 
@@ -166,41 +117,7 @@ function removeAll(array, elem) {
 	return filtered;
 }
 
-function postMessageZoff() {
-	zoffWindow.postMessage("parent", "https://zoff.me");
-	setTimeout(function(){
-		zoffWindow.postMessage("get_info", "https://zoff.me");
-	}, 1000);
-}
-
 //Dynamic listener
-
-function receiveMessage(event) {
-  // Do we trust the sender of this message?  (might be
-  // different from what we originally opened, for example).
-	if(event.data.type == "np") {
-	  $("#now_playing_title").text(event.data.title);
-		$(".now_playing").removeClass("hide");
-		if(event.data.title == "" || event.data.title == undefined) {
-			clearTimeout(title_timeout);
-			title_timeout = setTimeout(function() {
-				console.log("trying again");
-				zoffWindow.postMessage("get_info", "https://zoff.me");
-			}, 1000);
-		}
-	} else if(event.data.type == "duration") {
-		$(".durationBar").css("width", event.data.percent + 1 + "vw");
-	} else if(event.data.type == "nextVideo") {
-		$("#next_title").text(event.data.title);
-		$(".now_playing").removeClass("hide");
-	} else if(event.data.type == "controller") {
-		$(".controller-container").removeClass("hide");
-        if(event.data.id == null) return;
-		$("#controller_id").html(event.data.id.toUpperCase());
-	}
-  // event.source is popup
-  // event.data is "hi there yourself!  the secret response is: rheeeeet!"
-}
 
 $(document).on('click', '#toast-container', function(){
     $(this).fadeOut(function(){
@@ -323,14 +240,6 @@ function endtalk(){
 				}
         document.getElementById("container").style.background = "rgba(255,255,255,0.95)"
 	}, 10000);
-}
-
-function lowerVolume(){
-	if(zoffWindow !== undefined && zoffWindow) zoffWindow.postMessage("lower", "https://zoff.me");
-}
-
-function resetVolume() {
-	if(zoffWindow !== undefined && zoffWindow) zoffWindow.postMessage("reset", "https://zoff.me");
 }
 
 function newTimer(){
