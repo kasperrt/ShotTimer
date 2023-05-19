@@ -15,10 +15,7 @@ window.addEventListener("load", function(){
     name = this.name.value;
     $("#inp").blur();
     window.scrollTo(0, 0);
-		/*socket.emit("join", {id: window.location.search.substring(1), name: this.name.value});
-    document.getElementsByClassName("valign")[0].innerHTML = "<div style='text-align:center;font-size:4rem;'>You have joined the game!</span>";
-    socket.disconnect();*/
-		//window.location = "https://zoff.no";
+	
 	});
 
   $("#submit_drawing").on("click", function(e) {
