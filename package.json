@@ -1,12 +1,16 @@
 {
   "name": "shottimer",
   "version": "1.0.0",
-  "description": "Shot timer drinking game",
-  "main": "main.js",
+  "description": "Randomized timed shots drinking game",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev --port 3000",
     "build": "vite build",
+    "lint:fix": "biome lint --fix ./ && pnpm lint:organize-imports",
+    "lint:check": "biome lint ./ && biome check",
+    "lint:organize-imports": "biome check --write",
+    "format:fix": "prettier --log-level warn --write './**/*.{tsx,ts,js,jsx,json,css,html}'",
+    "format:check": "prettier --log-level warn --check --no-color -u './**/*.{tsx,ts,js,jsx,json,css,html}'",
     "start": "ts-node server/index.ts"
   },
   "repository": {
@@ -26,7 +30,8 @@
     "hono": "4.6.17",
     "socket.io": "4.8.1",
     "solid-js": "1.9.4",
-    "ts-node": "10.9.2"
+    "ts-node": "10.9.2",
+    "zustand": "5.0.3"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
