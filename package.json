@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev --port 3000",
     "build": "vite build",
-    "start": "ts-node server.ts"
+    "start": "ts-node server/index.ts"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
   "homepage": "https://github.com/kasperrt/shottimer#readme",
   "dependencies": {
     "@generouted/solid-router": "1.19.10",
+    "@hono/node-server": "1.13.7",
     "@solidjs/router": "0.15.3",
+    "hono": "4.6.17",
     "socket.io": "4.8.1",
     "solid-js": "1.9.4",
     "ts-node": "10.9.2"
