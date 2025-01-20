@@ -31,8 +31,7 @@
     "hono": "4.6.17",
     "socket.io": "4.8.1",
     "solid-js": "1.9.4",
-    "ts-node": "10.9.2",
-    "zustand": "5.0.3"
+    "ts-node": "10.9.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

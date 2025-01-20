@@ -7,21 +7,13 @@ export type Player = {
 };
 
 export type Game = {
-  players: Player[];
+  players: Record<string, Player>;
   addPlayer: (p: Player) => void;
+  removePlayer: (id: string) => void;
+  incrementScore: (id: string) => void;
 };
 
 export type GameType = 'ANARCHY' | 'FAIR';
 
-export type Settings = {
-  soundEnabled: boolean;
-  scoreEnabled: boolean;
-  timerEnabled: boolean;
-  rigidInterval: null | number;
-  gameType: GameType;
-  enableSound: (enabled: boolean) => void;
-  enableScore: (enabled: boolean) => void;
-  showTimer: (show: boolean) => void;
-  toggleInterval: (i: null | number) => void;
-  setGameType: (type: GameType) => void;
-};
+export type Timeout = ReturnType<typeof setTimeout> | null;
+export type Interval = ReturnType<typeof setInterval> | null;
