@@ -1,7 +1,6 @@
 import { Modal } from '@/components/Modal';
 import { Toggle } from '@/components/Toggle';
 import { settings } from '@/stores/settings';
-import { createEffect } from 'solid-js';
 
 export default function SettingsModal() {
   const {
@@ -29,10 +28,6 @@ export default function SettingsModal() {
 
     setIntervals(interval);
   };
-
-  createEffect(() => {
-    console.log(gameType());
-  });
 
   return (
     <Modal>
