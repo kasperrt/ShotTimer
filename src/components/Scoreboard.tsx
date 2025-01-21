@@ -16,8 +16,9 @@ export function Scoreboard() {
 
   return (
     <Show when={scoreEnabled() && players.length > 0}>
-      <div class="absolute left-20 top-20">
+      <div class="left-20 top-20 w-full px-8 lg:absolute lg:max-w-48 lg:px-0">
         <h2>Score</h2>
+        <hr />
         <ul>
           <For each={players}>
             {(player) => (
@@ -26,7 +27,8 @@ export function Scoreboard() {
                 onClick={() => removePlayer(player.id)}
                 onKeyDown={(e) => onKeyDown(e, player.id)}
               >
-                <span>{player.name}</span> - <span>{player.score}</span>
+                <span>{player.name}</span>
+                <span>{player.score}</span>
               </li>
             )}
           </For>

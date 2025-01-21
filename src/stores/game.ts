@@ -1,40 +1,24 @@
-import { type Interval, type Player, playerSchema } from '@/types/types';
+import type { Interval, Player, Timeout } from '@/types/types';
 import { drawPlayer } from '@/utils/drawPlayer';
-import { io } from 'socket.io-client';
 import { createEffect, createRoot, createSignal, on, onCleanup } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
 import { settings } from './settings';
 
 function createGame() {
-  const { intervals, gameType } = settings;
+  const { intervals, gameType, soundEnabled } = settings;
   const [gameId, setGameId] = createSignal<string | null>(null);
   const [players, setPlayers] = createStore<Player[]>([]);
   const [countdown, setCountdown] = createSignal<Date | null>(null);
-  const socket = io(`${window.location.protocol}//ws.${window.location.hostname}:${import.meta.env.VITE_CLIENT_PORT}`, {
-    path: '/',
-  });
   const [drinker, setDrinker] = createSignal<Player | null>(null, {
     equals: false,
   });
+  const bell = new Audio('/assets/sound/bell.mp3');
+  const sanic = new Audio('/assets/sound/sanic.mp3');
+
+  // This is loud as fuck
+  sanic.volume = 0.2;
   let counter: Interval = null;
-
-  socket.on('id', (id) => {
-    setGameId(id);
-  });
-
-  socket.on('join', (data) => {
-    const { data: player, success, error } = playerSchema.safeParse(data);
-    if (!success || error) {
-      console.error("error couldn't parse: ", error);
-      return;
-    }
-
-    addPlayer(player);
-  });
-
-  socket.on('connect', () => {
-    socket.emit('server');
-  });
+  let soundTimeout: Timeout = null;
 
   const addPlayer = (player: Player) => {
     setPlayers((prev) => [...prev, player]);
@@ -47,6 +31,27 @@ function createGame() {
       (prev) => prev.id === id,
       produce((prev) => prev.score++),
     );
+
+  const playSound = () => {
+    if (!soundEnabled()) {
+      return;
+    }
+    const playSanic = Math.floor(Math.random() * 1000 + 1) === 137;
+    const sound = playSanic ? sanic : bell;
+    sound.play();
+
+    soundTimeout && clearTimeout(soundTimeout);
+    soundTimeout = setTimeout(() => {
+      stopSound();
+    }, 10000);
+  };
+
+  const stopSound = () => {
+    sanic.pause();
+    bell.pause();
+    sanic.currentTime = 0;
+    bell.currentTime = 0;
+  };
 
   const startTimer = () => {
     counter && clearInterval(counter);
@@ -71,7 +76,7 @@ function createGame() {
         return;
       }
 
-      // Play sound here
+      playSound();
       incrementScore(drinker.id);
       setCountdown(null);
     }),
@@ -91,11 +96,20 @@ function createGame() {
     startTimer();
   });
 
+  createEffect(() => {
+    if (soundEnabled()) {
+      return;
+    }
+
+    stopSound();
+  });
+
   onCleanup(() => counter && clearInterval(counter));
 
   return {
     players,
     gameId,
+    setGameId,
     drinker,
     countdown,
     addPlayer,

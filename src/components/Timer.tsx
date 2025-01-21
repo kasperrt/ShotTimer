@@ -65,7 +65,7 @@ export function Timer() {
   });
 
   return (
-    <h1 class="w-full text-center text-9xl font-light tabular-nums">
+    <h1 class="w-full text-center text-6xl font-light tabular-nums lg:text-9xl">
       <Show when={!countdown()}>ShotTimer</Show>
       <Show when={showDrinker()}>{drinker()?.name}</Show>
       <Show when={timerEnabled() && !showDrinker() && countdown()}>

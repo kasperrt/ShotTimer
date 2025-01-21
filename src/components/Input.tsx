@@ -10,7 +10,7 @@ export function Input() {
     addPlayer({
       name: name(),
       id: createUniqueId(),
-      joined: new Date(),
+      joined: new Date().getTime(),
       score: 0,
     });
     setName('');

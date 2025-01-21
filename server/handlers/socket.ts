@@ -1,17 +1,24 @@
 import type { ServerType } from '@hono/node-server';
+import dotenv from 'dotenv';
 import { customAlphabet } from 'nanoid';
 import { Server } from 'socket.io';
 
+dotenv.config();
+
+const CORS = (process.env.VITE_CORS ?? '').split(',');
 const nanoid = customAlphabet('1234567890abcdef', 10);
 const ids: string[] = [];
 let io: Server;
 
 function attachServer(server: ServerType) {
+  if (!server) {
+    throw new Error('error server not initialized yet');
+  }
   io = new Server(server, {
     cors: {
-      origin: ['http://localhost:3000', 'https://etys.no', 'https://ws.etys.no'],
+      origin: CORS,
     },
-    path: '/',
+    path: '/rtd',
   });
 
   io.on('connection', (socket) => {
@@ -26,6 +33,10 @@ function attachServer(server: ServerType) {
 }
 
 function getSocket() {
+  if (!io) {
+    throw new Error('error socket.io not initialized yet');
+  }
+
   return io;
 }
 

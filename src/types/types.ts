@@ -3,9 +3,16 @@ import { z } from 'zod';
 export const playerSchema = z.object({
   id: z.string(),
   name: z.string(),
-  drawing: z.array(z.number()),
+  drawing: z
+    .object({
+      x: z.array(z.number()),
+      y: z.array(z.number()),
+      drag: z.array(z.boolean()),
+      color: z.string(),
+    })
+    .optional(),
   score: z.number(),
-  joined: z.date(),
+  joined: z.number(),
 });
 
 export type Player = z.infer<typeof playerSchema>;
