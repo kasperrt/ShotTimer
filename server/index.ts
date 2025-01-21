@@ -1,12 +1,22 @@
 import { serve } from '@hono/node-server';
-import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
+import { joinHandler } from './handlers/join';
+import { attachServer } from './handlers/socket';
 
 const app = new Hono();
 
-app.use('*', serveStatic({ root: './dist/' }));
+app.post('/join/:id', joinHandler);
 
-serve({
-  fetch: app.fetch,
-  port: 8080,
-});
+const server = serve(
+  {
+    fetch: app.fetch,
+    port: 8080,
+  },
+  (info) => {
+    console.log(`Server is running: http://${info.address}:${info.port}`);
+  },
+);
+
+attachServer(server);
+
+console.log('started');

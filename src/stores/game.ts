@@ -1,18 +1,40 @@
-import type { Interval, Player } from '@/types/types';
+import { type Interval, type Player, playerSchema } from '@/types/types';
 import { drawPlayer } from '@/utils/drawPlayer';
+import { io } from 'socket.io-client';
 import { createEffect, createRoot, createSignal, on, onCleanup } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
 import { settings } from './settings';
 
 function createGame() {
   const { intervals, gameType } = settings;
+  const [gameId, setGameId] = createSignal<string | null>(null);
   const [players, setPlayers] = createStore<Player[]>([]);
   const [countdown, setCountdown] = createSignal<Date | null>(null);
+  const socket = io(`${window.location.protocol}//ws.${window.location.hostname}:${import.meta.env.VITE_CLIENT_PORT}`, {
+    path: '/',
+  });
   const [drinker, setDrinker] = createSignal<Player | null>(null, {
     equals: false,
   });
-  // Do socket-io connection here
   let counter: Interval = null;
+
+  socket.on('id', (id) => {
+    setGameId(id);
+  });
+
+  socket.on('join', (data) => {
+    const { data: player, success, error } = playerSchema.safeParse(data);
+    if (!success || error) {
+      console.error("error couldn't parse: ", error);
+      return;
+    }
+
+    addPlayer(player);
+  });
+
+  socket.on('connect', () => {
+    socket.emit('server');
+  });
 
   const addPlayer = (player: Player) => {
     setPlayers((prev) => [...prev, player]);
@@ -73,6 +95,7 @@ function createGame() {
 
   return {
     players,
+    gameId,
     drinker,
     countdown,
     addPlayer,

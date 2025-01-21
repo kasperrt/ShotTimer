@@ -1,10 +1,14 @@
-export type Player = {
-  id: string;
-  name: string;
-  // drawing: any, // update when I remember how canvas' works,
-  score: number;
-  joined: Date;
-};
+import { z } from 'zod';
+
+export const playerSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  drawing: z.array(z.number()),
+  score: z.number(),
+  joined: z.date(),
+});
+
+export type Player = z.infer<typeof playerSchema>;
 
 export type Game = {
   players: Record<string, Player>;
