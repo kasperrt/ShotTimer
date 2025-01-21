@@ -1,5 +1,6 @@
 import { useParams } from '@/router';
 import { getRandomColor } from '@/utils/color';
+import { draw } from '@/utils/draw';
 import { Show, createSignal, onMount } from 'solid-js';
 
 export default function Id() {
@@ -12,6 +13,7 @@ export default function Id() {
   const clickDrag: boolean[] = [];
   const color = getRandomColor();
   let canvas: HTMLCanvasElement | undefined;
+  let container: HTMLDivElement | undefined;
   let painting = false;
 
   const onChange = (e: Event) => {
@@ -52,7 +54,7 @@ export default function Id() {
     painting = true;
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.touches[0].pageX - target.offsetLeft, e.touches[0].pageY - target.offsetTop, false);
-    draw();
+    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onTouchMove = (e: TouchEvent) => {
@@ -62,14 +64,14 @@ export default function Id() {
 
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.touches[0].pageX - target.offsetLeft, e.touches[0].pageY - target.offsetTop, true);
-    draw();
+    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onMouseDown = (e: MouseEvent) => {
     painting = true;
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.pageX - target.offsetLeft, e.pageY - target.offsetTop, false);
-    draw();
+    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onMouseMove = (e: MouseEvent) => {
@@ -79,7 +81,7 @@ export default function Id() {
 
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.pageX - target.offsetLeft, e.pageY - target.offsetTop, true);
-    draw();
+    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onTouchEnd = () => {
@@ -92,29 +94,6 @@ export default function Id() {
     clickDrag.push(drag);
   };
 
-  const draw = () => {
-    if (!canvas) {
-      return;
-    }
-    const context = canvas.getContext('2d');
-    if (!context) {
-      return;
-    }
-    context.strokeStyle = color;
-    context.lineJoin = 'round';
-    context.lineWidth = 5;
-
-    context.beginPath();
-    if (clickDrag[clickDrag.length - 1]) {
-      context.moveTo(clickX[clickDrag.length - 2], clickY[clickDrag.length - 2]);
-    } else {
-      context.moveTo(clickX[clickDrag.length - 1] - 1, clickY[clickDrag.length - 1]);
-    }
-    context.lineTo(clickX[clickDrag.length - 1], clickY[clickDrag.length - 1]);
-    context.closePath();
-    context.stroke();
-  };
-
   onMount(() => {
     if (!canvas) {
       return;
@@ -125,7 +104,7 @@ export default function Id() {
   });
 
   return (
-    <div class="flex h-full w-full flex-col justify-center gap-y-2 p-2">
+    <div class="flex h-screen w-full flex-1 flex-col justify-center gap-y-2 p-2">
       <Show when={submitted()}>
         <h1 class="text-center text-4xl">Submitted!</h1>
       </Show>
@@ -142,7 +121,7 @@ export default function Id() {
           />
           <canvas
             ref={canvas}
-            class="w-full flex-1 border"
+            class="w-full flex-1 border lg:max-h-96"
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
             onMouseLeave={onTouchEnd}

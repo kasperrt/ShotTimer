@@ -15,7 +15,12 @@ export const playerSchema = z.object({
   joined: z.number(),
 });
 
+export const drawnPlayerSchema = playerSchema.extend({
+  drawn: z.number(),
+});
+
 export type Player = z.infer<typeof playerSchema>;
+export type DrawnPlayer = z.infer<typeof drawnPlayerSchema>;
 
 export type Game = {
   players: Record<string, Player>;

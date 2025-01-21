@@ -29,5 +29,3 @@ const server = serve(
 );
 
 attachServer(server);
-
-console.log('started');

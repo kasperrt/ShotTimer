@@ -1,6 +1,6 @@
-import type { GameType, Player } from '@/types/types';
+import type { DrawnPlayer, GameType, Player } from '@/types/types';
 
-export function drawPlayer(players: Player[], gameType: GameType): Player {
+export function drawPlayer(players: Player[], gameType: GameType): DrawnPlayer {
   let maxScore: number = players[0].score;
   let minScore: number = players[0].score;
 
@@ -33,5 +33,8 @@ export function drawPlayer(players: Player[], gameType: GameType): Player {
     return prev;
   }, []);
 
-  return pool[Math.floor(Math.random() * pool.length)];
+  return {
+    ...pool[Math.floor(Math.random() * pool.length)],
+    drawn: new Date().getTime(),
+  };
 }

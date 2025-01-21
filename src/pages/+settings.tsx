@@ -1,5 +1,7 @@
 import { Modal } from '@/components/Modal';
+import { Toggle } from '@/components/Toggle';
 import { settings } from '@/stores/settings';
+import { createEffect } from 'solid-js';
 
 export default function SettingsModal() {
   const {
@@ -28,38 +30,24 @@ export default function SettingsModal() {
     setIntervals(interval);
   };
 
+  createEffect(() => {
+    console.log(gameType());
+  });
+
   return (
     <Modal>
-      <div class="flex flex-col gap-y-4">
+      <div class="flex flex-col gap-y-8">
         <h1 class="w-full text-center text-3xl">Settings</h1>
-        <label class="flex w-full cursor-pointer justify-between">
-          Sound
-          <input type="checkbox" checked={soundEnabled()} onChange={() => setSoundEnabled(!soundEnabled())} />
-        </label>
-        <label class="flex w-full cursor-pointer justify-between">
-          Score
-          <input type="checkbox" checked={scoreEnabled()} onChange={() => setScoreEnabled(!scoreEnabled())} />
-        </label>
-        <label class="flex w-full cursor-pointer justify-between">
-          Type{' '}
-          <span>
-            {gameType()}
-            <input
-              type="checkbox"
-              class="absolute -left-full -top-full"
-              checked={gameType() === 'FAIR'}
-              onChange={() => setGameType(gameType() === 'FAIR' ? 'ANARCHY' : 'FAIR')}
-            />
-          </span>
-        </label>
-        <label class="flex w-full cursor-pointer justify-between">
-          Blinking
-          <input type="checkbox" checked={blinkingEnabled()} onChange={() => setBlinkingEnabled(!blinkingEnabled())} />
-        </label>
-        <label class="flex w-full cursor-pointer justify-between">
-          Timer
-          <input type="checkbox" checked={timerEnabled()} onChange={() => setTimerEnabled(!timerEnabled())} />
-        </label>
+        <Toggle label="Sound" checked={soundEnabled()} onChange={() => setSoundEnabled(!soundEnabled())} />
+        <Toggle label="Score" checked={scoreEnabled()} onChange={() => setScoreEnabled(!scoreEnabled())} />
+        <Toggle label="Blinking" checked={blinkingEnabled()} onChange={() => setBlinkingEnabled(!blinkingEnabled())} />
+        <Toggle label="Timer" checked={timerEnabled()} onChange={() => setTimerEnabled(!timerEnabled())} />
+        <Toggle
+          label="Type"
+          text={gameType()}
+          checked={gameType() === 'FAIR'}
+          onChange={() => setGameType(gameType() === 'FAIR' ? 'ANARCHY' : 'FAIR')}
+        />
         <label class="flex w-full cursor-pointer justify-between">
           Intervals (minutes)
           <input

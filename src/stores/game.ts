@@ -1,4 +1,4 @@
-import type { Interval, Player, Timeout } from '@/types/types';
+import type { DrawnPlayer, Interval, Player, Timeout } from '@/types/types';
 import { drawPlayer } from '@/utils/drawPlayer';
 import { createEffect, createRoot, createSignal, on, onCleanup } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
@@ -9,11 +9,12 @@ function createGame() {
   const [gameId, setGameId] = createSignal<string | null>(null);
   const [players, setPlayers] = createStore<Player[]>([]);
   const [countdown, setCountdown] = createSignal<Date | null>(null);
-  const [drinker, setDrinker] = createSignal<Player | null>(null, {
+  const [drinker, setDrinker] = createSignal<DrawnPlayer | null>(null, {
     equals: false,
   });
   const bell = new Audio('/assets/sound/bell.mp3');
   const sanic = new Audio('/assets/sound/sanic.mp3');
+  const synth = window.speechSynthesis;
 
   // This is loud as fuck
   sanic.volume = 0.2;
@@ -32,10 +33,23 @@ function createGame() {
       produce((prev) => prev.score++),
     );
 
+  const playCommand = () => {
+    if (!soundEnabled()) {
+      return;
+    }
+
+    const drinkCommand = new SpeechSynthesisUtterance(`Your turn to drink ${drinker.name}`);
+    drinkCommand.onend = playSound;
+    drinkCommand.onerror = playSound;
+
+    synth.speak(drinkCommand);
+  };
+
   const playSound = () => {
     if (!soundEnabled()) {
       return;
     }
+
     const playSanic = Math.floor(Math.random() * 1000 + 1) === 137;
     const sound = playSanic ? sanic : bell;
     sound.play();
@@ -47,6 +61,7 @@ function createGame() {
   };
 
   const stopSound = () => {
+    synth.cancel();
     sanic.pause();
     bell.pause();
     sanic.currentTime = 0;
@@ -76,7 +91,7 @@ function createGame() {
         return;
       }
 
-      playSound();
+      playCommand();
       incrementScore(drinker.id);
       setCountdown(null);
     }),

@@ -18,7 +18,7 @@ importers:
         specifier: 0.15.3
         version: 0.15.3(solid-js@1.9.4)
       dotenv:
-        specifier: ^16.4.7
+        specifier: 16.4.7
         version: 16.4.7
       hono:
         specifier: 4.6.17
@@ -48,8 +48,11 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
+      '@tsconfig/node18':
+        specifier: ^18.2.4
+        version: 18.2.4
       '@types/qrcode':
-        specifier: ^1.5.5
+        specifier: 1.5.5
         version: 1.5.5
       autoprefixer:
         specifier: 10.4.20
@@ -538,6 +541,9 @@ packages:
 
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+
+  '@tsconfig/node18@18.2.4':
+    resolution: {integrity: sha512-5xxU8vVs9/FNcvm3gE07fPbn9tl6tqGGWA9tSlwsUEkBxtRnTsNmwrV8gasZ9F/EobaSv9+nu8AxUKccw77JpQ==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1799,6 +1805,8 @@ snapshots:
   '@tsconfig/node14@1.0.3': {}
 
   '@tsconfig/node16@1.0.4': {}
+
+  '@tsconfig/node18@18.2.4': {}
 
   '@types/babel__core@7.20.5':
     dependencies:

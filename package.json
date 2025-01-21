@@ -12,7 +12,7 @@
     "lint:organize-imports": "biome check --write",
     "format:fix": "prettier --log-level warn --write './**/*.{tsx,ts,js,jsx,json,css,html}'",
     "format:check": "prettier --log-level warn --check --no-color -u './**/*.{tsx,ts,js,jsx,json,css,html}'",
-    "start": "node --loader ts-node/esm --experimental-specifier-resolution=node server/index.ts"
+    "start": "node --loader ts-node/esm --no-warnings=ExperimentalWarning --experimental-specifier-resolution=node server/index.ts"
   },
   "repository": {
     "type": "git",
