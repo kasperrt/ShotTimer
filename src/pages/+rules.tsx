@@ -29,7 +29,7 @@ export default function RulesModal() {
         </p>
         <p>
           If a player wants to leave the game/has to leave the party, his or hers name can be removed from the name-pool
-          by clicking his or hers name underneath the timer.
+          by clicking his or her name on the scoreboard.
         </p>
       </div>
     </Modal>
