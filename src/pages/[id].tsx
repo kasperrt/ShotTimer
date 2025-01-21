@@ -13,7 +13,6 @@ export default function Id() {
   const clickDrag: boolean[] = [];
   const color = getRandomColor();
   let canvas: HTMLCanvasElement | undefined;
-  let container: HTMLDivElement | undefined;
   let painting = false;
 
   const onChange = (e: Event) => {
@@ -51,6 +50,7 @@ export default function Id() {
   };
 
   const onTouchStart = (e: TouchEvent) => {
+    e.preventDefault();
     painting = true;
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.touches[0].pageX - target.offsetLeft, e.touches[0].pageY - target.offsetTop, false);
@@ -58,6 +58,7 @@ export default function Id() {
   };
 
   const onTouchMove = (e: TouchEvent) => {
+    e.preventDefault();
     if (!painting) {
       return;
     }
@@ -68,6 +69,7 @@ export default function Id() {
   };
 
   const onMouseDown = (e: MouseEvent) => {
+    e.preventDefault();
     painting = true;
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.pageX - target.offsetLeft, e.pageY - target.offsetTop, false);
@@ -75,6 +77,7 @@ export default function Id() {
   };
 
   const onMouseMove = (e: MouseEvent) => {
+    e.preventDefault();
     if (!painting) {
       return;
     }
@@ -84,7 +87,8 @@ export default function Id() {
     draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
-  const onTouchEnd = () => {
+  const onTouchEnd = (e: Event) => {
+    e.preventDefault();
     painting = false;
   };
 
