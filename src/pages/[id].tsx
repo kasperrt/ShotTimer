@@ -1,7 +1,7 @@
 import { useParams } from '@/router';
 import { getRandomColor } from '@/utils/color';
 import { draw } from '@/utils/draw';
-import { Show, createSignal, onMount } from 'solid-js';
+import { Show, createSignal, onCleanup, onMount } from 'solid-js';
 
 export default function Id() {
   const { id } = useParams('/:id');
@@ -105,6 +105,22 @@ export default function Id() {
     const { height, width } = canvas.getBoundingClientRect();
     canvas.height = height;
     canvas.width = width;
+
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd, { passive: false });
+    canvas.addEventListener('mousedown', onMouseDown, { passive: false });
+    canvas.addEventListener('mousemove', onMouseMove, { passive: false });
+    canvas.addEventListener('mouseup', onTouchEnd, { passive: false });
+  });
+
+  onCleanup(() => {
+    canvas?.removeEventListener('touchstart', onTouchStart);
+    canvas?.removeEventListener('touchmove', onTouchMove);
+    canvas?.removeEventListener('touchend', onTouchEnd);
+    canvas?.removeEventListener('mousedown', onMouseDown);
+    canvas?.removeEventListener('mousemove', onMouseMove);
+    canvas?.removeEventListener('mouseup', onTouchEnd);
   });
 
   return (
@@ -123,17 +139,7 @@ export default function Id() {
             placeholder="Your name"
             class="w-full border-b border-b-black/20 pb-2 text-center text-xl outline-none hover:border-b-black/50 focus:border-b-black/50"
           />
-          <canvas
-            ref={canvas}
-            class="w-full flex-1 border lg:max-h-96"
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseLeave={onTouchEnd}
-            onMouseUp={onTouchEnd}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-          />
+          <canvas ref={canvas} class="h-5/6 w-full border" />
 
           <button type="submit" disabled={submitting()}>
             Submit
