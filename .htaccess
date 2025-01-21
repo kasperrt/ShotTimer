@@ -1,4 +1,0 @@
-RewriteEngine on
-
-RewriteCond %{REQUEST_URI} !\.(?:css|js|jpe?g|gif|png)$ [NC]
-RewriteRule ^m/(.*)?$ m/index.html?$1 [L]
