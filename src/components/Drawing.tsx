@@ -16,9 +16,8 @@ export function Drawing() {
         return;
       }
 
-      const { height, width } = canvas.getBoundingClientRect();
-      canvas.height = height;
-      canvas.width = width;
+      canvas.height = drawing.height;
+      canvas.width = drawing.width;
 
       const context = canvas.getContext('2d');
       if (!context) {
@@ -39,7 +38,7 @@ export function Drawing() {
   return (
     <Show when={drinker() && !!drinker()?.drawing}>
       <div class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-10 h-full opacity-50">
-        <canvas ref={canvas} class="h-full w-full" />
+        <canvas ref={canvas} class="m-auto h-full" />
       </div>
     </Show>
   );

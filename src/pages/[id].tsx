@@ -26,6 +26,10 @@ export default function Id() {
       return alert('You need to define a name');
     }
 
+    if (!canvas) {
+      return alert('Something went wrong, please reload the page and try again');
+    }
+
     if (submitting()) {
       return;
     }
@@ -36,7 +40,7 @@ export default function Id() {
       method: 'POST',
       body: JSON.stringify({
         name: name(),
-        drawing: { x: clickX, y: clickY, drag: clickDrag, color },
+        drawing: { x: clickX, y: clickY, drag: clickDrag, color, height: canvas.height, width: canvas.width },
       }),
     })
       .then((res) => {

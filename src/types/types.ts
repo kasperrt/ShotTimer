@@ -9,6 +9,8 @@ export const playerSchema = z.object({
       y: z.array(z.number()),
       drag: z.array(z.boolean()),
       color: z.string(),
+      height: z.number(),
+      width: z.number(),
     })
     .optional(),
   score: z.number(),
