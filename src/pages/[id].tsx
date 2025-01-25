@@ -36,7 +36,7 @@ export default function Id() {
 
     setSubmitting(true);
 
-    fetch(`${window.location.protocol}//ws.${window.location.hostname}${import.meta.env.VITE_CLIENT_PORT}/join/${id}`, {
+    fetch(`${window.location.protocol}//${window.location.hostname}${import.meta.env.VITE_CLIENT_PORT}/join/${id}`, {
       method: 'POST',
       body: JSON.stringify({
         name: name(),

@@ -8,14 +8,20 @@ interface Props {
 export function Modal({ children }: Props) {
   const modals = useModals();
 
-  const close = modals.close;
+  const onClose = () => modals.close();
+  const onKeyDown = (e: KeyboardEvent) => {
+    if (e.code !== 'Enter' && e.code !== 'Space') {
+      return;
+    }
+
+    onClose();
+  };
 
   return (
     <>
-      {/* biome-ignore lint/a11y/useKeyWithClickEvents: On purpose for only clicks */}
-      <div class="absolute inset-0 z-20 h-full w-full bg-black/40" onClick={() => modals.close()} />
-      <div class="absolute left-0 right-0 top-0 z-30 m-auto h-fit w-full max-w-xl rounded-xl bg-white p-8 lg:bottom-0">
-        <button type="button" onClick={() => close()} class="absolute right-5 top-5">
+      <div class="absolute inset-0 z-20 h-full w-full bg-black/40" onClick={onClose} onKeyDown={onKeyDown} />
+      <div class="absolute left-0 right-0 top-0 z-30 m-auto h-fit min-h-screen w-full min-w-full max-w-xl rounded-none bg-white p-8 lg:bottom-0 lg:min-h-[unset] lg:min-w-[unset] lg:rounded-xl">
+        <button type="button" onClick={onClose} class="absolute right-5 top-5">
           <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
             <path
               fill-rule="evenodd"

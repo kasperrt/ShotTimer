@@ -4,12 +4,12 @@ import { Input } from '@/components/Input';
 import { Join } from '@/components/Join';
 import { Scoreboard } from '@/components/Scoreboard';
 import { Timer } from '@/components/Timer';
-import { useNetwork } from '@/hooks/useNetwork';
+import { network } from '@/hooks/network';
 import { useModals } from '@/router';
 
 export default function Landing() {
   const modals = useModals();
-  useNetwork();
+  network();
 
   return (
     <>
