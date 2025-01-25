@@ -1,7 +1,7 @@
 import type { Game } from '@/stores/game';
 import { settings } from '@/stores/settings';
 import type { Interval, Timeout } from '@/types/types';
-import { getRemaining } from '@/utils/getRemaining';
+import { getRemainingTimeReadable } from '@/utils/getRemainingTimeReadable';
 import { Show, createEffect, createSignal, on, onCleanup } from 'solid-js';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 export function Timer({ countdown, winner }: Props) {
   const { timerEnabled } = settings;
   const [showWinner, setShowWinner] = createSignal<boolean>(false);
-  const [remaining, setRemaining] = createSignal<ReturnType<typeof getRemaining>>({
+  const [remainingTimeReadable, setRemainingTimeReadable] = createSignal<ReturnType<typeof getRemainingTimeReadable>>({
     minutes: '00',
     seconds: '00',
     milliseconds: '000',
@@ -30,21 +30,21 @@ export function Timer({ countdown, winner }: Props) {
     const r = c.getTime() - new Date().getTime();
     if (r <= 0) {
       counterInterval && clearInterval(counterInterval);
-      setRemaining(getRemaining(null));
+      setRemainingTimeReadable(getRemainingTimeReadable(null));
       return;
     }
 
-    setRemaining(getRemaining(c.getTime() - new Date().getTime()));
+    setRemainingTimeReadable(getRemainingTimeReadable(c.getTime() - new Date().getTime()));
   };
 
   createEffect(() => {
     const c = countdown();
     if (!c) {
-      setRemaining(getRemaining(null));
+      setRemainingTimeReadable(getRemainingTimeReadable(null));
       return;
     }
 
-    setRemaining(getRemaining(c.getTime() - new Date().getTime()));
+    setRemainingTimeReadable(getRemainingTimeReadable(c.getTime() - new Date().getTime()));
     counterInterval && clearInterval(counterInterval);
     counterInterval = setInterval(count, 10);
   });
@@ -73,7 +73,7 @@ export function Timer({ countdown, winner }: Props) {
       <Show when={!countdown()}>ShotTimer</Show>
       <Show when={showWinner() && winner()}>{winner()?.name}</Show>
       <Show when={timerEnabled() && !showWinner() && countdown()}>
-        {remaining()?.minutes}:{remaining()?.seconds}.{remaining()?.milliseconds}
+        {remainingTimeReadable()?.minutes}:{remainingTimeReadable()?.seconds}.{remainingTimeReadable()?.milliseconds}
       </Show>
     </h1>
   );

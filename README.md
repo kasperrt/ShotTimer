@@ -31,6 +31,12 @@ $ pnpm install && pnpm dev
 
 And open `http://localhost:3000`.
 
+### Tests
+
+```
+$ pnpm test
+```
+
 
 ### Deployment
 

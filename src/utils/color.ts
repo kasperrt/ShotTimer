@@ -1,19 +1,25 @@
 export function getRandomColor() {
   const letters = '0123456789ABCDEF';
-  const rgb = [];
   let color = '#';
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
 
+  const rgb = hexToRgb(color);
+  const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+  return `hsl(${hsl[0]}, ${hsl[1]}%,${hsl[2]}%)`;
+}
+
+export function hexToRgb(color: string): [number, number, number] {
+  const rgb = [];
   for (let i = 0; i < 6; i += 2) {
     rgb.push(Number.parseInt(color.substring(i + 1, i + 3), 16));
   }
 
-  return rgbToHsl(rgb[0], rgb[1], rgb[2]);
+  return [rgb[0], rgb[1], rgb[2]];
 }
 
-function rgbToHsl(r: number, g: number, b: number) {
+export function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
   const red = r / 255;
   const green = g / 255;
   const blue = b / 255;
@@ -46,5 +52,5 @@ function rgbToHsl(r: number, g: number, b: number) {
 
   if (l > 0.5) l = 0.4;
 
-  return `hsl(${Math.floor(h * 360)}, ${Math.floor(s * 100)}%, ${Math.floor(l * 100)}%)`;
+  return [Math.floor(h * 360), Math.floor(s * 100), Math.floor(l * 100)];
 }

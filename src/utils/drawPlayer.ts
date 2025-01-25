@@ -22,7 +22,7 @@ export function drawPlayer(players: Player[], gameType: GameType): DrawnPlayer {
     }
 
     let occurrences = maxScore - current.score;
-    if (maxDiff <= 3) {
+    if (maxDiff < 3) {
       occurrences = 3 - (current.score % 3);
     }
 
