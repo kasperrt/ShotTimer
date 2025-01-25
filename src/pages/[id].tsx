@@ -15,7 +15,20 @@ export default function Id() {
   const clickDrag: boolean[] = [];
   const color = getRandomColor();
   let canvas: HTMLCanvasElement | undefined;
+  let canvasContainer: HTMLDivElement | undefined;
   let painting = false;
+
+  const onResize = () => {
+    if (!canvas || !canvasContainer) {
+      return;
+    }
+
+    const { height, width } = canvasContainer.getBoundingClientRect();
+    canvas.height = height;
+    canvas.width = width;
+
+    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color, full: true });
+  };
 
   const onChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
@@ -100,13 +113,14 @@ export default function Id() {
   };
 
   onMount(() => {
-    if (!canvas) {
+    if (!canvas || !canvasContainer) {
       return;
     }
-    const { height, width } = canvas.getBoundingClientRect();
+    const { height, width } = canvasContainer.getBoundingClientRect();
     canvas.height = height;
     canvas.width = width;
 
+    window.addEventListener('resize', onResize, { passive: true });
     canvas.addEventListener('touchstart', onTouchStart, { passive: false });
     canvas.addEventListener('touchmove', onTouchMove, { passive: false });
     canvas.addEventListener('touchend', onTouchEnd, { passive: false });
@@ -116,6 +130,7 @@ export default function Id() {
   });
 
   onCleanup(() => {
+    window.addEventListener('resize', onResize);
     canvas?.removeEventListener('touchstart', onTouchStart);
     canvas?.removeEventListener('touchmove', onTouchMove);
     canvas?.removeEventListener('touchend', onTouchEnd);
@@ -150,7 +165,9 @@ export default function Id() {
               Submit
             </button>
           </div>
-          <canvas ref={canvas} class="h-full w-full border" />
+          <div class="h-full w-full" ref={canvasContainer}>
+            <canvas ref={canvas} class="h-full w-full border" />
+          </div>
         </form>
       </Show>
     </div>
