@@ -4,10 +4,10 @@ import type { Timeout } from '@/types/types';
 import { Show, createEffect, createSignal, on, onCleanup } from 'solid-js';
 
 interface Props {
-  drinker: Game['drinker'];
+  winner: Game['winner'];
 }
 
-export function Blinker({ drinker }: Props) {
+export function Blinker({ winner }: Props) {
   const { blinkingEnabled } = settings;
   const [blink, setBlink] = createSignal<boolean>(false);
   const [color, setColor] = createSignal<(typeof colors)[number] | 'white'>();
@@ -37,8 +37,8 @@ export function Blinker({ drinker }: Props) {
   };
 
   createEffect(
-    on(drinker, (drinker) => {
-      if (!drinker) {
+    on(winner, (winner) => {
+      if (!winner) {
         setBlink(false);
         return;
       }

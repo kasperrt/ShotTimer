@@ -6,12 +6,12 @@ import { Show, createEffect, createSignal, on, onCleanup } from 'solid-js';
 
 interface Props {
   countdown: Game['countdown'];
-  drinker: Game['drinker'];
+  winner: Game['winner'];
 }
 
-export function Timer({ countdown, drinker }: Props) {
+export function Timer({ countdown, winner }: Props) {
   const { timerEnabled } = settings;
-  const [showDrinker, setShowDrinker] = createSignal<boolean>(false);
+  const [showWinner, setShowWinner] = createSignal<boolean>(false);
   const [remaining, setRemaining] = createSignal<ReturnType<typeof getRemaining>>({
     minutes: '00',
     seconds: '00',
@@ -50,15 +50,15 @@ export function Timer({ countdown, drinker }: Props) {
   });
 
   createEffect(
-    on(drinker, (drinker) => {
-      if (!drinker) {
+    on(winner, (winner) => {
+      if (!winner) {
         return;
       }
 
       showcaseTimeout && clearTimeout(showcaseTimeout);
-      setShowDrinker(true);
+      setShowWinner(true);
       showcaseTimeout = setTimeout(() => {
-        setShowDrinker(false);
+        setShowWinner(false);
       }, 2000);
     }),
   );
@@ -71,8 +71,8 @@ export function Timer({ countdown, drinker }: Props) {
   return (
     <h1 class="w-full text-center text-6xl font-light tabular-nums lg:text-9xl">
       <Show when={!countdown()}>ShotTimer</Show>
-      <Show when={showDrinker() && drinker()}>{drinker()?.name}</Show>
-      <Show when={timerEnabled() && !showDrinker() && countdown()}>
+      <Show when={showWinner() && winner()}>{winner()?.name}</Show>
+      <Show when={timerEnabled() && !showWinner() && countdown()}>
         {remaining()?.minutes}:{remaining()?.seconds}.{remaining()?.milliseconds}
       </Show>
     </h1>

@@ -3,18 +3,18 @@ import { draw } from '@/utils/draw';
 import { Show, createEffect, on } from 'solid-js';
 
 interface Props {
-  drinker: Game['drinker'];
+  winner: Game['winner'];
 }
 
-export function Drawing({ drinker }: Props) {
+export function Drawing({ winner }: Props) {
   let canvas: HTMLCanvasElement | undefined;
 
   createEffect(
-    on(drinker, (drinker) => {
-      if (!drinker || !canvas) {
+    on(winner, (winner) => {
+      if (!winner || !canvas) {
         return;
       }
-      const drawing = drinker.drawing;
+      const drawing = winner.drawing;
       if (!drawing) {
         return;
       }
@@ -39,7 +39,7 @@ export function Drawing({ drinker }: Props) {
   );
 
   return (
-    <Show when={drinker() && !!drinker()?.drawing}>
+    <Show when={winner() && !!winner()?.drawing}>
       <div class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-10 h-full opacity-50">
         <canvas ref={canvas} class="m-auto h-full" />
       </div>

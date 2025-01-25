@@ -9,7 +9,7 @@ export function useGame() {
   const [gameId, setGameId] = createSignal<string | null>(null);
   const [players, setPlayers] = createStore<Player[]>([]);
   const [countdown, setCountdown] = createSignal<Date | null>(null);
-  const [drinker, setDrinker] = createSignal<DrawnPlayer | null>(null, {
+  const [winner, setWinner] = createSignal<DrawnPlayer | null>(null, {
     equals: false,
   });
   const bell = new Audio('/assets/sound/bell.mp3');
@@ -34,7 +34,7 @@ export function useGame() {
       return;
     }
 
-    const drinkCommand = new SpeechSynthesisUtterance(`Your turn to drink ${drinker.name}`);
+    const drinkCommand = new SpeechSynthesisUtterance(`Your turn to drink ${winner.name}`);
     drinkCommand.onend = () => {
       const playSanic = Math.floor(Math.random() * 1000 + 1) === 137;
       const sound = playSanic ? sanic : bell;
@@ -69,7 +69,7 @@ export function useGame() {
     }
 
     counter && clearInterval(counter);
-    setDrinker(drawPlayer(players, gameType()));
+    setWinner(drawPlayer(players, gameType()));
   };
 
   const startTimer = () => {
@@ -78,13 +78,13 @@ export function useGame() {
   };
 
   createEffect(
-    on(drinker, (drinker) => {
-      if (!drinker) {
+    on(winner, (winner) => {
+      if (!winner) {
         return;
       }
 
       playCommand();
-      incrementScore(drinker.id);
+      incrementScore(winner.id);
       setCountdown(null);
     }),
   );
@@ -111,7 +111,7 @@ export function useGame() {
     players,
     gameId,
     setGameId,
-    drinker,
+    winner,
     countdown,
     addPlayer,
     removePlayer,
