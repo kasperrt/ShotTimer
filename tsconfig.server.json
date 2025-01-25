@@ -1,17 +1,15 @@
 {
-    "compilerOptions": {
-        "outDir": "distServer",
-        "target": "ES2022",
-        "declaration": true,
-        "moduleResolution": "Bundler",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "skipLibCheck": false,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-    },
-    "include": [
-        "server/**/*.ts",
-    ],
+  "compilerOptions": {
+    "outDir": "distServer",
+    "target": "ES2022",
+    "declaration": true,
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": ["server/**/*.ts"]
 }
