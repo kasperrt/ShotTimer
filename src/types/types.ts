@@ -24,13 +24,6 @@ export const drawnPlayerSchema = playerSchema.extend({
 export type Player = z.infer<typeof playerSchema>;
 export type DrawnPlayer = z.infer<typeof drawnPlayerSchema>;
 
-export type Game = {
-  players: Record<string, Player>;
-  addPlayer: (p: Player) => void;
-  removePlayer: (id: string) => void;
-  incrementScore: (id: string) => void;
-};
-
 export type GameType = 'ANARCHY' | 'FAIR';
 
 export type Timeout = ReturnType<typeof setTimeout> | null;

@@ -1,8 +1,11 @@
-import { game } from '@/stores/game';
+import type { Game } from '@/stores/game';
 import { createSignal, createUniqueId } from 'solid-js';
 
-export function Input() {
-  const { addPlayer } = game;
+interface Props {
+  addPlayer: Game['addPlayer'];
+}
+
+export function Input({ addPlayer }: Props) {
   const [name, setName] = createSignal('');
 
   const onSubmit = (e: Event) => {

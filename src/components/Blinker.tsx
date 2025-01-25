@@ -1,65 +1,38 @@
-import { game } from '@/stores/game';
+import type { Game } from '@/stores/game';
 import { settings } from '@/stores/settings';
 import type { Timeout } from '@/types/types';
 import { Show, createEffect, createSignal, on, onCleanup } from 'solid-js';
 
-export function Blinker() {
-  const { drinker } = game;
+interface Props {
+  drinker: Game['drinker'];
+}
+
+export function Blinker({ drinker }: Props) {
   const { blinkingEnabled } = settings;
   const [blink, setBlink] = createSignal<boolean>(false);
-  const [color, setColor] = createSignal<(typeof colors)[number]>();
-  const colors = [
-    'red',
-    'blue',
-    'purple',
-    'yellow',
-    'green',
-    'red',
-    'blue',
-    'purple',
-    'yellow',
-    'green',
-    'red',
-    'blue',
-    'purple',
-    'yellow',
-    'green',
-    'red',
-    'blue',
-    'purple',
-    'yellow',
-    'green',
-    'red',
-    'blue',
-    'purple',
-    'yellow',
-    'green',
-    'red',
-    'blue',
-    'purple',
-    'yellow',
-    'green',
-    'red',
-    'blue',
-    'purple',
-    'yellow',
-    'green',
-    'white',
-  ] as const;
+  const [color, setColor] = createSignal<(typeof colors)[number] | 'white'>();
+  const colors = ['red', 'blue', 'purple', 'yellow', 'green', 'red'] as const;
   let blinkTimeout: Timeout = null;
 
-  const doBlink = (current = 0) => {
-    if (current > colors.length) {
+  const doBlink = (c = 0, l = 0) => {
+    let current = c;
+    let loop = l;
+    if (loop > 5) {
       setColor('white');
       setBlink(false);
       return;
+    }
+
+    if (current > colors.length) {
+      current = 0;
+      loop++;
     }
 
     setBlink(true);
     setColor(colors[current]);
     blinkTimeout && clearTimeout(blinkTimeout);
     blinkTimeout = setTimeout(() => {
-      doBlink(current + 1);
+      doBlink(current + 1, loop);
     }, 100);
   };
 

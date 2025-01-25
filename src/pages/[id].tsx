@@ -1,3 +1,4 @@
+import { join } from '@/network/join';
 import { useParams } from '@/router';
 import { getRandomColor } from '@/utils/color';
 import { draw } from '@/utils/draw';
@@ -8,6 +9,7 @@ export default function Id() {
   const [name, setName] = createSignal<string>('');
   const [submitted, setSubmitted] = createSignal(false);
   const [submitting, setSubmitting] = createSignal(false);
+  const [showHint, setShowHint] = createSignal(true);
   const clickX: number[] = [];
   const clickY: number[] = [];
   const clickDrag: boolean[] = [];
@@ -20,7 +22,7 @@ export default function Id() {
     setName(target.value);
   };
 
-  const onSubmit = (e: Event) => {
+  const onSubmit = async (e: Event) => {
     e.preventDefault();
     if (!name()) {
       return alert('You need to define a name');
@@ -35,22 +37,19 @@ export default function Id() {
     }
 
     setSubmitting(true);
-
-    fetch(`${window.location.protocol}//${window.location.hostname}${import.meta.env.VITE_CLIENT_PORT}/join/${id}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        name: name(),
-        drawing: { x: clickX, y: clickY, drag: clickDrag, color, height: canvas.height, width: canvas.width },
-      }),
-    })
-      .then((res) => {
-        if (!res.ok || res.status !== 204) {
-          throw new Error('Not ok');
-        }
-        setSubmitted(true);
-      })
-      .catch(() => alert('Something went wrong, please try again'))
-      .finally(() => setSubmitting(false));
+    const submitted = await join(id, name(), {
+      x: clickX,
+      y: clickY,
+      drag: clickDrag,
+      color,
+      height: canvas.height,
+      width: canvas.width,
+    });
+    setSubmitted(submitted);
+    setSubmitting(false);
+    if (!submitted) {
+      window.alert('Something went wrong, please try again');
+    }
   };
 
   const onTouchStart = (e: TouchEvent) => {
@@ -58,7 +57,6 @@ export default function Id() {
     painting = true;
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.touches[0].pageX - target.offsetLeft, e.touches[0].pageY - target.offsetTop, false);
-    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onTouchMove = (e: TouchEvent) => {
@@ -69,7 +67,6 @@ export default function Id() {
 
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.touches[0].pageX - target.offsetLeft, e.touches[0].pageY - target.offsetTop, true);
-    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onMouseDown = (e: MouseEvent) => {
@@ -77,7 +74,6 @@ export default function Id() {
     painting = true;
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.pageX - target.offsetLeft, e.pageY - target.offsetTop, false);
-    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onMouseMove = (e: MouseEvent) => {
@@ -88,7 +84,6 @@ export default function Id() {
 
     const target = e.target as HTMLCanvasElement;
     updatePositions(e.pageX - target.offsetLeft, e.pageY - target.offsetTop, true);
-    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   const onTouchEnd = (e: Event) => {
@@ -97,9 +92,11 @@ export default function Id() {
   };
 
   const updatePositions = (x: number, y: number, drag: boolean) => {
+    setShowHint(false);
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(drag);
+    draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
   onMount(() => {
@@ -131,23 +128,29 @@ export default function Id() {
     <div class="flex h-screen w-full flex-1 flex-col justify-center gap-y-2 p-2">
       <Show when={submitted()}>
         <h1 class="text-center text-4xl">Submitted!</h1>
+        <p class="text-center">You can now close this tab</p>
       </Show>
       <Show when={!submitted()}>
-        <h1 class="text-center text-4xl">Draw a picture!</h1>
+        <Show when={showHint()}>
+          <h1 class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 m-auto h-fit text-center text-4xl text-black/20">
+            Draw a picture!
+          </h1>
+        </Show>
         <form onSubmit={onSubmit} class="flex flex-1 flex-col gap-y-2">
-          <input
-            type="text"
-            name="name"
-            value={name()}
-            onKeyDown={(e) => onChange(e)}
-            placeholder="Your name"
-            class="w-full border-b border-b-black/20 pb-2 text-center text-xl outline-none hover:border-b-black/50 focus:border-b-black/50"
-          />
-          <canvas ref={canvas} class="h-5/6 w-full border" />
-
-          <button type="submit" disabled={submitting()}>
-            Submit
-          </button>
+          <div class="flex w-full flex-row gap-x-4">
+            <input
+              type="text"
+              name="name"
+              value={name()}
+              onKeyDown={(e) => onChange(e)}
+              placeholder="Your name"
+              class="w-full border-b border-b-black/20 pb-2 text-xl outline-none hover:border-b-black/50 focus:border-b-black/50"
+            />
+            <button type="submit" disabled={submitting()}>
+              Submit
+            </button>
+          </div>
+          <canvas ref={canvas} class="h-full w-full border" />
         </form>
       </Show>
     </div>

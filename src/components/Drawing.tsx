@@ -1,9 +1,12 @@
-import { game } from '@/stores/game';
+import type { Game } from '@/stores/game';
 import { draw } from '@/utils/draw';
 import { Show, createEffect, on } from 'solid-js';
 
-export function Drawing() {
-  const { drinker } = game;
+interface Props {
+  drinker: Game['drinker'];
+}
+
+export function Drawing({ drinker }: Props) {
   let canvas: HTMLCanvasElement | undefined;
 
   createEffect(

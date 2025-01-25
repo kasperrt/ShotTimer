@@ -1,9 +1,12 @@
-import { game } from '@/stores/game';
+import type { Game } from '@/stores/game';
 import qrcode from 'qrcode';
 import { Show, createEffect, createSignal } from 'solid-js';
 
-export function Join() {
-  const { gameId } = game;
+interface Props {
+  gameId: Game['gameId'];
+}
+
+export function Join({ gameId }: Props) {
   const [code, setCode] = createSignal<string>('');
   const joinUrl = () => `${window.location.protocol}//${window.location.host}/${gameId()}`;
 

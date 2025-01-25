@@ -1,9 +1,13 @@
-import { game } from '@/stores/game';
+import type { Game } from '@/stores/game';
 import { settings } from '@/stores/settings';
 import { For, Show } from 'solid-js';
 
-export function Scoreboard() {
-  const { players, removePlayer } = game;
+interface Props {
+  players: Game['players'];
+  removePlayer: Game['removePlayer'];
+}
+
+export function Scoreboard({ players, removePlayer }: Props) {
   const { scoreEnabled } = settings;
 
   const onKeyDown = (e: KeyboardEvent, id: string) => {
