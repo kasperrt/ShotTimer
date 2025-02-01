@@ -4,9 +4,9 @@
   "type": "module",
   "description": "Randomized timed shots drinking game",
   "scripts": {
-    "dev": "run-p dev:client dev:server",
-    "dev:client": "vite dev --port 3000",
+    "dev": "run-p dev:server dev:client",
     "dev:server": "tsx server/index.ts",
+    "dev:client": "vite dev",
     "lint:fix": "biome lint --fix ./ && pnpm lint:organize-imports",
     "lint:check": "biome lint ./ && biome check",
     "lint:organize-imports": "biome check --write",
@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@hono/vite-dev-server": "0.18.1",
     "@types/qrcode": "1.5.5",
     "autoprefixer": "10.4.20",
     "jsdom": "26.0.0",

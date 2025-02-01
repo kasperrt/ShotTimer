@@ -48,6 +48,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
+      '@hono/vite-dev-server':
+        specifier: ^0.18.1
+        version: 0.18.1(hono@4.6.17)
       '@types/qrcode':
         specifier: 1.5.5
         version: 1.5.5
@@ -569,6 +572,19 @@ packages:
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
+
+  '@hono/vite-dev-server@0.18.1':
+    resolution: {integrity: sha512-Hud6Vsm+5jZDYGuchOVrc/Cr+CqydLH9yBc7VY8ChI1PH0WKSxG12t/qtQs4otuPDuUhowtemCLrk3TpMONYjQ==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: '*'
+      miniflare: '*'
+      wrangler: '*'
+    peerDependenciesMeta:
+      miniflare:
+        optional: true
+      wrangler:
+        optional: true
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -2293,6 +2309,12 @@ snapshots:
   '@hono/node-server@1.13.7(hono@4.6.17)':
     dependencies:
       hono: 4.6.17
+
+  '@hono/vite-dev-server@0.18.1(hono@4.6.17)':
+    dependencies:
+      '@hono/node-server': 1.13.7(hono@4.6.17)
+      hono: 4.6.17
+      minimatch: 9.0.5
 
   '@isaacs/cliui@8.0.2':
     dependencies:

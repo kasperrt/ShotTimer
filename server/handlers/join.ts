@@ -2,7 +2,7 @@ import type { Context } from 'hono';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
 import type { Player } from '../../src/types/types';
-import { getSocket } from './socket';
+import type { SocketHandlerMiddleware } from './socket';
 
 const simplePlayerSchema = z.object({
   name: z.string(),
@@ -16,7 +16,7 @@ const simplePlayerSchema = z.object({
   }),
 });
 
-export async function joinHandler(ctx: Context) {
+export async function joinHandler(ctx: Context<SocketHandlerMiddleware>) {
   const id = ctx.req.param('id');
   const body = await ctx.req.json();
   const { data, success, error } = simplePlayerSchema.safeParse(body);
@@ -34,7 +34,11 @@ export async function joinHandler(ctx: Context) {
     score: 0,
   };
 
-  getSocket().to(id).emit('join', JSON.stringify(player));
+  const io = ctx.get('io');
+  if (!io) {
+    throw new Error('error io not defined in joinHandler');
+  }
+  io.to(id).emit('join', JSON.stringify(player));
 
   return new Response(null, { status: 204 });
 }
