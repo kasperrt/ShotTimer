@@ -34,7 +34,7 @@ export function useGame() {
       return;
     }
 
-    const drinkCommand = new SpeechSynthesisUtterance(`Your turn to drink ${winner.name}`);
+    const drinkCommand = new SpeechSynthesisUtterance(`Your turn to drink ${winner()?.name}`);
     drinkCommand.onend = () => {
       const playSanic = Math.floor(Math.random() * 1000 + 1) === 137;
       const sound = playSanic ? sanic : bell;
