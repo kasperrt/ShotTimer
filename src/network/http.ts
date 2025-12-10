@@ -9,7 +9,7 @@ const endpoints = {
       request: simplePlayerSchema,
     },
   },
-  '/events': {
+  '/rtd': {
     sse: {
       response: z.discriminatedUnion('type', [
         z.object({

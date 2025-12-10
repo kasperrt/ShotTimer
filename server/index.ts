@@ -18,14 +18,14 @@ app.use(
 );
 
 app.use(
-  '/events',
+  '/rtd',
   cors({
     origin: CORS,
   }),
 );
 
 app.post('/join/:id', joinHandler);
-app.get('/events', sseHandler);
+app.get('/rtd', sseHandler);
 
 serve(
   {

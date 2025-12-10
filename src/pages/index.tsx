@@ -15,7 +15,7 @@ export default function Landing() {
   let closer: VoidFunction | null = null;
 
   createEffect(async () => {
-    const [errListen, close] = await httpClient.sse('/events', null, ([err, data]) => {
+    const [errListen, close] = await httpClient.sse('/rtd', null, ([err, data]) => {
       if (err) {
         return;
       }
