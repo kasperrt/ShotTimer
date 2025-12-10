@@ -1,20 +1,8 @@
 import type { Context } from 'hono';
 import { nanoid } from 'nanoid';
-import { z } from 'zod';
+import { simplePlayerSchema } from '../../src/schemas';
 import type { Player } from '../../src/types/types';
 import { getSocket } from './socket';
-
-const simplePlayerSchema = z.object({
-  name: z.string(),
-  drawing: z.object({
-    x: z.array(z.number()),
-    y: z.array(z.number()),
-    drag: z.array(z.boolean()),
-    color: z.string(),
-    height: z.number(),
-    width: z.number(),
-  }),
-});
 
 export async function joinHandler(ctx: Context) {
   const id = ctx.req.param('id');

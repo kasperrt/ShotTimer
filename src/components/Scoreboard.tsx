@@ -28,7 +28,7 @@ export function Scoreboard({ players, removePlayer }: Props) {
             {(player) => (
               <li
                 class="flex w-full cursor-pointer items-center justify-between"
-                onClick={() => removePlayer(player.id)}
+                on:click={() => removePlayer(player.id)}
                 onKeyDown={(e) => onKeyDown(e, player.id)}
               >
                 <span>{player.name}</span>

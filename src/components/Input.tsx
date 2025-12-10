@@ -25,10 +25,10 @@ export function Input({ addPlayer }: Props) {
   };
 
   return (
-    <form onSubmit={onSubmit} class="text-center">
+    <form on:submit={onSubmit} class="text-center">
       <input
         name="Name"
-        onChange={onChange}
+        on:change={onChange}
         value={name()}
         placeholder="Type player name here..."
         class="m-auto w-5/6 max-w-4xl border-b border-b-black/20 bg-transparent pb-2 text-center text-3xl font-thin outline-hidden"

@@ -19,10 +19,10 @@ export default function Landing() {
       <Blinker winner={winner} />
       <div class="relative h-full">
         <div class="absolute z-30 flex w-full items-center justify-between p-2">
-          <button type="button" onClick={() => modals.open('/settings')} class="cursor-pointer">
+          <button type="button" on:click={() => modals.open('/settings')} class="cursor-pointer">
             Settings
           </button>
-          <button type="button" onClick={() => modals.open('/rules')} class="cursor-pointer">
+          <button type="button" on:click={() => modals.open('/rules')} class="cursor-pointer">
             Rules
           </button>
         </div>

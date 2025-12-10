@@ -1,5 +1,5 @@
 import { createSignal, onCleanup, onMount, Show } from 'solid-js';
-import { join } from '@/network/join';
+import { httpClient } from '@/network/http';
 import { useParams } from '@/router';
 import { getRandomColor } from '@/utils/color';
 import { draw } from '@/utils/draw';
@@ -50,17 +50,29 @@ export default function Id() {
     }
 
     setSubmitting(true);
-    const submitted = await join(id, name(), {
-      x: clickX,
-      y: clickY,
-      drag: clickDrag,
-      color,
-      height: canvas.height,
-      width: canvas.width,
-    });
-    setSubmitted(submitted);
+    const [errorSubmitted] = await httpClient.post(
+      '/join/{id}',
+      { id },
+      {
+        name: name(),
+        drawing: {
+          x: clickX,
+          y: clickY,
+          drag: clickDrag,
+          color,
+          height: canvas.height,
+          width: canvas.width,
+        },
+      },
+    );
+
+    if (errorSubmitted) {
+      console.error('error submitting');
+    }
+
+    setSubmitted(!errorSubmitted);
     setSubmitting(false);
-    if (!submitted) {
+    if (errorSubmitted) {
       window.alert('Something went wrong, please try again');
     }
   };
@@ -112,6 +124,13 @@ export default function Id() {
     draw({ canvas, x: clickX, y: clickY, drag: clickDrag, color });
   };
 
+  const close = () => {
+    if(!submitted()) {
+      return
+    }
+    window.close();
+  }
+
   onMount(() => {
     if (!canvas || !canvasContainer) {
       return;
@@ -140,7 +159,7 @@ export default function Id() {
   });
 
   return (
-    <div class="flex h-screen w-full flex-1 flex-col justify-center gap-y-2 p-2">
+    <div class={"flex h-screen w-full flex-1 flex-col justify-center gap-y-2 p-2"} on:click={close}>
       <Show when={submitted()}>
         <h1 class="text-center text-4xl">Submitted!</h1>
         <p class="text-center">You can now close this tab</p>
@@ -151,7 +170,7 @@ export default function Id() {
             Draw a picture!
           </h1>
         </Show>
-        <form onSubmit={onSubmit} class="flex flex-1 flex-col gap-y-2">
+        <form on:submit={onSubmit} class="flex flex-1 flex-col gap-y-2">
           <div class="flex w-full flex-row gap-x-4">
             <input
               type="text"
