@@ -21,7 +21,7 @@ export function Modal({ children }: Props) {
     <>
       <div class="absolute inset-0 z-20 h-full w-full bg-black/40" onClick={onClose} onKeyDown={onKeyDown} />
       <div class="absolute left-0 right-0 top-0 z-30 m-auto h-fit min-h-screen w-full min-w-full max-w-xl rounded-none bg-white p-8 lg:bottom-0 lg:min-h-[unset] lg:min-w-[unset] lg:rounded-xl">
-        <button type="button" onClick={onClose} class="absolute right-5 top-5">
+        <button type="button" onClick={onClose} class="absolute right-5 top-5 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
             <path
               fill-rule="evenodd"
