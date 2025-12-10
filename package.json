@@ -56,5 +56,10 @@
     "vite": "7.2.7",
     "vite-plugin-solid": "2.11.10",
     "vitest": "4.0.15"
+  },
+  "pnpm": {
+    "overrides": {
+       "@babel/helpers": ">=7.26.10"
+    }
   }
 }
