@@ -13,7 +13,7 @@ Invite your friends, have them type in their name and see who comes out alive.
 
 ### Requirements
 
-- node 18.19.1
+- node 20.x
 - pnpm 9.15.4
 
 ### Setup
@@ -36,6 +36,7 @@ And open `http://localhost:3000`.
 ```
 $ pnpm test
 ```
+
 
 
 ### Deployment
