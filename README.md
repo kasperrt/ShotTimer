@@ -40,4 +40,4 @@ $ pnpm test
 
 ### Deployment
 
-The client-code transpiles to a client-side-rendered SolidJS app, so you'll need hosting for that as the hono-server is just for socket-connetions and external joins.
+The client-code transpiles to a client-side-rendered SolidJS app, so you'll need hosting for that as the hono-server is just for SSE connections and external joins.

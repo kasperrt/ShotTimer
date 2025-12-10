@@ -1,8 +1,7 @@
 import type { Context } from 'hono';
 import { nanoid } from 'nanoid';
-import { simplePlayerSchema } from '../../src/schemas';
-import type { Player } from '../../src/types/types';
-import { getSocket } from './socket';
+import { type Player, simplePlayerSchema } from '../../src/types/types';
+import { sendPlayerEvent } from './sse';
 
 export async function joinHandler(ctx: Context) {
   const id = ctx.req.param('id');
@@ -22,7 +21,11 @@ export async function joinHandler(ctx: Context) {
     score: 0,
   };
 
-  getSocket().to(id).emit('join', JSON.stringify(player));
+  const emitted = await sendPlayerEvent(id, JSON.stringify({ type: 'player', player }));
+  if (!emitted) {
+    console.warn(`could not find an active game for id ${id}`);
+    return new Response(null, { status: 404 });
+  }
 
   return new Response(null, { status: 204 });
 }

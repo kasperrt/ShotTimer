@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { joinHandler } from './handlers/join';
-import { attachServer } from './handlers/socket';
+import { sseHandler } from './handlers/sse';
 
 dotenv.config({ quiet: true });
 
@@ -16,9 +16,18 @@ app.use(
     origin: CORS,
   }),
 );
-app.post('/join/:id', joinHandler);
 
-const server = serve(
+app.use(
+  '/events',
+  cors({
+    origin: CORS,
+  }),
+);
+
+app.post('/join/:id', joinHandler);
+app.get('/events', sseHandler);
+
+serve(
   {
     fetch: app.fetch,
     port: 8080,
@@ -27,5 +36,3 @@ const server = serve(
     console.log(`Server is running: http://${info.address}:${info.port}`);
   },
 );
-
-attachServer(server);

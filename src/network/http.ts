@@ -1,12 +1,26 @@
 import { RequestClient, type RequestDefinitions } from 'wiretyped';
 import z from 'zod';
-import { simplePlayerSchema } from '@/schemas';
+import { playerSchema, simplePlayerSchema } from '@/types/types';
 
 const endpoints = {
   '/join/{id}': {
     post: {
       response: z.null(),
       request: simplePlayerSchema,
+    },
+  },
+  '/events': {
+    sse: {
+      response: z.discriminatedUnion('type', [
+        z.object({
+          type: z.literal('join'),
+          id: z.string(),
+        }),
+        z.object({
+          type: z.literal('player'),
+          player: playerSchema,
+        }),
+      ]),
     },
   },
 } satisfies RequestDefinitions;

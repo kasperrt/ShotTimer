@@ -1,18 +1,46 @@
+import { createEffect, onCleanup } from 'solid-js';
 import { Blinker } from '@/components/Blinker';
 import { Drawing } from '@/components/Drawing';
 import { Input } from '@/components/Input';
 import { Join } from '@/components/Join';
 import { Scoreboard } from '@/components/Scoreboard';
 import { Timer } from '@/components/Timer';
-import { socket } from '@/network/socket';
+import { httpClient } from '@/network/http';
 import { useModals } from '@/router';
 import { useGame } from '@/stores/game';
 
 export default function Landing() {
   const modals = useModals();
   const { gameId, setGameId, countdown, winner, players, addPlayer, removePlayer } = useGame();
+  let closer: VoidFunction | null = null;
 
-  socket({ addPlayer, setGameId });
+  createEffect(async () => {
+    const [errListen, close] = await httpClient.sse('/events', null, ([err, data]) => {
+      if (err) {
+        return;
+      }
+
+      if (data.type === 'join') {
+        setGameId(data.id);
+        return;
+      }
+
+      if (data.type === 'player') {
+        addPlayer(data.player);
+      }
+    });
+
+    if (errListen) {
+      window.alert('Something went wrong when opening connection');
+      return;
+    }
+
+    closer = close;
+  });
+
+  onCleanup(() => {
+    closer?.();
+  });
 
   return (
     <>
