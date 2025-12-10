@@ -30,7 +30,7 @@ export async function joinHandler(ctx: Context) {
     id: nanoid(),
     name: data.name,
     drawing: data.drawing,
-    joined: new Date().getTime(),
+    joined: Date.now(),
     score: 0,
   };
 

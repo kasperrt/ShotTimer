@@ -20,7 +20,7 @@ export default function SettingsModal() {
 
   const onChangeIntervals = (e: Event) => {
     const target = e.target as HTMLInputElement;
-    const interval = Number.parseInt(target.value);
+    const interval = Number.parseInt(target.value, 10);
     if (Number.isNaN(interval)) {
       setIntervals(null);
       return;

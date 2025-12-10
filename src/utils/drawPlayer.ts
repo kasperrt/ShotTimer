@@ -35,6 +35,6 @@ export function drawPlayer(players: Player[], gameType: GameType): DrawnPlayer {
 
   return {
     ...pool[Math.floor(Math.random() * pool.length)],
-    drawn: new Date().getTime(),
+    drawn: Date.now(),
   };
 }

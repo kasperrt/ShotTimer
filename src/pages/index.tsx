@@ -33,7 +33,7 @@ export default function Landing() {
           <Scoreboard players={players} removePlayer={removePlayer} />
         </div>
         <Drawing winner={winner} />
-        <a href="https://github.com/kasperrt/shottimer" class="absolute bottom-2 right-2 z-20 m-auto w-full text-right">
+        <a href="https://github.com/kasperrt/shottimer" class="absolute right-2 bottom-2 z-20 m-auto w-full text-right">
           GitHub
         </a>
       </div>

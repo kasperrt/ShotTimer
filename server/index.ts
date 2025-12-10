@@ -5,7 +5,7 @@ import { cors } from 'hono/cors';
 import { joinHandler } from './handlers/join';
 import { attachServer } from './handlers/socket';
 
-dotenv.config({quiet:true});
+dotenv.config({ quiet: true });
 
 const CORS = (process.env.VITE_CORS ?? '').split(',');
 const app = new Hono();

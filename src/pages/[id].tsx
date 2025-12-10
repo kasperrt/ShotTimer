@@ -1,8 +1,8 @@
+import { createSignal, onCleanup, onMount, Show } from 'solid-js';
 import { join } from '@/network/join';
 import { useParams } from '@/router';
 import { getRandomColor } from '@/utils/color';
 import { draw } from '@/utils/draw';
-import { Show, createSignal, onCleanup, onMount } from 'solid-js';
 
 export default function Id() {
   const { id } = useParams('/:id');
@@ -147,7 +147,7 @@ export default function Id() {
       </Show>
       <Show when={!submitted()}>
         <Show when={showHint()}>
-          <h1 class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 m-auto h-fit text-center text-4xl text-black/20">
+          <h1 class="pointer-events-none absolute top-0 right-0 bottom-0 left-0 m-auto h-fit text-center text-4xl text-black/20">
             Draw a picture!
           </h1>
         </Show>

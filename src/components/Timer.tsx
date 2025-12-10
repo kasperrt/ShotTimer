@@ -1,8 +1,8 @@
+import { createEffect, createSignal, on, onCleanup, Show } from 'solid-js';
 import type { Game } from '@/stores/game';
 import { settings } from '@/stores/settings';
 import type { Interval, Timeout } from '@/types/types';
 import { getRemainingTimeReadable } from '@/utils/getRemainingTimeReadable';
-import { Show, createEffect, createSignal, on, onCleanup } from 'solid-js';
 
 interface Props {
   countdown: Game['countdown'];
@@ -27,14 +27,14 @@ export function Timer({ countdown, winner }: Props) {
       return;
     }
 
-    const r = c.getTime() - new Date().getTime();
+    const r = c.getTime() - Date.now();
     if (r <= 0) {
       counterInterval && clearInterval(counterInterval);
       setRemainingTimeReadable(getRemainingTimeReadable(null));
       return;
     }
 
-    setRemainingTimeReadable(getRemainingTimeReadable(c.getTime() - new Date().getTime()));
+    setRemainingTimeReadable(getRemainingTimeReadable(c.getTime() - Date.now()));
   };
 
   createEffect(() => {
@@ -44,7 +44,7 @@ export function Timer({ countdown, winner }: Props) {
       return;
     }
 
-    setRemainingTimeReadable(getRemainingTimeReadable(c.getTime() - new Date().getTime()));
+    setRemainingTimeReadable(getRemainingTimeReadable(c.getTime() - Date.now()));
     counterInterval && clearInterval(counterInterval);
     counterInterval = setInterval(count, 10);
   });

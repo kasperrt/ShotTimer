@@ -1,6 +1,6 @@
-import type { Game } from '@/stores/game';
 import qrcode from 'qrcode';
-import { Show, createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal, Show } from 'solid-js';
+import type { Game } from '@/stores/game';
 
 interface Props {
   gameId: Game['gameId'];

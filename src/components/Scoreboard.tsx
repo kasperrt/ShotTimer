@@ -1,6 +1,6 @@
+import { For, Show } from 'solid-js';
 import type { Game } from '@/stores/game';
 import { settings } from '@/stores/settings';
-import { For, Show } from 'solid-js';
 
 interface Props {
   players: Game['players'];
@@ -20,7 +20,7 @@ export function Scoreboard({ players, removePlayer }: Props) {
 
   return (
     <Show when={scoreEnabled() && players.length > 0}>
-      <div class="left-20 top-20 w-full px-8 lg:absolute lg:max-w-48 lg:px-0">
+      <div class="top-20 left-20 w-full px-8 lg:absolute lg:max-w-48 lg:px-0">
         <h2>Score</h2>
         <hr />
         <ul>

@@ -1,5 +1,5 @@
-import type { Game } from '@/stores/game';
 import { createSignal, createUniqueId } from 'solid-js';
+import type { Game } from '@/stores/game';
 
 interface Props {
   addPlayer: Game['addPlayer'];
@@ -13,7 +13,7 @@ export function Input({ addPlayer }: Props) {
     addPlayer({
       name: name(),
       id: createUniqueId(),
-      joined: new Date().getTime(),
+      joined: Date.now(),
       score: 0,
     });
     setName('');

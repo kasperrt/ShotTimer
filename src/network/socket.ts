@@ -1,7 +1,7 @@
-import type { Game } from '@/stores/game';
-import { playerSchema } from '@/types/types';
 import { io } from 'socket.io-client';
 import { onCleanup } from 'solid-js';
+import type { Game } from '@/stores/game';
+import { playerSchema } from '@/types/types';
 
 interface Props {
   addPlayer: Game['addPlayer'];

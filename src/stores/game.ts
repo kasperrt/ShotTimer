@@ -1,7 +1,7 @@
-import type { DrawnPlayer, Interval, Player, Timeout } from '@/types/types';
-import { drawPlayer } from '@/utils/drawPlayer';
 import { createEffect, createSignal, on, onCleanup } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
+import type { DrawnPlayer, Interval, Player, Timeout } from '@/types/types';
+import { drawPlayer } from '@/utils/drawPlayer';
 import { settings } from './settings';
 
 export function useGame() {
@@ -63,7 +63,7 @@ export function useGame() {
     if (!c) {
       return counter && clearInterval(counter);
     }
-    const passed = c.getTime() < new Date().getTime();
+    const passed = c.getTime() < Date.now();
     if (!passed) {
       return;
     }
@@ -99,7 +99,7 @@ export function useGame() {
     }
 
     const interval = intervals() ?? Math.floor(Math.random() * 6) + 1;
-    setCountdown(new Date(new Date().getTime() + interval * 60000));
+    setCountdown(new Date(Date.now() + interval * 60000));
     startTimer();
   });
 

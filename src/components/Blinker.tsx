@@ -1,7 +1,7 @@
+import { createEffect, createSignal, on, onCleanup, Show } from 'solid-js';
 import type { Game } from '@/stores/game';
 import { settings } from '@/stores/settings';
 import type { Timeout } from '@/types/types';
-import { Show, createEffect, createSignal, on, onCleanup } from 'solid-js';
 
 interface Props {
   winner: Game['winner'];

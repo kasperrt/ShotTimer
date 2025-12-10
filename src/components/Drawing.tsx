@@ -1,6 +1,6 @@
+import { createEffect, on, Show } from 'solid-js';
 import type { Game } from '@/stores/game';
 import { draw } from '@/utils/draw';
-import { Show, createEffect, on } from 'solid-js';
 
 interface Props {
   winner: Game['winner'];
@@ -40,7 +40,7 @@ export function Drawing({ winner }: Props) {
 
   return (
     <Show when={winner() && !!winner()?.drawing}>
-      <div class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-10 h-full opacity-50">
+      <div class="pointer-events-none absolute top-0 right-0 bottom-0 left-0 z-10 h-full opacity-50">
         <canvas ref={canvas} class="m-auto h-full" />
       </div>
     </Show>
