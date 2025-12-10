@@ -125,11 +125,11 @@ export default function Id() {
   };
 
   const close = () => {
-    if(!submitted()) {
-      return
+    if (!submitted()) {
+      return;
     }
     window.close();
-  }
+  };
 
   onMount(() => {
     if (!canvas || !canvasContainer) {
@@ -159,7 +159,7 @@ export default function Id() {
   });
 
   return (
-    <div class={"flex h-screen w-full flex-1 flex-col justify-center gap-y-2 p-2"} on:click={close}>
+    <div class={'flex h-screen w-full flex-1 flex-col justify-center gap-y-2 p-2'} on:click={close}>
       <Show when={submitted()}>
         <h1 class="text-center text-4xl">Submitted!</h1>
         <p class="text-center">You can now close this tab</p>
