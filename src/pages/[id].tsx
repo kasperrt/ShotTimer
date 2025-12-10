@@ -159,7 +159,7 @@ export default function Id() {
               value={name()}
               onKeyDown={(e) => onChange(e)}
               placeholder="Your name"
-              class="w-full border-b border-b-black/20 pb-2 text-xl outline-none hover:border-b-black/50 focus:border-b-black/50"
+              class="w-full border-b border-b-black/20 pb-2 text-xl outline-hidden hover:border-b-black/50 focus:border-b-black/50"
             />
             <button type="submit" disabled={submitting()}>
               Submit

@@ -50,7 +50,7 @@ export default function SettingsModal() {
             onKeyUp={onChangeIntervals}
             value={intervals() ?? ''}
             placeholder="Random (1-6)"
-            class="border-b border-b-black/20 pb-2 text-right outline-none"
+            class="border-b border-b-black/20 pb-2 text-right outline-hidden"
           />
         </label>
       </div>

@@ -31,7 +31,7 @@ export function Input({ addPlayer }: Props) {
         onChange={onChange}
         value={name()}
         placeholder="Type player name here..."
-        class="m-auto w-5/6 max-w-4xl border-b border-b-black/20 bg-transparent pb-2 text-center text-3xl font-thin outline-none"
+        class="m-auto w-5/6 max-w-4xl border-b border-b-black/20 bg-transparent pb-2 text-center text-3xl font-thin outline-hidden"
       />
     </form>
   );

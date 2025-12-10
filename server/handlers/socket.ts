@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { customAlphabet } from 'nanoid';
 import { Server } from 'socket.io';
 
-dotenv.config();
+dotenv.config({quiet: true});
 
 const CORS = (process.env.VITE_CORS ?? '').split(',');
 const nanoid = customAlphabet('1234567890abcdef', 10);
