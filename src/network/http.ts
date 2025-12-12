@@ -11,16 +11,10 @@ const endpoints = {
   },
   '/rtd': {
     sse: {
-      response: z.discriminatedUnion('type', [
-        z.object({
-          type: z.literal('join'),
-          id: z.string(),
-        }),
-        z.object({
-          type: z.literal('player'),
-          player: playerSchema,
-        }),
-      ]),
+      events: {
+        join: z.object({ id: z.string() }),
+        player: playerSchema,
+      },
     },
   },
 } satisfies RequestDefinitions;

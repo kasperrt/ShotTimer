@@ -82,8 +82,8 @@ importers:
         specifier: 4.0.15
         version: 4.0.15(@types/node@22.10.7)(jiti@2.6.1)(jsdom@27.3.0(postcss@8.5.6))(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.7.0)
       wiretyped:
-        specifier: 0.2.5
-        version: 0.2.5
+        specifier: 0.3.0-alpha.1
+        version: 0.3.0-alpha.1
 
 packages:
 
@@ -1818,8 +1818,8 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  wiretyped@0.2.5:
-    resolution: {integrity: sha512-qZU5EPV8nHDWBZKWd0JIJIMqfir9aiWy2zQEQ/1VlpORFrCksW8bYGqloMZX+1baLGu6QCvJ1Y+0yeeUHVW55w==}
+  wiretyped@0.3.0-alpha.1:
+    resolution: {integrity: sha512-WZTYZXQ7UNU/dttvGMmt4l78Wi2yK3Wn913Acenago7QoUuLckM3/LXA9fvScrs8qiW6bqPGRvosuLuIxirPIg==}
 
   wrap-ansi@6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}
@@ -3295,7 +3295,7 @@ snapshots:
       siginfo: 2.0.0
       stackback: 0.0.2
 
-  wiretyped@0.2.5:
+  wiretyped@0.3.0-alpha.1:
     dependencies:
       '@standard-schema/spec': 1.0.0
 
