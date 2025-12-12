@@ -1,5 +1,5 @@
 import { RequestClient, type RequestDefinitions } from 'wiretyped';
-import z from 'zod';
+import { z } from 'zod';
 import { playerSchema, simplePlayerSchema } from '@/types/types';
 
 const endpoints = {

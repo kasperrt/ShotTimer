@@ -15,16 +15,16 @@ export const simplePlayerSchema = z.object({
 export const playerSchema = z.object({
   id: z.string(),
   name: z.string(),
-  drawing: z
-    .object({
+  drawing: z.optional(
+    z.object({
       x: z.array(z.number()),
       y: z.array(z.number()),
       drag: z.array(z.boolean()),
       color: z.string(),
       height: z.number(),
       width: z.number(),
-    })
-    .optional(),
+    }),
+  ),
   score: z.number(),
   joined: z.number(),
 });
