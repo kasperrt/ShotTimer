@@ -54,7 +54,7 @@
     "vite": "7.2.7",
     "vite-plugin-solid": "2.11.10",
     "vitest": "4.0.15",
-    "wiretyped": "0.2.5"
+    "wiretyped": "0.3.0-alpha.1"
   },
   "pnpm": {
     "overrides": {

@@ -12,7 +12,7 @@ async function sendPlayerEvent(gameId: string, data: string) {
   }
 
   try {
-    await stream.writeSSE({ data });
+    await stream.writeSSE({ event: 'player', data });
     return true;
   } catch (error) {
     console.error('error sending SSE event', error);
@@ -27,8 +27,8 @@ const sseHandler = (ctx: Context) =>
     connections.set(gameId, stream);
 
     await stream.writeSSE({
+      event: 'join',
       data: JSON.stringify({
-        type: 'join',
         id: gameId,
       }),
     });

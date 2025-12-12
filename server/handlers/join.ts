@@ -21,7 +21,7 @@ export async function joinHandler(ctx: Context) {
     score: 0,
   };
 
-  const emitted = await sendPlayerEvent(id, JSON.stringify({ type: 'player', player }));
+  const emitted = await sendPlayerEvent(id, JSON.stringify(player));
   if (!emitted) {
     console.warn(`could not find an active game for id ${id}`);
     return new Response(null, { status: 404 });
