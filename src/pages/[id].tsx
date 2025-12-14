@@ -1,5 +1,5 @@
 import { createSignal, onCleanup, onMount, Show } from 'solid-js';
-import { httpClient } from '@/network/http';
+import { httpClient } from '@/lib/http';
 import { useParams } from '@/router';
 import { getRandomColor } from '@/utils/color';
 import { draw } from '@/utils/draw';

@@ -5,7 +5,7 @@ import { Input } from '@/components/Input';
 import { Join } from '@/components/Join';
 import { Scoreboard } from '@/components/Scoreboard';
 import { Timer } from '@/components/Timer';
-import { httpClient } from '@/network/http';
+import { httpClient } from '@/lib/http';
 import { useModals } from '@/router';
 import { useGame } from '@/stores/game';
 
