@@ -38,6 +38,9 @@ importers:
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@types/node@22.10.7)(typescript@5.9.3)
+      wiretyped:
+        specifier: 0.3.2
+        version: 0.3.2
       zod:
         specifier: 4.1.13
         version: 4.1.13
@@ -81,9 +84,6 @@ importers:
       vitest:
         specifier: 4.0.15
         version: 4.0.15(@types/node@22.10.7)(jiti@2.6.1)(jsdom@27.3.0(postcss@8.5.6))(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.7.0)
-      wiretyped:
-        specifier: 0.3.0
-        version: 0.3.0
 
 packages:
 
@@ -1815,8 +1815,8 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  wiretyped@0.3.0:
-    resolution: {integrity: sha512-J5GOpws1pJLB/HYX/VYpHu5g7DW3hlhlFVwGRwA7HpPXUFmYw5iawE+m3HBj7oYrrH8vrpgR2atgLVSUIK73Rw==}
+  wiretyped@0.3.2:
+    resolution: {integrity: sha512-920wc+S3pPBUwUIE7mmm5tqS38Gdi7v6RpcARn/ulDJ4vCVIvvP0a601qfA+OAd58UXp2XCWcDWkSM8w+JFUiw==}
 
   wrap-ansi@6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}
@@ -3290,7 +3290,7 @@ snapshots:
       siginfo: 2.0.0
       stackback: 0.0.2
 
-  wiretyped@0.3.0:
+  wiretyped@0.3.2:
     dependencies:
       '@standard-schema/spec': 1.0.0
 
