@@ -58,7 +58,9 @@
   },
   "pnpm": {
     "overrides": {
-      "@babel/helpers": ">=7.26.10"
+      "@babel/helpers": ">=7.26.10",
+      "seroval": ">=1.4.1",
+      "diff": ">=4.0.4"
     }
   }
 }
