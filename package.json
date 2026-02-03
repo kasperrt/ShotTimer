@@ -30,7 +30,7 @@
   "homepage": "https://github.com/kasperrt/shottimer#readme",
   "dependencies": {
     "@generouted/solid-router": "1.20.0",
-    "@hono/node-server":"1.19.9",
+    "@hono/node-server": "1.19.9",
     "@solidjs/router": "0.15.4",
     "dotenv": "17.2.3",
     "hono": "4.11.7",
