@@ -2,8 +2,9 @@
   "compilerOptions": {
     "outDir": "distServer",
     "target": "ES2022",
-    "declaration": true,
+    "module": "ES2022",
     "moduleResolution": "Bundler",
+    "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

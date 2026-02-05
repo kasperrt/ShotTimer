@@ -1,7 +1,7 @@
 import type { Context } from 'hono';
 import { nanoid } from 'nanoid';
-import { type Player, simplePlayerSchema } from '../../src/types/types';
-import { sendPlayerEvent } from './sse';
+import { type Player, simplePlayerSchema } from '../../src/types/types.js';
+import { sendPlayerEvent } from './sse.js';
 
 export async function joinHandler(ctx: Context) {
   const id = ctx.req.param('id');
