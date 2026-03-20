@@ -5,6 +5,9 @@ import { sendPlayerEvent } from './sse.js';
 
 export async function joinHandler(ctx: Context) {
   const id = ctx.req.param('id');
+  if (!id) {
+    return new Response('Missing game id', { status: 400 });
+  }
   const body = await ctx.req.json();
   const { data, success, error } = simplePlayerSchema.safeParse(body);
 
