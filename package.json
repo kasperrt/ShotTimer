@@ -30,38 +30,41 @@
   "homepage": "https://github.com/kasperrt/shottimer#readme",
   "dependencies": {
     "@generouted/solid-router": "1.20.2",
-    "@hono/node-server": "1.19.11",
+    "@hono/node-server": "1.19.13",
     "@solidjs/router": "0.16.1",
-    "dotenv": "17.3.1",
-    "hono": "4.12.8",
+    "dotenv": "17.4.1",
+    "hono": "4.12.12",
     "nanoid": "5.1.7",
     "qrcode": "1.5.4",
-    "solid-js": "1.9.11",
+    "solid-js": "1.9.12",
     "ts-node": "10.9.2",
-    "wiretyped": "0.3.6",
+    "wiretyped":"0.3.7",
     "zod": "4.3.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.8",
+    "@biomejs/biome": "2.4.10",
     "@tailwindcss/vite": "4.2.2",
     "@types/qrcode": "1.5.6",
-    "jsdom": "29.0.1",
-    "npm-run-all2": "8.0.4",
+    "jsdom":"29.0.2",
+    "npm-run-all2":"8.0.4",
     "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "0.7.2",
-    "tailwindcss": "4.2.2",
+    "tailwindcss":"4.2.2",
     "tsx": "4.21.0",
-    "typescript": "5.9.3",
-    "vite": "8.0.1",
-    "vite-plugin-solid": "2.11.11",
-    "vitest": "4.1.0"
+    "typescript":"6.0.2",
+    "vite": "8.0.5",
+    "vite-plugin-solid": "2.11.12",
+    "vitest": "4.1.2"
   },
   "pnpm": {
     "overrides": {
       "@babel/helpers": ">=7.26.10",
       "diff": ">=4.0.4",
       "seroval": ">=1.4.1",
-      "undici": ">=7.24.5"
+      "picomatch": ">=4.0.4",
+      "undici": ">=7.24.5",
+      "yaml": ">=2.8.3",
+      "vite": ">=8.0.5"
     }
   }
 }
