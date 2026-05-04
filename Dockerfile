@@ -6,7 +6,7 @@ FROM node:${NODE_VERSION}-bookworm-slim AS deps
 WORKDIR /app
 RUN npm install -g corepack@latest --force \
   && npm install -g pnpm@latest --force
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 FROM deps AS build
