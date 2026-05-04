@@ -1,0 +1,11 @@
+packages:
+  - .
+
+overrides:
+  "@babel/helpers": ">=7.26.10"
+  diff: ">=4.0.4"
+  seroval: ">=1.4.1"
+  picomatch: ">=4.0.4"
+  undici: ">=7.24.5"
+  yaml: ">=2.8.3"
+  vite: ">=8.0.5"
