@@ -13,7 +13,7 @@ Invite your friends, have them type in their name and see who comes out alive.
 
 ### Requirements
 
-- node 20.x
+- node 22.x
 - pnpm 9.15.4
 
 ### Setup
