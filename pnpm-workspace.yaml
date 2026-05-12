@@ -1,6 +1,9 @@
 packages:
   - .
 
+allowBuilds:
+  esbuild: true
+
 overrides:
   "@babel/helpers": ">=7.26.10"
   diff: ">=4.0.4"
