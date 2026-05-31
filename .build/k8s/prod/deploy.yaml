@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shottimer
+  namespace: shottimer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shottimer
+  template:
+    metadata:
+      labels:
+        app: shottimer
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: shottimer
+          image: IMAGE_PLACEHOLDER
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: shottimer-env
+                optional: true
+          resources:
+            requests:
+              cpu: 25m
+              memory: 128Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi

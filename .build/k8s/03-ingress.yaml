@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shottimer
+  namespace: shottimer
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: shottimer-tls
+      hosts:
+        - shottimer.kasperrt.me
+  rules:
+    - host: shottimer.kasperrt.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: shottimer
+                port:
+                  number: 80
