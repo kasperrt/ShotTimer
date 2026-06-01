@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, k3s, deployer]
     steps:
       - uses: actions/checkout@v5
       - run: .build/scripts/build-image.sh
@@ -20,9 +20,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: .build/scripts/deploy.sh
         env:
-          APP_NAME: shottimer
           NAMESPACE: shottimer
           DEPLOYMENT: shottimer
-          K3S_HOST: ${{ secrets.K3S_HOST }}
-          K3S_USER: ${{ secrets.K3S_USER }}
-          K3S_SSH_KEY: ${{ secrets.K3S_SSH_KEY }}

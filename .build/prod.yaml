@@ -3,4 +3,5 @@ namespace: shottimer
 deployment: shottimer
 image: ghcr.io/kasperrt/shottimer
 hosts:
-  - shottimer.kasperrt.me
+  - etys.no
+  - www.etys.no
