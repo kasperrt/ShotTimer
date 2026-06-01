@@ -1,0 +1,7 @@
+app: shottimer
+namespace: shottimer
+deployment: shottimer
+image: ghcr.io/kasperrt/shottimer
+hosts:
+  - etys.no
+  - www.etys.no

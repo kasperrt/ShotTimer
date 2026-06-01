@@ -1,0 +1,27 @@
+name: prod
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, k3s, deployer]
+    steps:
+      - uses: actions/checkout@v5
+      - run: .build/scripts/build-image.sh
+        env:
+          VITE_HOST: https://etys.no
+          VITE_CORS: https://etys.no,https://www.etys.no
+      - run: .build/scripts/push-image.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: .build/scripts/deploy.sh
+        env:
+          NAMESPACE: shottimer
+          DEPLOYMENT: shottimer

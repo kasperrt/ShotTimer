@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shottimer
+  namespace: shottimer
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: shottimer-tls
+      hosts:
+        - etys.no
+        - www.etys.no
+  rules:
+    - host: etys.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: shottimer
+                port:
+                  number: 80
+    - host: www.etys.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: shottimer
+                port:
+                  number: 80
