@@ -10,20 +10,9 @@ spec:
   tls:
     - secretName: shottimer-tls
       hosts:
-        - etys.no
-        - www.etys.no
+        - shot.etys.no
   rules:
-    - host: etys.no
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: shottimer
-                port:
-                  number: 80
-    - host: www.etys.no
+    - host: shot.etys.no
       http:
         paths:
           - path: /
