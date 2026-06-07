@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_VERSION=25.5.0
+ARG NODE_VERSION=26.0.0
 
 FROM node:${NODE_VERSION}-bookworm-slim AS deps
 WORKDIR /app
