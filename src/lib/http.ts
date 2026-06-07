@@ -23,5 +23,4 @@ export const httpClient = new RequestClient({
   endpoints,
   baseUrl: import.meta.env.VITE_HOST,
   hostname: import.meta.env.VITE_HOST,
-  debug: true,
 });
