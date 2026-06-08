@@ -5,6 +5,7 @@ import { serveStatic } from '@hono/node-server/serve-static';
 import dotenv from 'dotenv';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import client from 'prom-client';
 import { joinHandler } from './handlers/join.js';
 import { sseHandler } from './handlers/sse.js';
 
@@ -15,6 +16,58 @@ const CORS = (process.env.CORS ?? process.env.VITE_CORS ?? '')
   .map((value) => value.trim())
   .filter(Boolean);
 const app = new Hono();
+const register = new client.Registry();
+client.collectDefaultMetrics({ register });
+
+const buckets = [
+  0.005,
+  0.01,
+  0.025,
+  0.05,
+  0.075,
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  1,
+  2.5,
+  5,
+  7.5,
+  10,
+];
+const requestStatus = new client.Counter({
+  name: 'http_request_status_code',
+  help: 'Status codes returned by the app.',
+  labelNames: ['status_code', 'operation_name'],
+  registers: [register],
+});
+const requestDuration = new client.Histogram({
+  name: 'http_request_duration',
+  help: 'Time spent processing requests.',
+  labelNames: ['operation_name'],
+  buckets,
+  registers: [register],
+});
+
+function operationName(method: string, path: string): string {
+  if (path === '/metrics') return 'Metrics';
+  if (path.startsWith('/join/')) return `${method} /join/:id`;
+  if (path === '/rtd') return `${method} /rtd`;
+  if (path.includes('.')) return 'Static';
+  return `${method} /*`;
+}
+
+app.use('*', async (c, next) => {
+  const start = process.hrtime.bigint();
+  await next();
+  const duration = Number(process.hrtime.bigint() - start) / 1e9;
+  const operation = operationName(c.req.method, new URL(c.req.url).pathname);
+  requestStatus.inc({
+    status_code: String(c.res.status),
+    operation_name: operation,
+  });
+  requestDuration.observe({ operation_name: operation }, duration);
+});
 
 app.use(
   '/join/*',
@@ -47,7 +100,17 @@ const port = Number.isFinite(parsedPort) ? parsedPort : 8080;
 
 serve(
   {
-    fetch: app.fetch,
+    fetch: async (request: Request) => {
+      if (new URL(request.url).pathname === '/metrics') {
+        if (request.headers.has('x-forwarded-host')) {
+          return new Response('Not Found', { status: 404 });
+        }
+        return new Response(await register.metrics(), {
+          headers: { 'Content-Type': register.contentType },
+        });
+      }
+      return app.fetch(request);
+    },
     port,
   },
   (info) => {

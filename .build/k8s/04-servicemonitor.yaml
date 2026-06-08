@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: shottimer
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames:
+      - shottimer
+  selector:
+    matchLabels:
+      app: shottimer
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s
