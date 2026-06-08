@@ -20,22 +20,7 @@ const app = new Hono();
 const register = new client.Registry();
 client.collectDefaultMetrics({ register });
 
-const buckets = [
-  0.005,
-  0.01,
-  0.025,
-  0.05,
-  0.075,
-  0.1,
-  0.25,
-  0.5,
-  0.75,
-  1,
-  2.5,
-  5,
-  7.5,
-  10,
-];
+const buckets = [0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 7.5, 10];
 const requestStatus = new client.Counter({
   name: 'http_request_status_code',
   help: 'Status codes returned by the app.',
@@ -116,7 +101,7 @@ createServer(async (req, res) => {
 
 serve(
   {
-    fetch: async (request: Request) => {
+    fetch: (request: Request) => {
       if (new URL(request.url).pathname === '/metrics') {
         return new Response('Not Found', { status: 404 });
       }
