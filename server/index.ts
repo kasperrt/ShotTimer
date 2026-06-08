@@ -1,4 +1,5 @@
 import { existsSync } from 'node:fs';
+import { createServer } from 'node:http';
 import { join } from 'node:path';
 import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
@@ -97,17 +98,27 @@ if (hasDist) {
 
 const parsedPort = Number.parseInt(process.env.PORT ?? '', 10);
 const port = Number.isFinite(parsedPort) ? parsedPort : 8080;
+const parsedMetricsPort = Number.parseInt(process.env.METRICS_PORT ?? '', 10);
+const metricsPort = Number.isFinite(parsedMetricsPort) ? parsedMetricsPort : 9090;
+
+createServer(async (req, res) => {
+  if (req.url !== '/metrics') {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not Found');
+    return;
+  }
+  const body = await register.metrics();
+  res.writeHead(200, { 'Content-Type': register.contentType });
+  res.end(body);
+}).listen(metricsPort, () => {
+  console.log(`Metrics server is running: http://0.0.0.0:${metricsPort}/metrics`);
+});
 
 serve(
   {
     fetch: async (request: Request) => {
       if (new URL(request.url).pathname === '/metrics') {
-        if (request.headers.has('x-forwarded-host')) {
-          return new Response('Not Found', { status: 404 });
-        }
-        return new Response(await register.metrics(), {
-          headers: { 'Content-Type': register.contentType },
-        });
+        return new Response('Not Found', { status: 404 });
       }
       return app.fetch(request);
     },

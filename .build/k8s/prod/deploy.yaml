@@ -28,6 +28,8 @@ spec:
           image: IMAGE_PLACEHOLDER
           ports:
             - containerPort: 8080
+            - name: metrics
+              containerPort: 9090
           readinessProbe:
             tcpSocket:
               port: 8080
